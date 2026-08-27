@@ -947,6 +947,14 @@ if (!finalBagVolume || finalBagVolume <= 0) {
 
 const finalConcentration =
     dose / finalBagVolume;
+        const diluentVolume =
+    finalBagVolume - drugVolume;
+        if (finalBagVolume < drugVolume) {
+    alert(
+        "Final bag volume cannot be less than the required drug volume."
+    );
+    return;
+}
         // Vial selection
 const vialSizes = product.presentations
     .map(item => {
@@ -1126,7 +1134,10 @@ if (bestCombination) {
     <strong>Final bag volume:</strong>
     ${finalBagVolume.toFixed(2)} mL
 </p>
-
+<p style="margin-top:8px;">
+    <strong>Diluent volume:</strong>
+    ${diluentVolume.toFixed(2)} mL
+</p>
 <p style="margin-top:8px;">
     <strong>Calculated final concentration:</strong>
     ${finalConcentration.toFixed(2)} mg/mL
