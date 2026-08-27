@@ -786,83 +786,7 @@ if (drug.products && drug.products.length > 0) {
         </p>
     `;
 }
-        // Recommended Bag Options
-const bagOptions = product.iv_preparation?.available_bag_sizes || [];
-let bagOptionsHTML = "";
-
-if (bagOptions.length > 0) {
-
-    bagOptionsHTML = `
-        <div style="
-            margin-top:20px;
-            padding:20px;
-            background:#f8fbff;
-            border:1px solid #dce8f5;
-            border-radius:12px;
-        ">
-
-            <h3 style="
-                color:#0b5cab;
-                margin-bottom:15px;
-            ">
-                Recommended Bag Options
-            </h3>
-
-            ${bagOptions.map(bagSize => {
-
-                const totalVolume =
-                    bagSize + drugVolume;
-
-                const concentration =
-                    dose / totalVolume;
-
-                const range =
-                    product.iv_preparation?.target_concentration;
-
-                const withinRange =
-                    range &&
-                    concentration >= parseFloat(range.minimum) &&
-                    concentration <= parseFloat(range.maximum);
-
-                return `
-                    <div style="
-                        padding:15px;
-                        margin-bottom:10px;
-                        background:white;
-                        border:1px solid #e2eaf3;
-                        border-radius:8px;
-                    ">
-
-                        <strong>${bagSize} mL bag</strong>
-
-                        <div style="margin-top:7px;">
-                            Total volume after drug addition:
-                            ${totalVolume.toFixed(2)} mL
-                        </div>
-
-                        <div style="margin-top:7px;">
-                            Final concentration:
-                            ${concentration.toFixed(2)} mg/mL
-                        </div>
-
-                        <div style="
-                            margin-top:7px;
-                            font-weight:bold;
-                            color:${withinRange ? "#176b3a" : "#9b3030"};
-                        ">
-                            ${withinRange
-                                ? "✓ Within concentration range"
-                                : "⚠ Outside concentration range"}
-                        </div>
-
-                    </div>
-                `;
-
-            }).join("")}
-
-        </div>
-    `;
-}
+      
         // IV Preparation
 const iv = drug.products?.find(
     product => product.iv_preparation
@@ -1049,6 +973,83 @@ const finalConcentration =
         "Final bag volume cannot be less than the required drug volume."
     );
     return;
+}
+        // Recommended Bag Options
+const bagOptions = product.iv_preparation?.available_bag_sizes || [];
+let bagOptionsHTML = "";
+
+if (bagOptions.length > 0) {
+
+    bagOptionsHTML = `
+        <div style="
+            margin-top:20px;
+            padding:20px;
+            background:#f8fbff;
+            border:1px solid #dce8f5;
+            border-radius:12px;
+        ">
+
+            <h3 style="
+                color:#0b5cab;
+                margin-bottom:15px;
+            ">
+                Recommended Bag Options
+            </h3>
+
+            ${bagOptions.map(bagSize => {
+
+                const totalVolume =
+                    bagSize + drugVolume;
+
+                const concentration =
+                    dose / totalVolume;
+
+                const range =
+                    product.iv_preparation?.target_concentration;
+
+                const withinRange =
+                    range &&
+                    concentration >= parseFloat(range.minimum) &&
+                    concentration <= parseFloat(range.maximum);
+
+                return `
+                    <div style="
+                        padding:15px;
+                        margin-bottom:10px;
+                        background:white;
+                        border:1px solid #e2eaf3;
+                        border-radius:8px;
+                    ">
+
+                        <strong>${bagSize} mL bag</strong>
+
+                        <div style="margin-top:7px;">
+                            Total volume after drug addition:
+                            ${totalVolume.toFixed(2)} mL
+                        </div>
+
+                        <div style="margin-top:7px;">
+                            Final concentration:
+                            ${concentration.toFixed(2)} mg/mL
+                        </div>
+
+                        <div style="
+                            margin-top:7px;
+                            font-weight:bold;
+                            color:${withinRange ? "#176b3a" : "#9b3030"};
+                        ">
+                            ${withinRange
+                                ? "✓ Within concentration range"
+                                : "⚠ Outside concentration range"}
+                        </div>
+
+                    </div>
+                `;
+
+            }).join("")}
+
+        </div>
+    `;
 }
         // Vial selection
 const vialSizes = product.presentations
