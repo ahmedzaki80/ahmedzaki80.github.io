@@ -278,7 +278,16 @@
             "></p>
 
         </div>
+<!-- Products -->
+<div id="resultProducts" style="margin-bottom:28px;">
 
+    <h3 style="color:#0b5cab; margin-bottom:15px;">
+        Available Products
+    </h3>
+
+    <div id="productsContainer"></div>
+
+</div>
 
         <!-- Indications -->
         <div style="margin-bottom:28px;">
@@ -523,6 +532,71 @@ if (!drug) {
             );
             return;
         }
+        // Products
+const productsContainer = document.getElementById("productsContainer");
+
+productsContainer.innerHTML = "";
+
+drug.products.forEach(product => {
+
+    const productCard = document.createElement("div");
+
+    productCard.style.cssText = `
+        background:#f8fbff;
+        border:1px solid #dce8f5;
+        border-radius:12px;
+        padding:18px;
+        margin-bottom:12px;
+    `;
+
+    productCard.innerHTML = `
+        <div style="
+            font-size:18px;
+            font-weight:bold;
+            color:#172033;
+            margin-bottom:8px;
+        ">
+            ${product.brand_name}
+        </div>
+
+        <div style="
+            color:#687386;
+            font-size:14px;
+            margin-bottom:8px;
+        ">
+            Active ingredient: ${product.active_ingredient}
+        </div>
+
+        <div style="
+            color:#3d4858;
+            font-size:14px;
+            margin-bottom:8px;
+        ">
+            Concentration: ${product.concentration}
+        </div>
+
+        <div style="
+            color:#3d4858;
+            font-size:14px;
+            margin-bottom:8px;
+        ">
+            Route: ${product.route}
+        </div>
+
+        <div style="
+            color:#3d4858;
+            font-size:14px;
+        ">
+            Presentations:
+            <br>
+            ${product.presentations
+                .map(item => "• " + item)
+                .join("<br>")}
+        </div>
+    `;
+
+    productsContainer.appendChild(productCard);
+});
 
         // Drug name
         document.getElementById("resultName").textContent =
