@@ -407,15 +407,24 @@ async function searchDrug() {
                 .map(item => "• " + item)
                 .join("<br>");
 
-        document.getElementById("resultRoute").textContent =
-            drug.route;
+        document.getElementById("resultRoute").innerHTML =
+            drug.routes
+                .map(item => "• " + item)
+                .join("<br>");
 
-        document.getElementById("resultNote").textContent =
-            drug.important_note;
+        document.getElementById("resultNote").innerHTML =
+            "<strong>Status:</strong> " +
+            drug.preparation.status +
+            "<br><br>" +
+            "<strong>Dilution:</strong> " +
+            drug.preparation.dilution +
+            "<br><br>" +
+            "<strong>Infusion Time:</strong> " +
+            drug.preparation.infusion_time;
 
         document.getElementById("resultReferences").innerHTML =
             drug.references
-                .map(item => "• " + item)
+                .map(ref => "• " + ref.name)
                 .join("<br>");
 
         document.getElementById("drugResult").style.display = "block";
