@@ -786,6 +786,83 @@ if (drug.products && drug.products.length > 0) {
         </p>
     `;
 }
+        // Recommended Bag Options
+const bagOptions = product.iv_preparation?.available_bag_sizes || [];
+let bagOptionsHTML = "";
+
+if (bagOptions.length > 0) {
+
+    bagOptionsHTML = `
+        <div style="
+            margin-top:20px;
+            padding:20px;
+            background:#f8fbff;
+            border:1px solid #dce8f5;
+            border-radius:12px;
+        ">
+
+            <h3 style="
+                color:#0b5cab;
+                margin-bottom:15px;
+            ">
+                Recommended Bag Options
+            </h3>
+
+            ${bagOptions.map(bagSize => {
+
+                const totalVolume =
+                    bagSize + drugVolume;
+
+                const concentration =
+                    dose / totalVolume;
+
+                const range =
+                    product.iv_preparation?.target_concentration;
+
+                const withinRange =
+                    range &&
+                    concentration >= parseFloat(range.minimum) &&
+                    concentration <= parseFloat(range.maximum);
+
+                return `
+                    <div style="
+                        padding:15px;
+                        margin-bottom:10px;
+                        background:white;
+                        border:1px solid #e2eaf3;
+                        border-radius:8px;
+                    ">
+
+                        <strong>${bagSize} mL bag</strong>
+
+                        <div style="margin-top:7px;">
+                            Total volume after drug addition:
+                            ${totalVolume.toFixed(2)} mL
+                        </div>
+
+                        <div style="margin-top:7px;">
+                            Final concentration:
+                            ${concentration.toFixed(2)} mg/mL
+                        </div>
+
+                        <div style="
+                            margin-top:7px;
+                            font-weight:bold;
+                            color:${withinRange ? "#176b3a" : "#9b3030"};
+                        ">
+                            ${withinRange
+                                ? "✓ Within concentration range"
+                                : "⚠ Outside concentration range"}
+                        </div>
+
+                    </div>
+                `;
+
+            }).join("")}
+
+        </div>
+    `;
+}
         // IV Preparation
 const iv = drug.products?.find(
     product => product.iv_preparation
@@ -1131,45 +1208,51 @@ if (bestCombination) {
 
     result.style.display = "block";
 
-    result.innerHTML = `
-        <p><strong>Product:</strong> ${product.brand_name}</p>
+   result.innerHTML = `
+    <p><strong>Product:</strong> ${product.brand_name}</p>
 
-        <p style="margin-top:8px;">
-            <strong>Prescribed dose:</strong> ${dose} mg
-        </p>
+    <p style="margin-top:8px;">
+        <strong>Prescribed dose:</strong> ${dose} mg
+    </p>
 
-        <p style="margin-top:8px;">
-            <strong>Concentration:</strong> ${product.concentration}
-        </p>
+    <p style="margin-top:8px;">
+        <strong>Concentration:</strong> ${product.concentration}
+    </p>
 
-        <p style="margin-top:8px;">
-        <p style="margin-top:8px;">
-    <strong>Vial selection:</strong><br>
-    ${vialSummary}
-</p>
-            <strong>Required drug volume:</strong>
-            <p style="margin-top:8px;">
-    <strong>IV bag volume:</strong>
-${finalBagVolume.toFixed(2)} mL
+    <p style="margin-top:8px;">
+        <strong>Vial selection:</strong><br>
+        ${vialSummary}
+    </p>
 
-</p>
-<p style="margin-top:8px;">
-    <strong>Total volume after drug addition:</strong>
-    ${totalFinalVolume.toFixed(2)} mL
-</p>
-<p style="margin-top:8px;">
-    <strong>Diluent volume:</strong>
-    ${diluentVolume.toFixed(2)} mL
-</p>
-<p style="margin-top:8px;">
-    <strong>Calculated final concentration:</strong>
-    ${finalConcentration.toFixed(2)} mg/mL
-</p>
+    <p style="margin-top:8px;">
+        <strong>Required drug volume:</strong>
+        ${drugVolume.toFixed(2)} mL
+    </p>
 
-${concentrationStatus}
-            ${drugVolume.toFixed(2)} mL
-        </p>
-    `;
+    <p style="margin-top:8px;">
+        <strong>IV bag volume:</strong>
+        ${finalBagVolume.toFixed(2)} mL
+    </p>
+
+    <p style="margin-top:8px;">
+        <strong>Total volume after drug addition:</strong>
+        ${totalFinalVolume.toFixed(2)} mL
+    </p>
+
+    <p style="margin-top:8px;">
+        <strong>Diluent volume:</strong>
+        ${diluentVolume.toFixed(2)} mL
+    </p>
+
+    <p style="margin-top:8px;">
+        <strong>Calculated final concentration:</strong>
+        ${finalConcentration.toFixed(2)} mg/mL
+    </p>
+
+    ${concentrationStatus}
+
+    ${bagOptionsHTML}
+`;
 }
 </script>
 </body>
