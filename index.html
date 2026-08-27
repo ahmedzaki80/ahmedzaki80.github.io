@@ -912,6 +912,116 @@ if (iv) {
 
     const drugVolume =
         dose / concentration;
+        // Vial selection
+const vialSizes = product.presentations
+    .map(item => {
+
+        const match = item.match(/(\d+)\s*mg\/(\d+)\s*mL/);
+
+        if (!match) return null;
+
+        return {
+            mg: parseFloat(match[1]),
+            ml: parseFloat(match[2])
+        };
+    })
+    .filter(Boolean);
+
+let bestCombination = null;
+let bestTotalMg = Infinity;
+let bestVialCount = Infinity;
+
+function findCombination(index, remainingDose, combination) {
+
+    if (remainingDose <= 0) {
+
+        const totalMg = combination.reduce(
+            (sum, vial) => sum + vial.mg,
+            0
+        );
+
+        if (
+            totalMg < bestTotalMg ||
+            (
+                totalMg === bestTotalMg &&
+                combination.length < bestVialCount
+            )
+        ) {
+            bestTotalMg = totalMg;
+            bestVialCount = combination.length;
+            bestCombination = [...combination];
+        }
+
+        return;
+    }
+
+    if (index >= vialSizes.length) return;
+
+    const vial = vialSizes[index];
+
+    const maxVials =
+        Math.ceil(remainingDose / vial.mg) + 1;
+
+    for (let count = 0; count <= maxVials; count++) {
+
+        for (let i = 0; i < count; i++) {
+            combination.push(vial);
+        }
+
+        findCombination(
+            index + 1,
+            remainingDose - (count * vial.mg),
+            combination
+        );
+
+        for (let i = 0; i < count; i++) {
+            combination.pop();
+        }
+    }
+}
+
+findCombination(0, dose, []);
+
+let vialSummary = "No vial combination available.";
+
+if (bestCombination) {
+
+    const vialCounts = {};
+
+    bestCombination.forEach(vial => {
+
+        vialCounts[vial.mg] =
+            (vialCounts[vial.mg] || 0) + 1;
+    });
+
+    vialSummary = Object.entries(vialCounts)
+        .map(([mg, count]) =>
+            `${count} × ${mg} mg vial`
+        )
+        .join("<br>");
+
+    const totalVialMg = bestCombination.reduce(
+        (sum, vial) => sum + vial.mg,
+        0
+    );
+
+    const wastageMg =
+        totalVialMg - dose;
+
+    const wastageVolume =
+        wastageMg / concentration;
+
+    vialSummary += `
+        <br><br>
+        <strong>Total vial amount:</strong>
+        ${totalVialMg} mg
+
+        <br>
+        <strong>Wastage:</strong>
+        ${wastageMg} mg
+        (${wastageVolume.toFixed(2)} mL)
+    `;
+}
 
     result.style.display = "block";
 
@@ -927,6 +1037,10 @@ if (iv) {
         </p>
 
         <p style="margin-top:8px;">
+        <p style="margin-top:8px;">
+    <strong>Vial selection:</strong><br>
+    ${vialSummary}
+</p>
             <strong>Required drug volume:</strong>
             ${drugVolume.toFixed(2)} mL
         </p>
