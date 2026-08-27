@@ -543,70 +543,66 @@ if (!drug) {
             return;
         }
         // Products
+// Products
 const productsContainer = document.getElementById("productsContainer");
 
 productsContainer.innerHTML = "";
 
-drug.products.forEach(product => {
+if (drug.products && drug.products.length > 0) {
 
-    const productCard = document.createElement("div");
+    drug.products.forEach(product => {
 
-    productCard.style.cssText = `
-        background:#f8fbff;
-        border:1px solid #dce8f5;
-        border-radius:12px;
-        padding:18px;
-        margin-bottom:12px;
+        const productCard = document.createElement("div");
+
+        productCard.style.cssText = `
+            background:#f8fbff;
+            border:1px solid #dce8f5;
+            border-radius:12px;
+            padding:18px;
+            margin-bottom:12px;
+        `;
+
+        productCard.innerHTML = `
+            <div style="
+                font-size:18px;
+                font-weight:bold;
+                color:#172033;
+                margin-bottom:8px;
+            ">
+                ${product.brand_name}
+            </div>
+
+            <div style="color:#687386;font-size:14px;margin-bottom:8px;">
+                Active ingredient: ${product.active_ingredient}
+            </div>
+
+            <div style="color:#3d4858;font-size:14px;margin-bottom:8px;">
+                Concentration: ${product.concentration}
+            </div>
+
+            <div style="color:#3d4858;font-size:14px;margin-bottom:8px;">
+                Route: ${product.route}
+            </div>
+
+            <div style="color:#3d4858;font-size:14px;">
+                Presentations:<br>
+                ${product.presentations
+                    .map(item => "• " + item)
+                    .join("<br>")}
+            </div>
+        `;
+
+        productsContainer.appendChild(productCard);
+    });
+
+} else {
+
+    productsContainer.innerHTML = `
+        <p style="color:#687386;">
+            Product-specific information is not available yet.
+        </p>
     `;
-
-    productCard.innerHTML = `
-        <div style="
-            font-size:18px;
-            font-weight:bold;
-            color:#172033;
-            margin-bottom:8px;
-        ">
-            ${product.brand_name}
-        </div>
-
-        <div style="
-            color:#687386;
-            font-size:14px;
-            margin-bottom:8px;
-        ">
-            Active ingredient: ${product.active_ingredient}
-        </div>
-
-        <div style="
-            color:#3d4858;
-            font-size:14px;
-            margin-bottom:8px;
-        ">
-            Concentration: ${product.concentration}
-        </div>
-
-        <div style="
-            color:#3d4858;
-            font-size:14px;
-            margin-bottom:8px;
-        ">
-            Route: ${product.route}
-        </div>
-
-        <div style="
-            color:#3d4858;
-            font-size:14px;
-        ">
-            Presentations:
-            <br>
-            ${product.presentations
-                .map(item => "• " + item)
-                .join("<br>")}
-        </div>
-    `;
-
-    productsContainer.appendChild(productCard);
-});
+}
         // IV Preparation
 const iv = drug.products?.find(
     product => product.iv_preparation
@@ -714,11 +710,17 @@ if (iv) {
         // References
         document.getElementById("resultReferences").innerHTML =
     drug.references
-        .map(ref =>
-            `• <a href="${ref.url}" target="_blank" rel="noopener noreferrer">
-                ${ref.name}
-              </a> (${ref.type})`
-        )
+       .map(ref => {
+
+    if (ref.url) {
+        return `• <a href="${ref.url}" target="_blank" rel="noopener noreferrer">
+            ${ref.name}
+        </a> (${ref.type})`;
+    }
+
+    return `• ${ref.name} (${ref.type})`;
+
+})
         .join("<br>");
 
         // Show result
