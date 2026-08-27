@@ -571,12 +571,13 @@ if (!drug) {
 
         // References
         document.getElementById("resultReferences").innerHTML =
-            drug.references
-                .map(ref =>
-                    "• " + ref.name +
-                    " (" + ref.type + ")"
-                )
-                .join("<br>");
+    drug.references
+        .map(ref =>
+            `• <a href="${ref.url}" target="_blank" rel="noopener noreferrer">
+                ${ref.name}
+              </a> (${ref.type})`
+        )
+        .join("<br>");
 
         // Show result
         document.getElementById("drugResult").style.display = "block";
