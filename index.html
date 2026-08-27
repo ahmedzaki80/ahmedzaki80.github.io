@@ -494,7 +494,27 @@ async function searchDrug() {
 
         const searchTerm = drugInput.toLowerCase();
 
-        const drug = drugs[searchTerm];
+       let drug = drugs[searchTerm];
+
+if (!drug) {
+
+    for (const key in drugs) {
+
+        const currentDrug = drugs[key];
+
+        const brandMatch = currentDrug.brand_names?.some(
+            brand => brand.toLowerCase() === searchTerm
+        );
+
+        const genericMatch =
+            currentDrug.generic_name.toLowerCase() === searchTerm;
+
+        if (brandMatch || genericMatch) {
+            drug = currentDrug;
+            break;
+        }
+    }
+}
 
         if (!drug) {
             alert(
