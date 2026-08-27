@@ -38,20 +38,23 @@
       "Nausea"
     ],
 
-    "references": [
-      {
-        "name": "FDA Prescribing Information",
-        "type": "Regulatory"
-      },
-      {
-        "name": "BC Cancer",
-        "type": "Cancer Drug Manual"
-      },
-      {
-        "name": "Cancer Care Ontario",
-        "type": "Cancer Drug Monograph"
-      }
-    ]
+   "references": [
+  {
+    "name": "FDA Prescribing Information",
+    "type": "Regulatory",
+    "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/103705s5451lbl.pdf"
+  },
+  {
+    "name": "BC Cancer",
+    "type": "Cancer Drug Manual",
+    "url": "https://www.bccancer.bc.ca/drug-database-site/Drug%20Index/Rituximab_monograph_1Jan2019.pdf"
+  },
+  {
+    "name": "Cancer Care Ontario",
+    "type": "Cancer Drug Monograph",
+    "url": "https://www.cancercareontario.ca/en/drugformulary/drugs/monograph/43716"
+  }
+]
   },
 
   "trastuzumab": {
