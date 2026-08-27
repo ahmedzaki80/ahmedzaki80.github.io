@@ -503,7 +503,7 @@ async function searchDrug() {
 
     try {
 
-        const response = await fetch("drugs.json");
+        const response = await fetch("./drugs.json");
 
         if (!response.ok) {
             throw new Error("Database could not be loaded.");
