@@ -402,7 +402,32 @@
         >
 
     </div>
+<div style="margin-bottom:15px;">
 
+    <label style="
+        display:block;
+        font-weight:bold;
+        margin-bottom:7px;
+    ">
+        Final Bag Volume (mL)
+    </label>
+
+    <input
+        type="number"
+        id="finalBagVolume"
+        placeholder="e.g. 250"
+        min="1"
+        step="1"
+        style="
+            width:100%;
+            padding:12px;
+            border:1px solid #ccd8e5;
+            border-radius:8px;
+            font-size:15px;
+        "
+    >
+
+</div>
     <button
         onclick="calculateDrugVolume()"
         style="
@@ -912,6 +937,16 @@ if (iv) {
 
     const drugVolume =
         dose / concentration;
+        const finalBagVolume =
+    parseFloat(document.getElementById("finalBagVolume").value);
+
+if (!finalBagVolume || finalBagVolume <= 0) {
+    alert("Please enter a valid final bag volume.");
+    return;
+}
+
+const finalConcentration =
+    dose / finalBagVolume;
         // Vial selection
 const vialSizes = product.presentations
     .map(item => {
@@ -981,7 +1016,52 @@ function findCombination(index, remainingDose, combination) {
 }
 
 findCombination(0, dose, []);
+let concentrationStatus = "";
 
+const targetRange = product.iv_preparation?.target_concentration;
+
+if (targetRange) {
+
+    const min =
+        parseFloat(targetRange.minimum);
+
+    const max =
+        parseFloat(targetRange.maximum);
+
+    if (
+        finalConcentration >= min &&
+        finalConcentration <= max
+    ) {
+
+        concentrationStatus = `
+            <p style="
+                margin-top:10px;
+                padding:10px;
+                background:#e9f8ef;
+                border-radius:8px;
+                color:#176b3a;
+            ">
+                ✓ Final concentration is within the product's
+                recommended range (${min}-${max} mg/mL).
+            </p>
+        `;
+
+    } else {
+
+        concentrationStatus = `
+            <p style="
+                margin-top:10px;
+                padding:10px;
+                background:#fff1f1;
+                border-radius:8px;
+                color:#9b3030;
+            ">
+                ⚠ Final concentration is outside the product's
+                recommended range (${min}-${max} mg/mL).
+            </p>
+        `;
+    }
+}
 let vialSummary = "No vial combination available.";
 
 if (bestCombination) {
@@ -1042,6 +1122,17 @@ if (bestCombination) {
     ${vialSummary}
 </p>
             <strong>Required drug volume:</strong>
+            <p style="margin-top:8px;">
+    <strong>Final bag volume:</strong>
+    ${finalBagVolume.toFixed(2)} mL
+</p>
+
+<p style="margin-top:8px;">
+    <strong>Calculated final concentration:</strong>
+    ${finalConcentration.toFixed(2)} mg/mL
+</p>
+
+${concentrationStatus}
             ${drugVolume.toFixed(2)} mL
         </p>
     `;
