@@ -1,9 +1,55 @@
 {
   "rituximab": {
     "generic_name": "Rituximab",
-    "brand_names": [
-      "Rituxan",
-      "MabThera"
+   "brand_names": [
+  "Rituxan",
+  "Truxima",
+  "Riabni",
+  "Ruxience"
+],
+
+"products": [
+  {
+    "brand_name": "Rituxan",
+    "active_ingredient": "rituximab",
+    "concentration": "10 mg/mL",
+    "presentations": [
+      "100 mg/10 mL single-dose vial",
+      "500 mg/50 mL single-dose vial"
+    ],
+    "route": "Intravenous"
+  },
+  {
+    "brand_name": "Truxima",
+    "active_ingredient": "rituximab-abbs",
+    "concentration": "10 mg/mL",
+    "presentations": [
+      "100 mg/10 mL single-dose vial",
+      "500 mg/50 mL single-dose vial"
+    ],
+    "route": "Intravenous"
+  },
+  {
+    "brand_name": "Riabni",
+    "active_ingredient": "rituximab-arrx",
+    "concentration": "10 mg/mL",
+    "presentations": [
+      "100 mg/10 mL single-dose vial",
+      "500 mg/50 mL single-dose vial"
+    ],
+    "route": "Intravenous"
+  },
+  {
+    "brand_name": "Ruxience",
+    "active_ingredient": "rituximab-pvvr",
+    "concentration": "10 mg/mL",
+    "presentations": [
+      "100 mg/10 mL single-dose vial",
+      "500 mg/50 mL single-dose vial"
+    ],
+    "route": "Intravenous"
+  }
+],
     ],
     "drug_class": "Monoclonal antibody",
     "category": "Oncology / Immunology",
