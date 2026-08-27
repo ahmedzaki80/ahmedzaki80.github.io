@@ -241,37 +241,145 @@
 </section>
 
 <section id="drugResult" style="display:none; max-width:1000px; margin:40px auto; padding:0 20px;">
-    
-    <div style="background:white; border-radius:14px; padding:30px; box-shadow:0 5px 20px rgba(0,0,0,0.08); border:1px solid #e7edf5;">
-        
-        <h2 id="resultName" style="color:#0b5cab; margin-bottom:10px;"></h2>
-        
-        <p id="resultClass" style="color:#687386; margin-bottom:25px;"></p>
 
-        <div style="margin-bottom:22px;">
-            <h3>Indications</h3>
-            <p id="resultIndications" style="margin-top:8px; line-height:1.7;"></p>
+    <div style="
+        background:white;
+        border-radius:16px;
+        padding:32px;
+        box-shadow:0 8px 30px rgba(0,0,0,0.08);
+        border:1px solid #e2eaf3;
+    ">
+
+        <!-- Drug Header -->
+        <div style="
+            border-bottom:1px solid #e7edf5;
+            padding-bottom:20px;
+            margin-bottom:25px;
+        ">
+
+            <div style="
+                color:#0b5cab;
+                font-size:14px;
+                font-weight:bold;
+                margin-bottom:8px;
+            ">
+                DRUG INFORMATION
+            </div>
+
+            <h2 id="resultName" style="
+                color:#172033;
+                font-size:32px;
+                margin-bottom:8px;
+            "></h2>
+
+            <p id="resultClass" style="
+                color:#687386;
+                font-size:16px;
+            "></p>
+
         </div>
 
-        <div style="margin-bottom:22px;">
-            <h3>Route of Administration</h3>
-            <p id="resultRoute" style="margin-top:8px; line-height:1.7;"></p>
+
+        <!-- Indications -->
+        <div style="margin-bottom:28px;">
+
+            <h3 style="color:#0b5cab; margin-bottom:10px;">
+                Indications
+            </h3>
+
+            <p id="resultIndications" style="
+                line-height:1.8;
+                color:#3d4858;
+            "></p>
+
         </div>
 
-        <div style="margin-bottom:22px;">
-            <h3>Important Note</h3>
-            <p id="resultNote" style="margin-top:8px; line-height:1.7;"></p>
+
+        <!-- Route -->
+        <div style="margin-bottom:28px;">
+
+            <h3 style="color:#0b5cab; margin-bottom:10px;">
+                Route of Administration
+            </h3>
+
+            <p id="resultRoute" style="
+                line-height:1.8;
+                color:#3d4858;
+            "></p>
+
         </div>
 
-        <div>
-            <h3>References</h3>
-            <p id="resultReferences" style="margin-top:8px; line-height:1.7;"></p>
+
+        <!-- Preparation -->
+        <div style="
+            background:#f4f8fc;
+            padding:22px;
+            border-radius:12px;
+            margin-bottom:28px;
+        ">
+
+            <h3 style="color:#0b5cab; margin-bottom:18px;">
+                Preparation & Administration
+            </h3>
+
+            <p id="resultNote" style="
+                line-height:1.8;
+                color:#3d4858;
+            "></p>
+
+        </div>
+
+
+        <!-- Warnings -->
+        <div style="margin-bottom:28px;">
+
+            <h3 style="color:#b06b00; margin-bottom:10px;">
+                Warnings & Precautions
+            </h3>
+
+            <p id="resultWarnings" style="
+                line-height:1.8;
+                color:#3d4858;
+            "></p>
+
+        </div>
+
+
+        <!-- Adverse Effects -->
+        <div style="margin-bottom:28px;">
+
+            <h3 style="color:#9b3030; margin-bottom:10px;">
+                Adverse Effects
+            </h3>
+
+            <p id="resultAdverse" style="
+                line-height:1.8;
+                color:#3d4858;
+            "></p>
+
+        </div>
+
+
+        <!-- References -->
+        <div style="
+            border-top:1px solid #e7edf5;
+            padding-top:22px;
+        ">
+
+            <h3 style="color:#0b5cab; margin-bottom:10px;">
+                References
+            </h3>
+
+            <p id="resultReferences" style="
+                line-height:1.8;
+                color:#3d4858;
+            "></p>
+
         </div>
 
     </div>
 
 </section>
-
 <main class="container">
 
     <div class="section-title">
@@ -396,39 +504,64 @@ async function searchDrug() {
             return;
         }
 
+        // Drug name
         document.getElementById("resultName").textContent =
             drug.generic_name;
 
+        // Drug class + category
         document.getElementById("resultClass").textContent =
             drug.drug_class + " • " + drug.category;
 
+        // Indications
         document.getElementById("resultIndications").innerHTML =
             drug.indications
                 .map(item => "• " + item)
                 .join("<br>");
 
+        // Routes
         document.getElementById("resultRoute").innerHTML =
             drug.routes
                 .map(item => "• " + item)
                 .join("<br>");
 
+        // Preparation
         document.getElementById("resultNote").innerHTML =
             "<strong>Status:</strong> " +
             drug.preparation.status +
             "<br><br>" +
+
             "<strong>Dilution:</strong> " +
             drug.preparation.dilution +
             "<br><br>" +
+
             "<strong>Infusion Time:</strong> " +
             drug.preparation.infusion_time;
 
-        document.getElementById("resultReferences").innerHTML =
-            drug.references
-                .map(ref => "• " + ref.name)
+        // Warnings
+        document.getElementById("resultWarnings").innerHTML =
+            drug.warnings
+                .map(item => "• " + item)
                 .join("<br>");
 
+        // Adverse effects
+        document.getElementById("resultAdverse").innerHTML =
+            drug.adverse_effects
+                .map(item => "• " + item)
+                .join("<br>");
+
+        // References
+        document.getElementById("resultReferences").innerHTML =
+            drug.references
+                .map(ref =>
+                    "• " + ref.name +
+                    " (" + ref.type + ")"
+                )
+                .join("<br>");
+
+        // Show result
         document.getElementById("drugResult").style.display = "block";
 
+        // Scroll to result
         document.getElementById("drugResult").scrollIntoView({
             behavior: "smooth"
         });
