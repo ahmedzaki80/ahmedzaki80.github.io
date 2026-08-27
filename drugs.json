@@ -1,0 +1,36 @@
+{
+  "rituximab": {
+    "generic_name": "Rituximab",
+    "drug_class": "Monoclonal antibody",
+    "category": "Oncology / Immunology",
+    "indications": [
+      "Non-Hodgkin lymphoma",
+      "Chronic lymphocytic leukemia",
+      "Rheumatoid arthritis",
+      "Granulomatosis with polyangiitis",
+      "Microscopic polyangiitis"
+    ],
+    "route": "Intravenous infusion",
+    "important_note": "Preparation and administration must follow the current official product information and institutional protocol.",
+    "references": [
+      "FDA Prescribing Information",
+      "Cancer Care Ontario",
+      "BC Cancer"
+    ]
+  },
+  "trastuzumab": {
+    "generic_name": "Trastuzumab",
+    "drug_class": "Monoclonal antibody",
+    "category": "Oncology",
+    "indications": [
+      "HER2-positive breast cancer",
+      "HER2-positive metastatic gastric cancer"
+    ],
+    "route": "Intravenous infusion or subcutaneous administration depending on product",
+    "important_note": "Product-specific preparation and administration requirements must be verified before use.",
+    "references": [
+      "FDA Prescribing Information",
+      "Cancer Care Ontario"
+    ]
+  }
+}
