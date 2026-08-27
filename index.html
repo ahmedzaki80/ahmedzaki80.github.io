@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MedInfo | Drug Information</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        /* Header */
+        header {
+            background: #0b5cab;
+            color: white;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #9ee7ff;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0b5cab, #1687c9);
+            color: white;
+            padding: 75px 20px 85px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.92;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        /* Search */
+        .search-box {
+            max-width: 700px;
+            margin: 35px auto 0;
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 7px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 16px;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+
+        .search-box button {
+            border: none;
+            background: #0b5cab;
+            color: white;
+            padding: 0 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Main */
+        .container {
+            max-width: 1100px;
+            margin: 55px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #687386;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            transition: 0.25s;
+            border: 1px solid #e7edf5;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+        }
+
+        .icon {
+            font-size: 35px;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #687386;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            margin-top: 45px;
+            background: #fff8e6;
+            border-left: 5px solid #e6a700;
+            padding: 20px;
+            border-radius: 8px;
+            color: #665000;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 70px;
+            background: #172033;
+            color: #bfc8d6;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .search-box {
+                flex-direction: column;
+                gap: 7px;
+            }
+
+            .search-box button {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        Med<span>Info</span>
+    </div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#references">References</a>
+    </nav>
+</header>
+
+
+<section class="hero">
+
+    <h1>Reliable Drug Information</h1>
+
+    <p>
+        A medical information platform providing
+        evidence-based drug information for healthcare professionals.
+    </p>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="drugSearch"
+            placeholder="Search for a drug... e.g. Rituximab"
+        >
+
+        <button onclick="searchDrug()">
+            Search
+        </button>
+    </div>
+
+</section>
+
+
+<main class="container">
+
+    <div class="section-title">
+        <h2>Explore Drug Information</h2>
+
+        <p>
+            Find essential information about medications,
+            administration and preparation.
+        </p>
+    </div>
+
+
+    <section class="cards" id="categories">
+
+        <div class="card">
+            <div class="icon">💊</div>
+
+            <h3>Drug Information</h3>
+
+            <p>
+                Indications, dosage, contraindications,
+                warnings and adverse reactions.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🧪</div>
+
+            <h3>IV Preparation</h3>
+
+            <p>
+                Dilution, administration,
+                infusion time and preparation information.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🧬</div>
+
+            <h3>Oncology</h3>
+
+            <p>
+                Information about chemotherapy,
+                targeted therapy and biological medicines.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">📚</div>
+
+            <h3>References</h3>
+
+            <p>
+                Drug information supported by
+                reliable medical and regulatory sources.
+            </p>
+        </div>
+
+    </section>
+
+
+    <div class="disclaimer">
+
+        <strong>Medical Disclaimer:</strong>
+
+        This website is intended for educational and
+        professional information purposes only.
+        It does not replace official prescribing information,
+        clinical judgment or institutional protocols.
+
+    </div>
+
+</main>
+
+
+<footer id="references">
+
+    <p>
+        © 2026 MedInfo — Evidence-Based Drug Information
+    </p>
+
+    <p style="margin-top:8px;">
+        Information should always be verified against
+        current official references.
+    </p>
+
+</footer>
+
+
+<script>
+
+function searchDrug() {
+
+    const drug = document.getElementById("drugSearch").value.trim();
+
+    if (drug === "") {
+
+        alert("Please enter a drug name.");
+
+        return;
+    }
+
+    alert(
+        "Drug search for: " +
+        drug +
+        "\n\nThe drug database will be connected in the next step."
+    );
+}
+
+</script>
+
+</body>
+</html>
