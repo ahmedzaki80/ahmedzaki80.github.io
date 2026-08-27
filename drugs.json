@@ -17,25 +17,23 @@
       "100 mg/10 mL single-dose vial",
       "500 mg/50 mL single-dose vial"
     ],
-    "route": "Intravenous" ,
+    "route": "Intravenous",
     "iv_preparation": {
-  "diluent": "0.9% Sodium Chloride or 5% Dextrose in Water",
-  "final_concentration": "1-4 mg/mL",
-  "administration": "Intravenous infusion",
-  "iv_push_or_bolus": "Do not administer as IV push or bolus",
-  "mixing": "Gently invert the infusion bag to mix; avoid foaming",
-  "line": "Administer through a dedicated line",
-  "compatibility": "Compatible with PVC or polyethylene bags",
-  "bag_volume": "250-500 mL",
-  "vial_stability": "Discard unused portion",
-  "product_stability": {
-    "normal_saline": "10 days refrigerated + 24 hours room temperature",
-    "d5w": "24 hours refrigerated + 12 hours room temperature"
-  },
- "source": "BC Cancer Chemotherapy Preparation and Stability Chart — verify against current chart before clinical use"
-}
-      
-}
+      "diluent": "0.9% Sodium Chloride or 5% Dextrose in Water",
+      "final_concentration": "1-4 mg/mL",
+      "administration": "Intravenous infusion",
+      "iv_push_or_bolus": "Do not administer as IV push or bolus",
+      "mixing": "Gently invert the infusion bag to mix; avoid foaming",
+      "line": "Administer through a dedicated line",
+      "compatibility": "Compatible with PVC or polyethylene bags",
+      "bag_volume": "250-500 mL",
+      "vial_stability": "Discard unused portion",
+      "product_stability": {
+        "normal_saline": "10 days refrigerated + 24 hours room temperature",
+        "d5w": "24 hours refrigerated + 12 hours room temperature"
+      },
+      "source": "BC Cancer Chemotherapy Preparation and Stability Chart — verify against current chart before clinical use"
+    }
   },
   {
     "brand_name": "Truxima",
