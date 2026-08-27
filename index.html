@@ -328,7 +328,121 @@
     <div id="ivPreparationContainer"></div>
 
 </div>
+<!-- Vial & Bag Calculator -->
+<div id="calculatorSection" style="
+    background:#eef6ff;
+    border:1px solid #cfe2f5;
+    border-radius:14px;
+    padding:25px;
+    margin-bottom:28px;
+">
 
+    <h3 style="color:#0b5cab; margin-bottom:18px;">
+        Vial & Bag Calculator
+    </h3>
+
+    <p style="
+        color:#687386;
+        font-size:14px;
+        margin-bottom:20px;
+    ">
+        Calculate drug volume and vial requirements based on the selected
+        product concentration and prescribed dose.
+    </p>
+
+    <div style="margin-bottom:15px;">
+
+        <label style="
+            display:block;
+            font-weight:bold;
+            margin-bottom:7px;
+        ">
+            Select Product
+        </label>
+
+        <select id="calculatorProduct" style="
+            width:100%;
+            padding:12px;
+            border:1px solid #ccd8e5;
+            border-radius:8px;
+            font-size:15px;
+        ">
+
+            <option value="">
+                Select a product
+            </option>
+
+        </select>
+
+    </div>
+
+    <div style="margin-bottom:15px;">
+
+        <label style="
+            display:block;
+            font-weight:bold;
+            margin-bottom:7px;
+        ">
+            Prescribed Dose (mg)
+        </label>
+
+        <input
+            type="number"
+            id="calculatorDose"
+            placeholder="e.g. 750"
+            min="0"
+            step="0.01"
+            style="
+                width:100%;
+                padding:12px;
+                border:1px solid #ccd8e5;
+                border-radius:8px;
+                font-size:15px;
+            "
+        >
+
+    </div>
+
+    <button
+        onclick="calculateDrugVolume()"
+        style="
+            width:100%;
+            padding:13px;
+            border:none;
+            border-radius:8px;
+            background:#0b5cab;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+        "
+    >
+        Calculate
+    </button>
+
+    <div
+        id="calculatorResult"
+        style="
+            margin-top:20px;
+            display:none;
+            background:white;
+            border-radius:10px;
+            padding:18px;
+            border:1px solid #dce8f5;
+        "
+    ></div>
+
+    <p style="
+        margin-top:15px;
+        font-size:12px;
+        color:#687386;
+        line-height:1.5;
+    ">
+        Clinical safety note: This calculator provides mathematical calculations
+        only. Always verify the current product information, prescribed dose,
+        preparation instructions and institutional protocol before preparation.
+    </p>
+
+</div>
         <!-- Preparation -->
         <div style="
             background:#f4f8fc;
@@ -542,6 +656,35 @@ if (!drug) {
             );
             return;
         }
+        // Store current drug for the calculator
+window.currentDrug = drug;
+
+// Populate calculator products
+const calculatorProduct =
+    document.getElementById("calculatorProduct");
+
+calculatorProduct.innerHTML =
+    `<option value="">Select a product</option>`;
+
+if (drug.products && drug.products.length > 0) {
+
+    drug.products.forEach((product, index) => {
+
+        const option = document.createElement("option");
+
+        option.value = index;
+
+        option.textContent =
+            `${product.brand_name} — ${product.concentration}`;
+
+        calculatorProduct.appendChild(option);
+    });
+
+} else {
+
+    calculatorProduct.innerHTML =
+        `<option value="">No products available</option>`;
+}
         // Products
 // Products
 const productsContainer = document.getElementById("productsContainer");
@@ -739,6 +882,55 @@ if (iv) {
             "Unable to connect to the drug database."
         );
     }
+}
+    function calculateDrugVolume() {
+
+    const productIndex =
+        document.getElementById("calculatorProduct").value;
+
+    const dose =
+        parseFloat(document.getElementById("calculatorDose").value);
+
+    const result =
+        document.getElementById("calculatorResult");
+
+    if (productIndex === "") {
+        alert("Please select a product.");
+        return;
+    }
+
+    if (!dose || dose <= 0) {
+        alert("Please enter a valid dose.");
+        return;
+    }
+
+    const product =
+        window.currentDrug.products[productIndex];
+
+    const concentration =
+        parseFloat(product.concentration);
+
+    const drugVolume =
+        dose / concentration;
+
+    result.style.display = "block";
+
+    result.innerHTML = `
+        <p><strong>Product:</strong> ${product.brand_name}</p>
+
+        <p style="margin-top:8px;">
+            <strong>Prescribed dose:</strong> ${dose} mg
+        </p>
+
+        <p style="margin-top:8px;">
+            <strong>Concentration:</strong> ${product.concentration}
+        </p>
+
+        <p style="margin-top:8px;">
+            <strong>Required drug volume:</strong>
+            ${drugVolume.toFixed(2)} mL
+        </p>
+    `;
 }
 </script>
 </body>
