@@ -414,7 +414,33 @@
 
     <input
         type="number"
+        <div style="margin-bottom:15px;">
+
+    <label style="
+        display:block;
+        font-weight:bold;
+        margin-bottom:7px;
+    ">
+        IV Bag Size (before drug addition)
+    </label>
+
+    <select
         id="finalBagVolume"
+        style="
+            width:100%;
+            padding:12px;
+            border:1px solid #ccd8e5;
+            border-radius:8px;
+            font-size:15px;
+            background:white;
+        "
+    >
+        <option value="">Select bag size</option>
+        <option value="250">250 mL</option>
+        <option value="500">500 mL</option>
+    </select>
+
+</div>finalBagVolume"
         placeholder="e.g. 250"
         min="1"
         step="1"
@@ -945,10 +971,13 @@ if (!finalBagVolume || finalBagVolume <= 0) {
     return;
 }
 
+const totalFinalVolume =
+    finalBagVolume + drugVolume;
+
 const finalConcentration =
-    dose / finalBagVolume;
+    dose / totalFinalVolume;
         const diluentVolume =
-    finalBagVolume - drugVolume;
+    finalBagVolume;
         if (finalBagVolume < drugVolume) {
     alert(
         "Final bag volume cannot be less than the required drug volume."
@@ -1131,8 +1160,13 @@ if (bestCombination) {
 </p>
             <strong>Required drug volume:</strong>
             <p style="margin-top:8px;">
-    <strong>Final bag volume:</strong>
-    ${finalBagVolume.toFixed(2)} mL
+    <strong>IV bag volume:</strong>
+${finalBagVolume.toFixed(2)} mL
+
+</p>
+<p style="margin-top:8px;">
+    <strong>Total volume after drug addition:</strong>
+    ${totalFinalVolume.toFixed(2)} mL
 </p>
 <p style="margin-top:8px;">
     <strong>Diluent volume:</strong>
