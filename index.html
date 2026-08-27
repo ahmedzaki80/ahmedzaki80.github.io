@@ -334,25 +334,62 @@
 
 
 <script>
+async function searchDrug() {
 
-function searchDrug() {
+    const drugInput = document.getElementById("drugSearch").value.trim();
 
-    const drug = document.getElementById("drugSearch").value.trim();
-
-    if (drug === "") {
-
+    if (drugInput === "") {
         alert("Please enter a drug name.");
-
         return;
     }
 
-    alert(
-        "Drug search for: " +
-        drug +
-        "\n\nThe drug database will be connected in the next step."
-    );
-}
+    try {
 
+        const response = await fetch("drugs.json");
+
+        if (!response.ok) {
+            throw new Error("Database could not be loaded.");
+        }
+
+        const drugs = await response.json();
+
+        const searchTerm = drugInput.toLowerCase();
+
+        const drug = drugs[searchTerm];
+
+        if (!drug) {
+            alert(
+                "Drug not found.\n\n" +
+                "Try: Rituximab or Trastuzumab"
+            );
+            return;
+        }
+
+        alert(
+            "Drug: " + drug.generic_name +
+            "\n\n" +
+            "Class: " + drug.drug_class +
+            "\n\n" +
+            "Category: " + drug.category +
+            "\n\n" +
+            "Route: " + drug.route +
+            "\n\n" +
+            "Indications:\n- " +
+            drug.indications.join("\n- ") +
+            "\n\n" +
+            "References:\n- " +
+            drug.references.join("\n- ")
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to connect to the drug database."
+        );
+    }
+}
 </script>
 
 </body>
