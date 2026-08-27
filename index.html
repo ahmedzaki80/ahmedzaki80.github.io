@@ -608,8 +608,9 @@ drug.products.forEach(product => {
     productsContainer.appendChild(productCard);
 });
         // IV Preparation
-const iv = drug.products?.[0]?.iv_preparation;
-
+const iv = drug.products?.find(
+    product => product.iv_preparation
+)?.iv_preparation;
 const ivContainer = document.getElementById("ivPreparationContainer");
 
 if (iv) {
