@@ -318,7 +318,16 @@
             "></p>
 
         </div>
+        <!-- IV Preparation -->
+<div id="resultIVPreparation" style="margin-bottom:28px;">
 
+    <h3 style="color:#0b5cab; margin-bottom:15px;">
+        IV Preparation
+    </h3>
+
+    <div id="ivPreparationContainer"></div>
+
+</div>
 
         <!-- Preparation -->
         <div style="
@@ -598,6 +607,63 @@ drug.products.forEach(product => {
 
     productsContainer.appendChild(productCard);
 });
+        // IV Preparation
+const iv = drug.products?.[0]?.iv_preparation;
+
+const ivContainer = document.getElementById("ivPreparationContainer");
+
+if (iv) {
+
+    ivContainer.innerHTML = `
+        <div style="
+            background:#f8fbff;
+            border:1px solid #dce8f5;
+            border-radius:12px;
+            padding:20px;
+        ">
+
+            <p><strong>Diluent:</strong> ${iv.diluent}</p>
+
+            <p><strong>Final concentration:</strong> ${iv.final_concentration}</p>
+
+            <p><strong>Bag volume:</strong> ${iv.bag_volume}</p>
+
+            <p><strong>Administration:</strong> ${iv.administration}</p>
+
+            <p><strong>IV push / bolus:</strong> ${iv.iv_push_or_bolus}</p>
+
+            <p><strong>Mixing:</strong> ${iv.mixing}</p>
+
+            <p><strong>Line:</strong> ${iv.line}</p>
+
+            <p><strong>Compatibility:</strong> ${iv.compatibility}</p>
+
+            <p><strong>Stability:</strong></p>
+
+            <ul>
+                <li>${iv.product_stability.normal_saline}</li>
+                <li>${iv.product_stability.d5w}</li>
+            </ul>
+
+            <p style="
+                margin-top:15px;
+                font-size:13px;
+                color:#687386;
+            ">
+                Source: ${iv.source}
+            </p>
+
+        </div>
+    `;
+
+} else {
+
+    ivContainer.innerHTML = `
+        <p style="color:#687386;">
+            IV preparation information is not available.
+        </p>
+    `;
+}
 
         // Drug name
         document.getElementById("resultName").textContent =
