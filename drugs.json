@@ -42,8 +42,8 @@
     "d5w": "24 hours refrigerated + 12 hours room temperature"
   },
   "source": "BC Cancer Chemotherapy Preparation and Stability Chart — verify against current chart before clinical use"
-}
-  },
+    }
+   },
   {
     "brand_name": "Truxima",
     "active_ingredient": "rituximab-abbs",
