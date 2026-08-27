@@ -57,7 +57,38 @@
       "500 mg/50 mL single-dose vial"
     ],
     "route": "Intravenous"
+    ,
+"iv_preparation": {
+  "diluent_options": [
+    "0.9% Sodium Chloride",
+    "5% Dextrose in Water"
+  ],
+  "target_concentration": {
+    "minimum": 1,
+    "maximum": 4,
+    "unit": "mg/mL"
   },
+  "final_bag_volume": {
+    "minimum": 250,
+    "maximum": 500,
+    "unit": "mL"
+  },
+  "available_bag_sizes": [
+    250,
+    500
+  ],
+  "administration": "Intravenous infusion",
+  "iv_push_or_bolus": "Do not administer as IV push or bolus",
+  "mixing": "Gently invert the infusion bag to mix; avoid foaming",
+  "line": "Administer through a dedicated line",
+  "compatibility": "Compatible with PVC or polyethylene bags",
+  "vial_stability": "Discard unused portion",
+  "product_stability": {
+    "refrigerated": "24 hours refrigerated + 24 hours room temperature after dilution"
+  },
+  "source": "FDA Truxima Prescribing Information and BC Cancer — verify against current product-specific instructions before clinical use"
+    }
+   },
   {
     "brand_name": "Riabni",
     "active_ingredient": "rituximab-arrx",
