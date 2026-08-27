@@ -1,8 +1,13 @@
 {
   "rituximab": {
     "generic_name": "Rituximab",
+    "brand_names": [
+      "Rituxan",
+      "MabThera"
+    ],
     "drug_class": "Monoclonal antibody",
     "category": "Oncology / Immunology",
+
     "indications": [
       "Non-Hodgkin lymphoma",
       "Chronic lymphocytic leukemia",
@@ -10,27 +15,90 @@
       "Granulomatosis with polyangiitis",
       "Microscopic polyangiitis"
     ],
-    "route": "Intravenous infusion",
-    "important_note": "Preparation and administration must follow the current official product information and institutional protocol.",
+
+    "routes": [
+      "Intravenous infusion"
+    ],
+
+    "preparation": {
+      "status": "Verify current product-specific instructions before preparation",
+      "dilution": "Refer to the current official product information",
+      "infusion_time": "Product- and regimen-dependent"
+    },
+
+    "warnings": [
+      "Infusion-related reactions may occur.",
+      "Screening and monitoring requirements depend on the indication and clinical protocol."
+    ],
+
+    "adverse_effects": [
+      "Infusion-related reactions",
+      "Infections",
+      "Fatigue",
+      "Nausea"
+    ],
+
     "references": [
-      "FDA Prescribing Information",
-      "Cancer Care Ontario",
-      "BC Cancer"
+      {
+        "name": "FDA Prescribing Information",
+        "type": "Regulatory"
+      },
+      {
+        "name": "BC Cancer",
+        "type": "Cancer Drug Manual"
+      },
+      {
+        "name": "Cancer Care Ontario",
+        "type": "Cancer Drug Monograph"
+      }
     ]
   },
+
   "trastuzumab": {
     "generic_name": "Trastuzumab",
+    "brand_names": [
+      "Herceptin"
+    ],
     "drug_class": "Monoclonal antibody",
     "category": "Oncology",
+
     "indications": [
       "HER2-positive breast cancer",
       "HER2-positive metastatic gastric cancer"
     ],
-    "route": "Intravenous infusion or subcutaneous administration depending on product",
-    "important_note": "Product-specific preparation and administration requirements must be verified before use.",
+
+    "routes": [
+      "Intravenous infusion",
+      "Subcutaneous administration for specific products"
+    ],
+
+    "preparation": {
+      "status": "Product-specific preparation requirements apply",
+      "dilution": "Refer to the current official product information",
+      "infusion_time": "Product- and regimen-dependent"
+    },
+
+    "warnings": [
+      "Cardiac function monitoring may be required.",
+      "Infusion-related reactions may occur."
+    ],
+
+    "adverse_effects": [
+      "Infusion-related reactions",
+      "Diarrhea",
+      "Fatigue",
+      "Cardiac dysfunction"
+    ],
+
     "references": [
-      "FDA Prescribing Information",
-      "Cancer Care Ontario"
+      {
+        "name": "FDA Prescribing Information",
+        "type": "Regulatory"
+      },
+      {
+        "name": "Cancer Care Ontario",
+        "type": "Cancer Drug Monograph"
+      }
     ]
   }
 }
