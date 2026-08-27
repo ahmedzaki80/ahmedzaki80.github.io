@@ -49,11 +49,11 @@
     "type": "Cancer Drug Manual",
     "url": "https://www.bccancer.bc.ca/health-professionals/clinical-resources/cancer-drug-manual"
   },
-  {
-    "name": "Cancer Care Ontario — Rituximab",
-    "type": "Cancer Drug Monograph",
-    "url": "https://www.cancercareontario.ca/en/drugformulary/regimens/monograph/78221"
-  }
+ {
+  "name": "Cancer Care Ontario — Rituximab",
+  "type": "Cancer Drug Monograph",
+  "url": "https://www.cancercareontario.ca/en/drugformulary/drugs/rituximab"
+}
 ]
   },
 
