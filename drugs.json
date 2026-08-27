@@ -38,21 +38,21 @@
       "Nausea"
     ],
 
-  "references": [
+ "references": [
   {
-    "name": "FDA Drug Information",
+    "name": "FDA — Rituxan Prescribing Information",
     "type": "Regulatory",
-    "url": "https://www.fda.gov/drugs"
+    "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/103705s5464lbl.pdf"
   },
   {
-    "name": "BC Cancer Drug Manual",
+    "name": "BC Cancer — Cancer Drug Manual",
     "type": "Cancer Drug Manual",
     "url": "https://www.bccancer.bc.ca/health-professionals/clinical-resources/cancer-drug-manual"
   },
   {
-    "name": "Cancer Care Ontario",
+    "name": "Cancer Care Ontario — Rituximab",
     "type": "Cancer Drug Monograph",
-    "url": "https://www.cancercareontario.ca/en/drugformulary"
+    "url": "https://www.cancercareontario.ca/en/drugformulary/regimens/monograph/78221"
   }
 ]
   },
