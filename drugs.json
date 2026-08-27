@@ -33,6 +33,10 @@
     "maximum": 500,
     "unit": "mL"
   },
+    "available_bag_sizes": [
+  250,
+  500
+],
   "administration": "Intravenous infusion",
   "iv_push_or_bolus": "Do not administer as IV push or bolus",
   "mixing": "Gently invert the infusion bag to mix; avoid foaming",
