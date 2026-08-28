@@ -823,5 +823,132 @@
       "type": "Regulatory"
     }
   ]
+},
+  "paclitaxel": {
+  "generic_name": "Paclitaxel",
+  "brand_names": [
+    "Unitaxel"
+  ],
+  "drug_class": "Taxane",
+  "category": "Oncology",
+
+  "products": [
+    {
+      "brand_name": "Unitaxel",
+      "active_ingredient": "paclitaxel",
+      "concentration": "6 mg/mL",
+      "presentations": [
+        "30 mg/5 mL vial",
+        "100 mg/16.67 mL vial",
+        "150 mg/25 mL vial",
+        "300 mg/50 mL vial"
+      ],
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water",
+          "5% Dextrose in 0.9% Sodium Chloride",
+          "5% Dextrose in Ringer's Injection"
+        ],
+
+        "do_not_use": [
+          "Do not administer undiluted",
+          "Do not administer as IV push or bolus"
+        ],
+
+        "target_concentration": {
+          "minimum": 0.3,
+          "maximum": 1.2,
+          "unit": "mg/mL"
+        },
+
+        "available_bag_sizes": [
+          100,
+          250,
+          500
+        ],
+
+        "bag_volume_rule": {
+          "type": "concentration-dependent",
+          "minimum_concentration": 0.3,
+          "maximum_concentration": 1.2,
+          "unit": "mg/mL",
+          "description": "Select a final volume that keeps the paclitaxel concentration within 0.3–1.2 mg/mL."
+        },
+
+        "administration": "Intravenous infusion",
+
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently mix after dilution according to institutional aseptic preparation procedures.",
+
+        "line": "Use an in-line filter with a microporous membrane not greater than 0.22 micrometer.",
+
+        "compatibility": "Use compatible non-PVC administration equipment where available according to current product and institutional requirements.",
+
+        "product_stability": {
+          "diluted_solution": "Diluted solutions are physically and chemically stable for up to 27 hours at approximately 25°C under room lighting conditions."
+        },
+
+        "special_notes": [
+          "Paclitaxel requires dilution before administration.",
+          "The formulation may produce haziness after dilution.",
+          "Inspect the diluted solution visually for particulate matter and discoloration before administration.",
+          "Monitor the infusion site because extravasation may occur.",
+          "Use appropriate precautions for handling hazardous antineoplastic drugs.",
+          "Premedication is required according to the current product-specific prescribing information and treatment protocol."
+        ],
+
+        "source": "Egyptian Drug Authority Conventional Anticancer Drugs Formulary and current Paclitaxel prescribing information — verify current local product information before clinical use"
+      }
+    }
+  ],
+
+  "indications": [
+    "Ovarian cancer",
+    "Breast cancer",
+    "Non-small cell lung cancer",
+    "AIDS-related Kaposi's sarcoma"
+  ],
+
+  "routes": [
+    "Intravenous infusion"
+  ],
+
+  "preparation": {
+    "status": "Product-specific preparation requirements apply",
+    "dilution": "Dilute to a final concentration of 0.3–1.2 mg/mL using an approved diluent.",
+    "infusion_time": "Regimen-dependent; commonly administered over 3 hours or 24 hours according to protocol."
+  },
+
+  "warnings": [
+    "Severe hypersensitivity reactions may occur.",
+    "Myelosuppression is dose-limiting.",
+    "Peripheral neuropathy may occur.",
+    "Extravasation may cause local tissue injury.",
+    "Premedication is required to reduce the risk of hypersensitivity reactions."
+  ],
+
+  "adverse_effects": [
+    "Neutropenia",
+    "Peripheral neuropathy",
+    "Alopecia",
+    "Myalgia",
+    "Arthralgia",
+    "Hypersensitivity reactions"
+  ],
+
+  "references": [
+    {
+      "name": "Egyptian Drug Authority — Conventional Anticancer Drugs Formulary",
+      "type": "Regulatory"
+    },
+    {
+      "name": "FDA/DailyMed — Paclitaxel Injection Prescribing Information",
+      "type": "Regulatory"
+    }
+  ]
 }
 }
