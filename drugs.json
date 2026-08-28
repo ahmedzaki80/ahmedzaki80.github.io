@@ -207,26 +207,35 @@
     "route": "Intravenous",
     "iv_preparation": {
       "reconstitution": {
-        "diluent": "Sterile Water for Injection (WFI)",
-        "volume": "20 mL",
-        "resulting_concentration": "21 mg/mL",
-        "resulting_volume": "Approximately 21 mL",
-        "method": "Slowly inject WFI into the vial and gently swirl to aid reconstitution; do not shake"
-      },
-      "diluent_options": [
-        "0.9% Sodium Chloride"
-      ],
-      "do_not_use": [
-        "5% Dextrose in Water"
-      ],
-      "target_concentration": {
-        "minimum": 1,
-        "maximum": 4,
-        "unit": "mg/mL"
-      },
-      "administration": "Intravenous infusion",
+  "diluent": "Bacteriostatic Water for Injection (BWFI), USP",
+  "alternative_diluent": "Sterile Water for Injection (SWFI) without preservative in patients with known hypersensitivity to benzyl alcohol",
+  "volume": "20 mL",
+  "resulting_concentration": "21 mg/mL",
+  "resulting_volume": "Approximately 21 mL",
+  "method": "Slowly inject 20 mL of diluent into the vial, directing the stream into the lyophilized cake. Gently swirl to aid reconstitution; do not shake. Allow the vial to stand undisturbed for approximately 5 minutes if slight foaming is present."
+},
+     "diluent_options": [
+  "0.9% Sodium Chloride"
+],
+"do_not_use": [
+  "5% Dextrose in Water"
+],
+"available_bag_sizes": [
+  250
+],
+"bag_volume_rule": {
+  "type": "fixed",
+  "volume": 250,
+  "unit": "mL",
+  "description": "Add the required volume of reconstituted trastuzumab to a 250 mL 0.9% Sodium Chloride infusion bag."
+},
+"administration": "Intravenous infusion",
       "iv_push_or_bolus": "Do not administer as IV push or bolus",
       "mixing": "Gently invert the infusion bag to mix; do not shake",
+      "product_stability": {
+  "reconstituted_vial": "28 days refrigerated at 2–8°C when reconstituted with bacteriostatic water for injection; if reconstituted with preservative-free sterile water, use immediately and discard unused portion.",
+  "normal_saline": "Up to 24 hours refrigerated at 2–8°C prior to use."
+},
       "source": "Egyptian National Targeted Anticancer Formulary — EDA; verify current manufacturer information before clinical use"
     }
   }
