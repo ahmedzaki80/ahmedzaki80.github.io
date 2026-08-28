@@ -959,16 +959,58 @@ if (iv) {
         alert("Please enter a valid dose.");
         return;
     }
+        const product =
+    window.currentDrug.products[productIndex];
 
-    const product =
-        window.currentDrug.products[productIndex];
+// Subcutaneous products do not use the IV bag calculator
+if (product.route === "Subcutaneous") {
 
-    const concentration =
-        parseFloat(product.concentration);
+    result.style.display = "block";
 
-    const drugVolume =
-        dose / concentration;
-        const finalBagVolume =
+    result.innerHTML = `
+        <p><strong>Product:</strong> ${product.brand_name}</p>
+
+        <p style="margin-top:8px;">
+            <strong>Route:</strong> Subcutaneous
+        </p>
+
+        <p style="margin-top:8px;">
+            <strong>Preparation:</strong>
+            ${product.sc_preparation?.preparation || "Product-specific preparation required."}
+        </p>
+
+        <p style="margin-top:8px;">
+            <strong>Administration:</strong>
+            ${product.sc_preparation?.administration || "Subcutaneous administration"}
+        </p>
+
+        <p style="margin-top:8px;">
+            <strong>Frequency:</strong>
+            ${product.sc_preparation?.frequency || "Product-specific"}
+        </p>
+
+        <p style="
+            margin-top:15px;
+            padding:12px;
+            background:#fff8e6;
+            border-radius:8px;
+            color:#8a5a00;
+            font-weight:bold;
+        ">
+            ⚠ This product is administered subcutaneously and does not require IV bag preparation.
+        </p>
+    `;
+
+    return;
+}
+
+const concentration =
+    parseFloat(product.concentration);
+
+const drugVolume =
+    dose / concentration;
+
+           const finalBagVolume =
     parseFloat(document.getElementById("finalBagVolume").value);
 
 if (!finalBagVolume || finalBagVolume <= 0) {
