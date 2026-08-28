@@ -1147,11 +1147,59 @@ if (concentrationRange) {
 
 const diluentVolume =
     finalBagVolume - drugVolume;
-        // Recommended Bag Options
-const bagOptions = product.iv_preparation?.available_bag_sizes || [];
+      // Recommended Bag Options
+const bagOptions =
+    product.iv_preparation?.available_bag_sizes || [];
+
 let bagOptionsHTML = "";
 
 if (bagOptions.length > 0) {
+
+    const range =
+        product.iv_preparation?.target_concentration;
+
+    const evaluatedBags = bagOptions.map(bagSize => {
+
+        const totalVolume =
+            bagSize + drugVolume;
+
+        const concentration =
+            dose / totalVolume;
+
+        let withinRange = null;
+
+        if (range) {
+
+            const minimum =
+                parseFloat(range.minimum);
+
+            const maximum =
+                parseFloat(range.maximum);
+
+            withinRange =
+                concentration >= minimum &&
+                concentration <= maximum;
+        }
+
+        return {
+            bagSize,
+            totalVolume,
+            concentration,
+            withinRange
+        };
+
+    });
+
+    // Find the smallest bag that produces a valid concentration
+    const recommendedBag =
+        evaluatedBags
+            .filter(bag => bag.withinRange === true)
+            .sort((a, b) => a.bagSize - b.bagSize)[0];
+
+    // Sort bags from smallest to largest
+    evaluatedBags.sort(
+        (a, b) => a.bagSize - b.bagSize
+    );
 
     bagOptionsHTML = `
         <div style="
@@ -1169,62 +1217,69 @@ if (bagOptions.length > 0) {
                 Recommended Bag Options
             </h3>
 
-            ${bagOptions.map(bagSize => {
+            ${evaluatedBags.map(bag => {
 
-               const totalVolume =
-    bagSize + drugVolume;
+                const isRecommended =
+                    recommendedBag &&
+                    bag.bagSize === recommendedBag.bagSize;
 
-const concentration =
-    dose / totalVolume;
+                let statusText = "";
+                let statusColor = "#b06b00";
 
-const range =
-    product.iv_preparation?.target_concentration;
+                if (bag.withinRange === true) {
 
-let withinRange = null;
+                    statusText =
+                        isRecommended
+                            ? "✓ Recommended"
+                            : "✓ Within concentration range";
 
-if (range) {
-    const minimum =
-        parseFloat(range.minimum);
+                    statusColor = "#176b3a";
 
-    const maximum =
-        parseFloat(range.maximum);
+                } else if (bag.withinRange === false) {
 
-    withinRange =
-        concentration >= minimum &&
-        concentration <= maximum;
-}
+                    statusText =
+                        "⚠ Outside concentration range";
+
+                    statusColor = "#9b3030";
+
+                } else {
+
+                    statusText =
+                        "Concentration range not specified";
+
+                    statusColor = "#b06b00";
+                }
 
                 return `
                     <div style="
                         padding:15px;
                         margin-bottom:10px;
                         background:white;
-                        border:1px solid #e2eaf3;
+                        border:
+                            ${isRecommended ? "2px solid #176b3a" : "1px solid #e2eaf3"};
                         border-radius:8px;
                     ">
 
-                        <strong>${bagSize} mL bag</strong>
+                        <strong>
+                            ${bag.bagSize} mL bag
+                        </strong>
 
                         <div style="margin-top:7px;">
                             Total volume after drug addition:
-                            ${totalVolume.toFixed(2)} mL
+                            ${bag.totalVolume.toFixed(2)} mL
                         </div>
 
                         <div style="margin-top:7px;">
                             Final concentration:
-                            ${concentration.toFixed(2)} mg/mL
+                            ${bag.concentration.toFixed(2)} mg/mL
                         </div>
 
                         <div style="
                             margin-top:7px;
                             font-weight:bold;
-                           color:${
-    withinRange === null
-        ? "#b06b00"
-        : withinRange
-            ? "#176b3a"
-            : "#9b3030"
-};
+                            color:${statusColor};
+                        ">
+                            ${statusText}
                         </div>
 
                     </div>
