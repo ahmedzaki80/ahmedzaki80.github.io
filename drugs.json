@@ -950,5 +950,125 @@
       "type": "Regulatory"
     }
   ]
+},
+  "doxorubicin": {
+  "generic_name": "Doxorubicin",
+  "brand_names": [
+    "Adricin"
+  ],
+  "drug_class": "Anthracycline",
+  "category": "Oncology",
+
+  "products": [
+    {
+      "brand_name": "Adricin",
+      "active_ingredient": "doxorubicin hydrochloride",
+      "concentration": "2 mg/mL",
+      "presentations": [
+        "10 mg/5 mL single-dose vial",
+        "50 mg/25 mL single-dose vial"
+      ],
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "do_not_use": [
+          "Do not administer undiluted as a routine infusion",
+          "Do not administer as IV push or bolus outside the approved administration procedure"
+        ],
+
+        "available_bag_sizes": [
+          50,
+          100
+        ],
+
+        "bag_volume_rule": {
+          "type": "fixed",
+          "volume": 100,
+          "unit": "mL",
+          "description": "Dilute the required dose in a suitable 0.9% Sodium Chloride or 5% Dextrose infusion bag according to the institutional protocol and current product information."
+        },
+
+        "administration": "Intravenous injection or infusion according to regimen and product-specific instructions",
+
+        "iv_push_or_bolus": "Administration method is regimen-dependent; follow the current product-specific prescribing information",
+
+        "mixing": "Gently mix after addition; avoid vigorous shaking",
+
+        "line": "Administer through a secure, free-flowing intravenous line. Verify patency before and during administration.",
+
+        "compatibility": "Compatible diluents include 0.9% Sodium Chloride and 5% Dextrose according to current prescribing information.",
+
+        "product_stability": {
+          "undiluted_solution": "Store refrigerated at 2–8°C and protect from light according to product labeling.",
+          "diluted_solution": "Protect from light after preparation and use according to the current product-specific stability information."
+        },
+
+        "special_notes": [
+          "Ready-to-use solution; no reconstitution required.",
+          "Doxorubicin is a cytotoxic and vesicant drug.",
+          "Verify IV access and monitor closely for extravasation.",
+          "Protect the prepared solution from light.",
+          "Inspect visually for particulate matter or discoloration before administration.",
+          "Discard unused portion from single-dose vial.",
+          "Follow institutional hazardous-drug handling procedures."
+        ],
+
+        "source": "Current Doxorubicin Hydrochloride Injection prescribing information; verify current Adricin local product information before clinical use"
+      }
+    }
+  ],
+
+  "indications": [
+    "Breast cancer",
+    "Lymphomas",
+    "Leukemias",
+    "Sarcomas",
+    "Solid tumors according to regimen"
+  ],
+
+  "routes": [
+    "Intravenous injection",
+    "Intravenous infusion"
+  ],
+
+  "preparation": {
+    "status": "Ready-to-use solution; no reconstitution required",
+    "dilution": "Dilute with 0.9% Sodium Chloride or 5% Dextrose according to the prescribed regimen and current product information",
+    "infusion_time": "Regimen-dependent"
+  },
+
+  "warnings": [
+    "Doxorubicin is a vesicant and extravasation may cause severe tissue injury.",
+    "Cumulative dose-related cardiotoxicity may occur.",
+    "Severe myelosuppression may occur.",
+    "Hypersensitivity and infusion-related reactions may occur.",
+    "Doxorubicin is a hazardous cytotoxic drug."
+  ],
+
+  "adverse_effects": [
+    "Myelosuppression",
+    "Alopecia",
+    "Nausea",
+    "Vomiting",
+    "Mucositis",
+    "Cardiotoxicity",
+    "Extravasation injury"
+  ],
+
+  "references": [
+    {
+      "name": "FDA/DailyMed — Doxorubicin Hydrochloride Injection Prescribing Information",
+      "type": "Regulatory"
+    },
+    {
+      "name": "Egyptian Drug Authority",
+      "type": "Regulatory"
+    }
+  ]
 }
 }
