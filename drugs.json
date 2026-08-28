@@ -339,5 +339,98 @@
         "type": "Cancer Drug Monograph"
       }
     ]
-  }
+  },
+  "pertuzumab": {
+  "generic_name": "Pertuzumab",
+  "brand_names": [
+    "Perjeta"
+  ],
+  "drug_class": "Monoclonal antibody",
+  "category": "Oncology",
+
+  "products": [
+    {
+      "brand_name": "Perjeta",
+      "active_ingredient": "Pertuzumab",
+      "concentration": "30 mg/mL",
+      "presentations": [
+        "420 mg/14 mL single-dose vial"
+      ],
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride"
+        ],
+
+        "do_not_use": [
+          "5% Dextrose in Water"
+        ],
+
+        "available_bag_sizes": [
+          250
+        ],
+
+        "bag_volume_rule": {
+          "type": "fixed",
+          "volume": 250,
+          "unit": "mL",
+          "description": "Dilute the required volume of Perjeta concentrate in a 250 mL 0.9% Sodium Chloride infusion bag."
+        },
+
+        "administration": "Intravenous infusion",
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently invert the infusion bag to mix; do not shake",
+
+        "product_stability": {
+          "diluted_infusion": "Store at 2–8°C for up to 24 hours prior to use. Do not freeze."
+        },
+
+        "source": "Perjeta FDA Prescribing Information and EDA Targeted Anticancer Formulary — verify current manufacturer information before clinical use"
+      }
+    }
+  ],
+
+  "indications": [
+    "HER2-positive early breast cancer",
+    "HER2-positive metastatic breast cancer"
+  ],
+
+  "routes": [
+    "Intravenous infusion"
+  ],
+
+  "preparation": {
+    "status": "Product-specific preparation requirements apply",
+    "dilution": "Dilute the required dose in 250 mL of 0.9% Sodium Chloride",
+    "infusion_time": "Loading dose: 60 minutes; maintenance dose: 30–60 minutes"
+  },
+
+  "warnings": [
+    "Cardiac function monitoring may be required.",
+    "Infusion-related reactions may occur.",
+    "Severe hypersensitivity reactions may occur."
+  ],
+
+  "adverse_effects": [
+    "Diarrhea",
+    "Alopecia",
+    "Nausea",
+    "Fatigue",
+    "Rash",
+    "Infusion-related reactions"
+  ],
+
+  "references": [
+    {
+      "name": "FDA Prescribing Information",
+      "type": "Regulatory"
+    },
+    {
+      "name": "Egyptian Drug Authority — Targeted Anticancer Formulary",
+      "type": "Regulatory"
+    }
+  ]
+},
 }
