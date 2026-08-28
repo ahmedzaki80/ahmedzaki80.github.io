@@ -828,6 +828,17 @@ if (drug.products && drug.products.length > 0) {
         </p>
     `;
 }
+        }
+
+    } catch (error) {
+
+        console.error("Search error:", error);
+
+        alert(
+            "An error occurred while loading the drug database."
+        );
+    }
+}
       
         // IV Preparation
 const iv = drug.products?.find(
