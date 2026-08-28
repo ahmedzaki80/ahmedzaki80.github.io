@@ -1149,13 +1149,18 @@ if (concentrationRange) {
 const diluentVolume =
     finalBagVolume;
       // Recommended Bag Options
+const bagRule =
+    product.iv_preparation?.bag_volume_rule;
+
 const bagOptions =
     product.iv_preparation?.available_bag_sizes || [];
 
 let bagOptionsHTML = "";
 
-if (bagOptions.length > 0) {
-
+if (
+    bagOptions.length > 0 &&
+    bagRule?.type !== "user_selected"
+) {
     const range =
         product.iv_preparation?.target_concentration;
 
