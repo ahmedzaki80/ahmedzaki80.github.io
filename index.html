@@ -979,16 +979,66 @@ if (!finalBagVolume || finalBagVolume <= 0) {
 const totalFinalVolume =
     finalBagVolume + drugVolume;
 
+// Final concentration
 const finalConcentration =
     dose / totalFinalVolume;
-        const diluentVolume =
-    finalBagVolume;
-        if (finalBagVolume < drugVolume) {
-    alert(
-        "Final bag volume cannot be less than the required drug volume."
-    );
-    return;
+
+// Product-specific concentration range
+const concentrationRange =
+    product.iv_preparation?.target_concentration;
+
+let concentrationStatus = "";
+
+if (concentrationRange) {
+
+    const minimum =
+        parseFloat(concentrationRange.minimum);
+
+    const maximum =
+        parseFloat(concentrationRange.maximum);
+
+    if (
+        finalConcentration >= minimum &&
+        finalConcentration <= maximum
+    ) {
+        concentrationStatus = `
+            <p style="
+                margin-top:12px;
+                color:#176b3a;
+                font-weight:bold;
+            ">
+                ✓ Within product-specific concentration range
+                (${minimum}–${maximum} ${concentrationRange.unit})
+            </p>
+        `;
+    } else {
+        concentrationStatus = `
+            <p style="
+                margin-top:12px;
+                color:#9b3030;
+                font-weight:bold;
+            ">
+                ⚠ Outside product-specific concentration range
+                (${minimum}–${maximum} ${concentrationRange.unit})
+            </p>
+        `;
+    }
+
+} else {
+
+    concentrationStatus = `
+        <p style="
+            margin-top:12px;
+            color:#b06b00;
+            font-weight:bold;
+        ">
+            ⚠ Product-specific final concentration range is not available.
+        </p>
+    `;
 }
+
+const diluentVolume =
+    finalBagVolume;
         // Recommended Bag Options
 const bagOptions = product.iv_preparation?.available_bag_sizes || [];
 let bagOptionsHTML = "";
@@ -1013,19 +1063,28 @@ if (bagOptions.length > 0) {
 
             ${bagOptions.map(bagSize => {
 
-                const totalVolume =
-                    bagSize + drugVolume;
+               const totalVolume =
+    bagSize + drugVolume;
 
-                const concentration =
-                    dose / totalVolume;
+const concentration =
+    dose / totalVolume;
 
-                const range =
-                    product.iv_preparation?.target_concentration;
+const range =
+    product.iv_preparation?.target_concentration;
 
-                const withinRange =
-                    range &&
-                    concentration >= parseFloat(range.minimum) &&
-                    concentration <= parseFloat(range.maximum);
+let withinRange = false;
+
+if (range) {
+    const minimum =
+        parseFloat(range.minimum);
+
+    const maximum =
+        parseFloat(range.maximum);
+
+    withinRange =
+        concentration >= minimum &&
+        concentration <= maximum;
+}
 
                 return `
                     <div style="
