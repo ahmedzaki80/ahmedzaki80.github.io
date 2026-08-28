@@ -665,27 +665,29 @@ async function searchDrug() {
 
         const drugs = await response.json();
 
-        const searchTerm = drugInput.toLowerCase();
+        const searchTerm = drugInput.trim().toLowerCase();
 
-       let drug = drugs[searchTerm];
+let drug = null;
 
-if (!drug) {
+for (const key in drugs) {
 
-    for (const key in drugs) {
+    const currentDrug = drugs[key];
 
-        const currentDrug = drugs[key];
+    const keyMatch =
+        key.toLowerCase() === searchTerm;
 
-        const brandMatch = currentDrug.brand_names?.some(
-            brand => brand.toLowerCase() === searchTerm
+    const genericMatch =
+        currentDrug.generic_name?.trim().toLowerCase() === searchTerm;
+
+    const brandMatch =
+        currentDrug.brand_names?.some(
+            brand =>
+                brand.trim().toLowerCase() === searchTerm
         );
 
-        const genericMatch =
-            currentDrug.generic_name.toLowerCase() === searchTerm;
-
-        if (brandMatch || genericMatch) {
-            drug = currentDrug;
-            break;
-        }
+    if (keyMatch || genericMatch || brandMatch) {
+        drug = currentDrug;
+        break;
     }
 }
 
