@@ -819,12 +819,27 @@ if (iv) {
 
             <p><strong>Compatibility:</strong> ${iv.compatibility}</p>
 
-            <p><strong>Stability:</strong></p>
+           ${iv.product_stability ? `
+    <p><strong>Stability:</strong></p>
 
-            <ul>
-                <li>${iv.product_stability.normal_saline}</li>
-                <li>${iv.product_stability.d5w}</li>
-            </ul>
+    <ul>
+        ${iv.product_stability.normal_saline
+            ? `<li>${iv.product_stability.normal_saline}</li>`
+            : ""}
+
+        ${iv.product_stability.d5w
+            ? `<li>${iv.product_stability.d5w}</li>`
+            : ""}
+
+        ${iv.product_stability.refrigerated
+            ? `<li>${iv.product_stability.refrigerated}</li>`
+            : ""}
+    </ul>
+` : `
+    <p style="color:#687386;">
+        Stability information is not available for this product.
+    </p>
+`}
 
             <p style="
                 margin-top:15px;
