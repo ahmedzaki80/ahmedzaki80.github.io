@@ -191,10 +191,46 @@
   "trastuzumab": {
     "generic_name": "Trastuzumab",
     "brand_names": [
-      "Herceptin"
-    ],
+  "Herceptin",
+  "Trastuza"
+],
     "drug_class": "Monoclonal antibody",
     "category": "Oncology",
+    "products": [
+  {
+    "brand_name": "Trastuza",
+    "active_ingredient": "trastuzumab",
+    "concentration": "21 mg/mL after reconstitution",
+    "presentations": [
+      "440 mg multidose vial + 20 mL WFI"
+    ],
+    "route": "Intravenous",
+    "iv_preparation": {
+      "reconstitution": {
+        "diluent": "Sterile Water for Injection (WFI)",
+        "volume": "20 mL",
+        "resulting_concentration": "21 mg/mL",
+        "resulting_volume": "Approximately 21 mL",
+        "method": "Slowly inject WFI into the vial and gently swirl to aid reconstitution; do not shake"
+      },
+      "diluent_options": [
+        "0.9% Sodium Chloride"
+      ],
+      "do_not_use": [
+        "5% Dextrose in Water"
+      ],
+      "target_concentration": {
+        "minimum": 1,
+        "maximum": 4,
+        "unit": "mg/mL"
+      },
+      "administration": "Intravenous infusion",
+      "iv_push_or_bolus": "Do not administer as IV push or bolus",
+      "mixing": "Gently invert the infusion bag to mix; do not shake",
+      "source": "Egyptian National Targeted Anticancer Formulary — EDA; verify current manufacturer information before clinical use"
+    }
+  }
+],
 
     "indications": [
       "HER2-positive breast cancer",
