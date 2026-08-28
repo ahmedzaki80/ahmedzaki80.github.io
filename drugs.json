@@ -197,6 +197,47 @@
     "drug_class": "Monoclonal antibody",
     "category": "Oncology",
     "products": [
+      {
+  "brand_name": "Herceptin",
+  "active_ingredient": "trastuzumab",
+  "concentration": "21 mg/mL after reconstitution",
+  "presentations": [
+    "150 mg single-dose vial"
+  ],
+  "route": "Intravenous",
+  "iv_preparation": {
+    "reconstitution": {
+      "diluent": "Sterile Water for Injection (SWFI)",
+      "volume": "7.4 mL",
+      "resulting_concentration": "21 mg/mL",
+      "resulting_volume": "Approximately 7.15 mL deliverable",
+      "method": "Slowly inject 7.4 mL SWFI into the vial, directing the stream into the cake. Gently swirl to aid reconstitution; do not shake. Allow the vial to stand undisturbed for approximately 5 minutes if slight foaming is present."
+    },
+    "diluent_options": [
+      "0.9% Sodium Chloride"
+    ],
+    "do_not_use": [
+      "5% Dextrose in Water"
+    ],
+    "available_bag_sizes": [
+      250
+    ],
+    "bag_volume_rule": {
+      "type": "fixed",
+      "volume": 250,
+      "unit": "mL",
+      "description": "Add the required volume of reconstituted Herceptin to a 250 mL 0.9% Sodium Chloride infusion bag."
+    },
+    "administration": "Intravenous infusion",
+    "iv_push_or_bolus": "Do not administer as IV push or bolus",
+    "mixing": "Gently invert the infusion bag to mix; do not shake",
+    "product_stability": {
+      "reconstituted_vial": "Use immediately after reconstitution. If not used immediately, store at 2–8°C for up to 24 hours. Do not freeze. Discard unused solution after 24 hours.",
+      "normal_saline": "Store diluted infusion at 2–8°C for no more than 24 hours prior to use. Do not freeze."
+    },
+    "source": "Herceptin FDA Prescribing Information; verify current manufacturer information before clinical use"
+    }
+   },
   {
     "brand_name": "Trastuza",
     "active_ingredient": "trastuzumab",
