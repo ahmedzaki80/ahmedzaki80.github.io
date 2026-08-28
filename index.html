@@ -1073,7 +1073,7 @@ const concentration =
 const range =
     product.iv_preparation?.target_concentration;
 
-let withinRange = false;
+let withinRange = null;
 
 if (range) {
     const minimum =
@@ -1111,11 +1111,13 @@ if (range) {
                         <div style="
                             margin-top:7px;
                             font-weight:bold;
-                            color:${withinRange ? "#176b3a" : "#9b3030"};
-                        ">
-                            ${withinRange
-                                ? "✓ Within concentration range"
-                                : "⚠ Outside concentration range"}
+                           color:${
+    withinRange === null
+        ? "#b06b00"
+        : withinRange
+            ? "#176b3a"
+            : "#9b3030"
+};
                         </div>
 
                     </div>
