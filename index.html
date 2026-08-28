@@ -1052,16 +1052,39 @@ const concentration =
 const drugVolume =
     dose / concentration;
 
-           const finalBagVolume =
-    parseFloat(document.getElementById("finalBagVolume").value);
+         let finalBagVolume;
 
-if (!finalBagVolume || finalBagVolume <= 0) {
-    alert("Please enter a valid final bag volume.");
-    return;
+// Product-specific bag volume rule
+const bagRule = product.iv_preparation?.bag_volume_rule;
+
+if (bagRule?.type === "dose-dependent") {
+
+    const threshold =
+        parseFloat(bagRule.high_dose_threshold);
+
+    const standardVolume =
+        parseFloat(bagRule.standard_volume);
+
+    const highDoseVolume =
+        parseFloat(bagRule.high_dose_volume);
+
+    finalBagVolume =
+        dose > threshold
+            ? highDoseVolume
+            : standardVolume;
+
+} else {
+
+    finalBagVolume =
+        parseFloat(document.getElementById("finalBagVolume").value);
+
+    if (!finalBagVolume || finalBagVolume <= 0) {
+        alert("Please enter a valid final bag volume.");
+        return;
+    }
 }
 
-const totalFinalVolume =
-    finalBagVolume + drugVolume;
+const totalFinalVolume = finalBagVolume;
 
 // Final concentration
 const finalConcentration =
@@ -1123,7 +1146,7 @@ if (concentrationRange) {
 }
 
 const diluentVolume =
-    finalBagVolume;
+    finalBagVolume - drugVolume;
         // Recommended Bag Options
 const bagOptions = product.iv_preparation?.available_bag_sizes || [];
 let bagOptionsHTML = "";
