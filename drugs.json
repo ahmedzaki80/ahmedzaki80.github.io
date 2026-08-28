@@ -609,5 +609,97 @@
       "type": "Regulatory"
     }
   ]
+},
+  "cetuximab": {
+  "generic_name": "Cetuximab",
+  "brand_names": [
+    "Erbitux"
+  ],
+  "drug_class": "Monoclonal antibody",
+  "category": "Oncology",
+
+  "products": [
+    {
+      "brand_name": "Erbitux",
+      "active_ingredient": "cetuximab",
+      "concentration": "5 mg/mL",
+      "presentations": [
+        "100 mg/20 mL single-dose vial",
+        "500 mg/100 mL solution for infusion"
+      ],
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride"
+        ],
+
+        "do_not_use": [
+          "Do not dilute"
+        ],
+
+        "available_bag_sizes": [
+          100,
+          250
+        ],
+
+        "administration": "Intravenous infusion",
+
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Do not shake. Do not dilute the product. Handle gently.",
+
+        "line": "Administer through a low protein-binding 0.22 micrometer in-line filter",
+
+        "product_stability": {
+          "infusion_container_room_temperature": "Discard after 8 hours at controlled room temperature.",
+          "infusion_container_refrigerated": "Discard after 12 hours at 2–8°C.",
+          "vial": "Discard unused portion."
+        },
+
+        "source": "Egyptian Drug Authority Targeted Anticancer Formulary and Erbitux FDA Prescribing Information — verify current local product information before clinical use"
+      }
+    }
+  ],
+
+  "indications": [
+    "Squamous cell carcinoma of the head and neck",
+    "K-RAS wild-type, EGFR-expressing metastatic colorectal cancer"
+  ],
+
+  "routes": [
+    "Intravenous infusion"
+  ],
+
+  "preparation": {
+    "status": "Product-specific preparation requirements apply",
+    "dilution": "Do not dilute unless required by the current product-specific instructions",
+    "infusion_time": "Dose- and regimen-dependent; infusion rate should not exceed 10 mg/min"
+  },
+
+  "warnings": [
+    "Infusion reactions may occur.",
+    "Electrolyte abnormalities may occur.",
+    "Severe dermatologic reactions may occur."
+  ],
+
+  "adverse_effects": [
+    "Acneiform rash",
+    "Infusion-related reactions",
+    "Hypomagnesemia",
+    "Diarrhea",
+    "Fatigue"
+  ],
+
+  "references": [
+    {
+      "name": "Egyptian Drug Authority — Targeted Anticancer Formulary",
+      "type": "Regulatory"
+    },
+    {
+      "name": "FDA — Erbitux Prescribing Information",
+      "type": "Regulatory"
+    }
+  ]
 }
 }
