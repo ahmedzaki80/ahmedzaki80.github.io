@@ -1194,52 +1194,7 @@ function findCombination(index, remainingDose, combination) {
 }
 
 findCombination(0, dose, []);
-let concentrationStatus = "";
 
-const targetRange = product.iv_preparation?.target_concentration;
-
-if (targetRange) {
-
-    const min =
-        parseFloat(targetRange.minimum);
-
-    const max =
-        parseFloat(targetRange.maximum);
-
-    if (
-        finalConcentration >= min &&
-        finalConcentration <= max
-    ) {
-
-        concentrationStatus = `
-            <p style="
-                margin-top:10px;
-                padding:10px;
-                background:#e9f8ef;
-                border-radius:8px;
-                color:#176b3a;
-            ">
-                ✓ Final concentration is within the product's
-                recommended range (${min}-${max} mg/mL).
-            </p>
-        `;
-
-    } else {
-
-        concentrationStatus = `
-            <p style="
-                margin-top:10px;
-                padding:10px;
-                background:#fff1f1;
-                border-radius:8px;
-                color:#9b3030;
-            ">
-                ⚠ Final concentration is outside the product's
-                recommended range (${min}-${max} mg/mL).
-            </p>
-        `;
-    }
-}
 let vialSummary = "No vial combination available.";
 
 if (bestCombination) {
