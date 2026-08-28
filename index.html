@@ -435,9 +435,7 @@
             background:white;
         "
     >
-        <option value="">Select bag size</option>
-        <option value="250">250 mL</option>
-        <option value="500">500 mL</option>
+       <option value="">Select bag size</option>
     </select>
 
 </div>
@@ -727,6 +725,48 @@ if (drug.products && drug.products.length > 0) {
     calculatorProduct.innerHTML =
         `<option value="">No products available</option>`;
 }
+        // Update IV bag sizes based on selected product
+const bagSelect =
+    document.getElementById("finalBagVolume");
+
+function updateBagSizes() {
+
+    bagSelect.innerHTML =
+        `<option value="">Select bag size</option>`;
+
+    const selectedIndex =
+        calculatorProduct.value;
+
+    if (selectedIndex === "") {
+        return;
+    }
+
+    const selectedProduct =
+        drug.products[parseInt(selectedIndex)];
+
+    const bagSizes =
+        selectedProduct.iv_preparation?.available_bag_sizes || [];
+
+    bagSizes.forEach(size => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = size;
+        option.textContent = `${size} mL`;
+
+        bagSelect.appendChild(option);
+    });
+}
+
+calculatorProduct.addEventListener(
+    "change",
+    updateBagSizes
+);
+
+// Reset bag sizes when a new drug is searched
+bagSelect.innerHTML =
+    `<option value="">Select bag size</option>`;
         // Products
 // Products
 const productsContainer = document.getElementById("productsContainer");
