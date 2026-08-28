@@ -1084,7 +1084,8 @@ if (bagRule?.type === "dose-dependent") {
     }
 }
 
-const totalFinalVolume = finalBagVolume;
+const totalFinalVolume =
+    finalBagVolume + drugVolume;
 
 // Final concentration
 const finalConcentration =
@@ -1146,7 +1147,7 @@ if (concentrationRange) {
 }
 
 const diluentVolume =
-    finalBagVolume - drugVolume;
+    finalBagVolume;
       // Recommended Bag Options
 const bagOptions =
     product.iv_preparation?.available_bag_sizes || [];
