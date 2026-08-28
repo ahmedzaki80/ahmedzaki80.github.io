@@ -407,30 +407,30 @@
     "infusion_time": "Loading dose: 60 minutes; maintenance dose: 30–60 minutes"
   },
 
-  "warnings": [
-    "Cardiac function monitoring may be required.",
-    "Infusion-related reactions may occur.",
-    "Severe hypersensitivity reactions may occur."
-  ],
+ "warnings": [
+  "Cardiac function monitoring may be required.",
+  "Infusion-related reactions may occur.",
+  "Severe hypersensitivity reactions may occur."
+],
 
-  "adverse_effects": [
-    "Diarrhea",
-    "Alopecia",
-    "Nausea",
-    "Fatigue",
-    "Rash",
-    "Infusion-related reactions"
-  ],
+"adverse_effects": [
+  "Diarrhea",
+  "Alopecia",
+  "Nausea",
+  "Fatigue",
+  "Rash",
+  "Infusion-related reactions"
+],
 
-  "references": [
-    {
-      "name": "FDA Prescribing Information",
-      "type": "Regulatory"
-    },
-    {
-      "name": "Egyptian Drug Authority — Targeted Anticancer Formulary",
-      "type": "Regulatory"
-    }
-  ]
+"references": [
+  {
+    "name": "FDA Prescribing Information",
+    "type": "Regulatory"
+  },
+  {
+    "name": "Egyptian Drug Authority — Targeted Anticancer Formulary",
+    "type": "Regulatory"
   }
+]
+}
 }
