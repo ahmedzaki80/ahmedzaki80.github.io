@@ -432,5 +432,182 @@
     "type": "Regulatory"
   }
 ]
+},
+  "bevacizumab": {
+  "generic_name": "Bevacizumab",
+  "brand_names": [
+    "Abevmy",
+    "Krabeva",
+    "Alymsys"
+  ],
+  "drug_class": "Monoclonal antibody",
+  "category": "Oncology",
+
+  "products": [
+    {
+      "brand_name": "Abevmy",
+      "active_ingredient": "bevacizumab",
+      "concentration": "25 mg/mL",
+      "presentations": [
+        "100 mg/4 mL single-dose vial",
+        "400 mg/16 mL single-dose vial"
+      ],
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride"
+        ],
+
+        "do_not_use": [
+          "5% Dextrose in Water"
+        ],
+
+        "available_bag_sizes": [
+          100
+        ],
+
+        "bag_volume_rule": {
+          "type": "fixed",
+          "volume": 100,
+          "unit": "mL",
+          "description": "Dilute the required volume of bevacizumab in a 100 mL 0.9% Sodium Chloride infusion bag."
+        },
+
+        "administration": "Intravenous infusion",
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently invert the infusion bag to mix; do not shake",
+
+        "source": "Egyptian Drug Authority — Targeted Anticancer Formulary; verify current product-specific manufacturer information before clinical use"
+      }
+    },
+
+    {
+      "brand_name": "Krabeva",
+      "active_ingredient": "bevacizumab",
+      "concentration": "25 mg/mL",
+      "presentations": [
+        "100 mg/4 mL vial",
+        "400 mg/16 mL vial"
+      ],
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride"
+        ],
+
+        "do_not_use": [
+          "5% Dextrose in Water"
+        ],
+
+        "available_bag_sizes": [
+          100
+        ],
+
+        "bag_volume_rule": {
+          "type": "fixed",
+          "volume": 100,
+          "unit": "mL",
+          "description": "Dilute the required volume of bevacizumab in a 100 mL 0.9% Sodium Chloride infusion bag."
+        },
+
+        "administration": "Intravenous infusion",
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently invert the infusion bag to mix; do not shake",
+
+        "source": "Egyptian Drug Authority — Targeted Anticancer Formulary; verify current product-specific manufacturer information before clinical use"
+      }
+    },
+
+    {
+      "brand_name": "Alymsys",
+      "active_ingredient": "bevacizumab",
+      "concentration": "25 mg/mL",
+      "presentations": [
+        "100 mg/4 mL vial",
+        "400 mg/16 mL vial"
+      ],
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride"
+        ],
+
+        "do_not_use": [
+          "5% Dextrose in Water"
+        ],
+
+        "available_bag_sizes": [
+          100
+        ],
+
+        "bag_volume_rule": {
+          "type": "fixed",
+          "volume": 100,
+          "unit": "mL",
+          "description": "Dilute the required volume of bevacizumab in a 100 mL 0.9% Sodium Chloride infusion bag."
+        },
+
+        "administration": "Intravenous infusion",
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently invert the infusion bag to mix; do not shake",
+
+        "source": "Egyptian Drug Authority — Targeted Anticancer Formulary; verify current product-specific manufacturer information before clinical use"
+      }
+    }
+  ],
+
+  "indications": [
+    "Metastatic colorectal cancer",
+    "Non-small cell lung cancer",
+    "Glioblastoma",
+    "Metastatic renal cell carcinoma",
+    "Cervical cancer",
+    "Ovarian cancer",
+    "Fallopian tube cancer",
+    "Primary peritoneal cancer"
+  ],
+
+  "routes": [
+    "Intravenous infusion"
+  ],
+
+  "preparation": {
+    "status": "Product-specific preparation requirements apply",
+    "dilution": "Dilute in 0.9% Sodium Chloride according to the product-specific preparation instructions",
+    "infusion_time": "Product- and regimen-dependent"
+  },
+
+  "warnings": [
+    "Infusion-related reactions may occur.",
+    "Hypertension may occur.",
+    "Proteinuria may occur.",
+    "Risk of gastrointestinal perforation and wound-healing complications should be considered."
+  ],
+
+  "adverse_effects": [
+    "Hypertension",
+    "Proteinuria",
+    "Fatigue",
+    "Epistaxis",
+    "Headache",
+    "Infusion-related reactions"
+  ],
+
+  "references": [
+    {
+      "name": "Egyptian Drug Authority — Targeted Anticancer Formulary",
+      "type": "Regulatory"
+    },
+    {
+      "name": "FDA Prescribing Information",
+      "type": "Regulatory"
+    }
+  ]
 }
 }
