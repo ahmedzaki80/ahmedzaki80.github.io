@@ -1148,7 +1148,7 @@ if (concentrationRange) {
 
 const diluentVolume =
     finalBagVolume;
-      // Recommended Bag Options
+  // Recommended Bag Options
 const bagRule =
     product.iv_preparation?.bag_volume_rule;
 
@@ -1161,50 +1161,55 @@ if (
     bagOptions.length > 0 &&
     bagRule?.type !== "user_selected"
 ) {
+
     const range =
         product.iv_preparation?.target_concentration;
 
-    const evaluatedBags = bagOptions.map(bagSize => {
+    const evaluatedBags =
+        bagOptions.map(bagSize => {
 
-        const totalVolume =
-            bagSize + drugVolume;
+            const totalVolume =
+                bagSize + drugVolume;
 
-        const concentration =
-            dose / totalVolume;
+            const concentration =
+                dose / totalVolume;
 
-        let withinRange = null;
+            let withinRange = null;
 
-        if (range) {
+            if (range) {
 
-            const minimum =
-                parseFloat(range.minimum);
+                const minimum =
+                    parseFloat(range.minimum);
 
-            const maximum =
-                parseFloat(range.maximum);
+                const maximum =
+                    parseFloat(range.maximum);
 
-            withinRange =
-                concentration >= minimum &&
-                concentration <= maximum;
-        }
+                withinRange =
+                    concentration >= minimum &&
+                    concentration <= maximum;
+            }
 
-        return {
-            bagSize,
-            totalVolume,
-            concentration,
-            withinRange
-        };
+            return {
+                bagSize,
+                totalVolume,
+                concentration,
+                withinRange
+            };
+        });
 
-    });
-
-    // Find the smallest bag that produces a valid concentration
     const recommendedBag =
         evaluatedBags
-            .filter(bag => bag.withinRange === true)
-            .sort((a, b) => a.bagSize - b.bagSize)[0];
+            .filter(
+                bag => bag.withinRange === true
+            )
+            .sort(
+                (a, b) =>
+                    a.bagSize - b.bagSize
+            )[0];
 
-    // Sort bags from smallest to largest
     evaluatedBags.sort(
-        (a, b) => a.bagSize - b.bagSize
+        (a, b) =>
+            a.bagSize - b.bagSize
     );
 
     bagOptionsHTML = `
@@ -1227,7 +1232,8 @@ if (
 
                 const isRecommended =
                     recommendedBag &&
-                    bag.bagSize === recommendedBag.bagSize;
+                    bag.bagSize ===
+                    recommendedBag.bagSize;
 
                 let statusText = "";
                 let statusColor = "#b06b00";
@@ -1241,7 +1247,9 @@ if (
 
                     statusColor = "#176b3a";
 
-                } else if (bag.withinRange === false) {
+                } else if (
+                    bag.withinRange === false
+                ) {
 
                     statusText =
                         "⚠ Outside concentration range";
@@ -1262,7 +1270,9 @@ if (
                         margin-bottom:10px;
                         background:white;
                         border:
-                            ${isRecommended ? "2px solid #176b3a" : "1px solid #e2eaf3"};
+                            ${isRecommended
+                                ? "2px solid #176b3a"
+                                : "1px solid #e2eaf3"};
                         border-radius:8px;
                     ">
 
