@@ -643,10 +643,12 @@
 </footer>
 
 
+```html
 <script>
 async function searchDrug() {
 
-    const drugInput = document.getElementById("drugSearch").value.trim();
+    const drugInput =
+        document.getElementById("drugSearch").value.trim();
 
     if (drugInput === "") {
         alert("Please enter a drug name.");
@@ -655,826 +657,1517 @@ async function searchDrug() {
 
     try {
 
-        const response = await fetch("./drugs.json");
+        const response =
+            await fetch("./drugs.json");
 
         if (!response.ok) {
             throw new Error("Database could not be loaded.");
         }
 
-        const drugs = await response.json();
+        const drugs =
+            await response.json();
 
-        const searchTerm = drugInput.trim().toLowerCase();
+        const searchTerm =
+            drugInput.toLowerCase();
 
-let drug = null;
+        let drug = null;
 
-for (const key in drugs) {
+        // =========================
+        // SEARCH DRUG
+        // =========================
 
-    const currentDrug = drugs[key];
+        for (const key in drugs) {
 
-    const keyMatch =
-        key.toLowerCase() === searchTerm;
+            const currentDrug =
+                drugs[key];
 
-    const genericMatch =
-        currentDrug.generic_name?.trim().toLowerCase() === searchTerm;
+            const keyMatch =
+                key.toLowerCase() === searchTerm;
 
-    const brandMatch =
-        currentDrug.brand_names?.some(
-            brand =>
-                brand.trim().toLowerCase() === searchTerm
-        );
+            const genericMatch =
+                currentDrug.generic_name?.trim().toLowerCase() === searchTerm;
 
-    if (keyMatch || genericMatch || brandMatch) {
-        drug = currentDrug;
-        break;
-    }
-}
+            const brandMatch =
+                currentDrug.brand_names?.some(
+                    brand =>
+                        brand.trim().toLowerCase() === searchTerm
+                );
+
+            if (
+                keyMatch ||
+                genericMatch ||
+                brandMatch
+            ) {
+                drug = currentDrug;
+                break;
+            }
+        }
 
         if (!drug) {
+
             alert(
                 "Drug not found.\n\n" +
-                "Try: Rituximab or Trastuzumab"
+                "Try: Rituximab, Trastuzumab or Paclitaxel"
             );
+
             return;
         }
-        // Store current drug for the calculator
-window.currentDrug = drug;
 
-// Populate calculator products
-const calculatorProduct =
-    document.getElementById("calculatorProduct");
+        // Store current drug
+        window.currentDrug = drug;
 
-calculatorProduct.innerHTML =
-    `<option value="">Select a product</option>`;
 
-if (drug.products && drug.products.length > 0) {
+        // =========================
+        // CALCULATOR PRODUCTS
+        // =========================
 
-    drug.products.forEach((product, index) => {
+        const calculatorProduct =
+            document.getElementById(
+                "calculatorProduct"
+            );
 
-        const option = document.createElement("option");
+        calculatorProduct.innerHTML =
+            `<option value="">
+                Select a product
+            </option>`;
 
-        option.value = index;
+        if (
+            drug.products &&
+            drug.products.length > 0
+        ) {
 
-        option.textContent =
-            `${product.brand_name} — ${product.concentration}`;
+            drug.products.forEach(
+                (product, index) => {
 
-        calculatorProduct.appendChild(option);
-    });
+                    const option =
+                        document.createElement("option");
 
-} else {
+                    option.value = index;
 
-    calculatorProduct.innerHTML =
-        `<option value="">No products available</option>`;
-}
-        // Update IV bag sizes based on selected product
-const bagSelect =
-    document.getElementById("finalBagVolume");
+                    option.textContent =
+                        `${product.brand_name} — ${product.concentration}`;
 
-function updateBagSizes() {
+                    calculatorProduct.appendChild(
+                        option
+                    );
+                }
+            );
 
-    bagSelect.innerHTML =
-        `<option value="">Select bag size</option>`;
+        } else {
 
-    const selectedIndex =
-        calculatorProduct.value;
-
-    if (selectedIndex === "") {
-        return;
-    }
-
-    const selectedProduct =
-        drug.products[parseInt(selectedIndex)];
-
-    const bagSizes =
-        selectedProduct.iv_preparation?.available_bag_sizes || [];
-
-    bagSizes.forEach(size => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = size;
-        option.textContent = `${size} mL`;
-
-        bagSelect.appendChild(option);
-    });
-}
-
-calculatorProduct.addEventListener(
-    "change",
-    updateBagSizes
-);
-
-// Reset bag sizes when a new drug is searched
-bagSelect.innerHTML =
-    `<option value="">Select bag size</option>`;
-        // Products
-// Products
-const productsContainer = document.getElementById("productsContainer");
-
-productsContainer.innerHTML = "";
-
-if (drug.products && drug.products.length > 0) {
-
-    drug.products.forEach(product => {
-
-        const productCard = document.createElement("div");
-
-        productCard.style.cssText = `
-            background:#f8fbff;
-            border:1px solid #dce8f5;
-            border-radius:12px;
-            padding:18px;
-            margin-bottom:12px;
-        `;
-
-        productCard.innerHTML = `
-            <div style="
-                font-size:18px;
-                font-weight:bold;
-                color:#172033;
-                margin-bottom:8px;
-            ">
-                ${product.brand_name}
-            </div>
-
-            <div style="color:#687386;font-size:14px;margin-bottom:8px;">
-                Active ingredient: ${product.active_ingredient}
-            </div>
-
-            <div style="color:#3d4858;font-size:14px;margin-bottom:8px;">
-                Concentration: ${product.concentration}
-            </div>
-
-            <div style="color:#3d4858;font-size:14px;margin-bottom:8px;">
-                Route: ${product.route}
-            </div>
-
-            <div style="color:#3d4858;font-size:14px;">
-                Presentations:<br>
-                ${product.presentations
-                    .map(item => "• " + item)
-                    .join("<br>")}
-            </div>
-        `;
-
-        productsContainer.appendChild(productCard);
-    });
-
-} else {
-
-    productsContainer.innerHTML = `
-        <p style="color:#687386;">
-            Product-specific information is not available yet.
-        </p>
-    `;
-}
+            calculatorProduct.innerHTML =
+                `<option value="">
+                    No products available
+                </option>`;
         }
 
-    } catch (error) {
 
-        console.error("Search error:", error);
+        // =========================
+        // IV BAG SIZE OPTIONS
+        // =========================
 
-        alert(
-            "An error occurred while loading the drug database."
-        );
-    }
-}
-      
-        // IV Preparation
-const iv = drug.products?.find(
-    product => product.iv_preparation
-)?.iv_preparation;
-const ivContainer = document.getElementById("ivPreparationContainer");
+        const bagSelect =
+            document.getElementById(
+                "finalBagVolume"
+            );
 
-if (iv) {
+        function updateBagSizes() {
 
-    ivContainer.innerHTML = `
-        <div style="
-            background:#f8fbff;
-            border:1px solid #dce8f5;
-            border-radius:12px;
-            padding:20px;
-        ">
+            bagSelect.innerHTML =
+                `<option value="">
+                    Select bag size
+                </option>`;
 
-            <p><strong>Diluent:</strong> ${iv.diluent}</p>
+            const selectedIndex =
+                calculatorProduct.value;
 
-            <p><strong>Final concentration:</strong> ${iv.final_concentration}</p>
+            if (selectedIndex === "") {
+                return;
+            }
 
-            <p><strong>Bag volume:</strong> ${iv.bag_volume}</p>
+            const selectedProduct =
+                drug.products[
+                    parseInt(selectedIndex)
+                ];
 
-            <p><strong>Administration:</strong> ${iv.administration}</p>
+            const bagSizes =
+                selectedProduct
+                    .iv_preparation
+                    ?.available_bag_sizes || [];
 
-            <p><strong>IV push / bolus:</strong> ${iv.iv_push_or_bolus}</p>
+            bagSizes.forEach(size => {
 
-            <p><strong>Mixing:</strong> ${iv.mixing}</p>
+                const option =
+                    document.createElement("option");
 
-            <p><strong>Line:</strong> ${iv.line}</p>
+                option.value = size;
 
-            <p><strong>Compatibility:</strong> ${iv.compatibility}</p>
+                option.textContent =
+                    `${size} mL`;
 
-           ${iv.product_stability ? `
-    <p><strong>Stability:</strong></p>
+                bagSelect.appendChild(
+                    option
+                );
+            });
+        }
 
-    <ul>
-        ${iv.product_stability.normal_saline
-            ? `<li>${iv.product_stability.normal_saline}</li>`
-            : ""}
+        // Prevent duplicate event listeners
+        calculatorProduct.onchange =
+            updateBagSizes;
 
-        ${iv.product_stability.d5w
-            ? `<li>${iv.product_stability.d5w}</li>`
-            : ""}
+        bagSelect.innerHTML =
+            `<option value="">
+                Select bag size
+            </option>`;
 
-        ${iv.product_stability.refrigerated
-            ? `<li>${iv.product_stability.refrigerated}</li>`
-            : ""}
-    </ul>
-` : `
-    <p style="color:#687386;">
-        Stability information is not available for this product.
-    </p>
-`}
 
-            <p style="
-                margin-top:15px;
-                font-size:13px;
-                color:#687386;
-            ">
-                Source: ${iv.source}
-            </p>
+        // =========================
+        // PRODUCTS DISPLAY
+        // =========================
 
-        </div>
-    `;
+        const productsContainer =
+            document.getElementById(
+                "productsContainer"
+            );
 
-} else {
+        productsContainer.innerHTML = "";
 
-    ivContainer.innerHTML = `
-        <p style="color:#687386;">
-            IV preparation information is not available.
-        </p>
-    `;
-}
+        if (
+            drug.products &&
+            drug.products.length > 0
+        ) {
 
-        // Drug name
-        document.getElementById("resultName").textContent =
+            drug.products.forEach(
+                product => {
+
+                    const productCard =
+                        document.createElement("div");
+
+                    productCard.style.cssText = `
+                        background:#f8fbff;
+                        border:1px solid #dce8f5;
+                        border-radius:12px;
+                        padding:18px;
+                        margin-bottom:12px;
+                    `;
+
+                    productCard.innerHTML = `
+
+                        <div style="
+                            font-size:18px;
+                            font-weight:bold;
+                            color:#172033;
+                            margin-bottom:8px;
+                        ">
+                            ${product.brand_name}
+                        </div>
+
+                        <div style="
+                            color:#687386;
+                            font-size:14px;
+                            margin-bottom:8px;
+                        ">
+                            Active ingredient:
+                            ${product.active_ingredient}
+                        </div>
+
+                        <div style="
+                            color:#3d4858;
+                            font-size:14px;
+                            margin-bottom:8px;
+                        ">
+                            Concentration:
+                            ${product.concentration}
+                        </div>
+
+                        <div style="
+                            color:#3d4858;
+                            font-size:14px;
+                            margin-bottom:8px;
+                        ">
+                            Route:
+                            ${product.route}
+                        </div>
+
+                        <div style="
+                            color:#3d4858;
+                            font-size:14px;
+                        ">
+                            Presentations:<br>
+
+                            ${product.presentations
+                                .map(
+                                    item =>
+                                        "• " + item
+                                )
+                                .join("<br>")}
+                        </div>
+                    `;
+
+                    productsContainer.appendChild(
+                        productCard
+                    );
+                }
+            );
+
+        } else {
+
+            productsContainer.innerHTML = `
+                <p style="color:#687386;">
+                    Product-specific information
+                    is not available yet.
+                </p>
+            `;
+        }
+
+
+        // =========================
+        // IV PREPARATION
+        // =========================
+
+        const ivContainer =
+            document.getElementById(
+                "ivPreparationContainer"
+            );
+
+        const selectedIVProduct =
+            drug.products?.find(
+                product =>
+                    product.iv_preparation
+            );
+
+        const iv =
+            selectedIVProduct
+                ?.iv_preparation;
+
+        if (iv) {
+
+            const diluentOptions =
+                iv.diluent_options
+                    ? iv.diluent_options.join(", ")
+                    : "Not specified";
+
+            const bagSizes =
+                iv.available_bag_sizes
+                    ? iv.available_bag_sizes.join(", ") +
+                      " mL"
+                    : "Not specified";
+
+            const concentrationRange =
+                iv.target_concentration
+                    ? `${iv.target_concentration.minimum}–${iv.target_concentration.maximum} ${iv.target_concentration.unit}`
+                    : "Not specified";
+
+            ivContainer.innerHTML = `
+
+                <div style="
+                    background:#f8fbff;
+                    border:1px solid #dce8f5;
+                    border-radius:12px;
+                    padding:20px;
+                ">
+
+                    <p>
+                        <strong>
+                            Diluent:
+                        </strong>
+                        ${diluentOptions}
+                    </p>
+
+                    <p style="margin-top:8px;">
+                        <strong>
+                            Final concentration range:
+                        </strong>
+                        ${concentrationRange}
+                    </p>
+
+                    <p style="margin-top:8px;">
+                        <strong>
+                            Available bag sizes:
+                        </strong>
+                        ${bagSizes}
+                    </p>
+
+                    <p style="margin-top:8px;">
+                        <strong>
+                            Administration:
+                        </strong>
+                        ${iv.administration || "Not specified"}
+                    </p>
+
+                    <p style="margin-top:8px;">
+                        <strong>
+                            IV push / bolus:
+                        </strong>
+                        ${iv.iv_push_or_bolus || "Not specified"}
+                    </p>
+
+                    <p style="margin-top:8px;">
+                        <strong>
+                            Mixing:
+                        </strong>
+                        ${iv.mixing || "Not specified"}
+                    </p>
+
+                    ${
+                        iv.line
+                            ? `
+                            <p style="margin-top:8px;">
+                                <strong>
+                                    Line:
+                                </strong>
+                                ${iv.line}
+                            </p>
+                            `
+                            : ""
+                    }
+
+                    ${
+                        iv.compatibility
+                            ? `
+                            <p style="margin-top:8px;">
+                                <strong>
+                                    Compatibility:
+                                </strong>
+                                ${iv.compatibility}
+                            </p>
+                            `
+                            : ""
+                    }
+
+                    ${
+                        iv.product_stability
+                            ? `
+                            <p style="margin-top:15px;">
+                                <strong>
+                                    Stability:
+                                </strong>
+                            </p>
+
+                            <ul>
+
+                                ${
+                                    iv.product_stability.normal_saline
+                                        ? `
+                                        <li>
+                                            ${iv.product_stability.normal_saline}
+                                        </li>
+                                        `
+                                        : ""
+                                }
+
+                                ${
+                                    iv.product_stability.d5w
+                                        ? `
+                                        <li>
+                                            ${iv.product_stability.d5w}
+                                        </li>
+                                        `
+                                        : ""
+                                }
+
+                                ${
+                                    iv.product_stability.refrigerated
+                                        ? `
+                                        <li>
+                                            ${iv.product_stability.refrigerated}
+                                        </li>
+                                        `
+                                        : ""
+                                }
+
+                                ${
+                                    iv.product_stability.room_temperature
+                                        ? `
+                                        <li>
+                                            ${iv.product_stability.room_temperature}
+                                        </li>
+                                        `
+                                        : ""
+                                }
+
+                            </ul>
+                            `
+                            : `
+                            <p style="
+                                margin-top:15px;
+                                color:#687386;
+                            ">
+                                Stability information
+                                is not available.
+                            </p>
+                            `
+                    }
+
+                    ${
+                        iv.source
+                            ? `
+                            <p style="
+                                margin-top:15px;
+                                font-size:13px;
+                                color:#687386;
+                            ">
+                                Source:
+                                ${iv.source}
+                            </p>
+                            `
+                            : ""
+                    }
+
+                </div>
+            `;
+
+        } else {
+
+            ivContainer.innerHTML = `
+                <p style="color:#687386;">
+                    IV preparation information
+                    is not available.
+                </p>
+            `;
+        }
+
+
+        // =========================
+        // DRUG NAME
+        // =========================
+
+        document.getElementById(
+            "resultName"
+        ).textContent =
             drug.generic_name;
 
-        // Drug class + category
-        document.getElementById("resultClass").textContent =
-            drug.drug_class + " • " + drug.category;
 
-        // Indications
-        document.getElementById("resultIndications").innerHTML =
+        // =========================
+        // CLASS + CATEGORY
+        // =========================
+
+        document.getElementById(
+            "resultClass"
+        ).textContent =
+            drug.drug_class +
+            " • " +
+            drug.category;
+
+
+        // =========================
+        // INDICATIONS
+        // =========================
+
+        document.getElementById(
+            "resultIndications"
+        ).innerHTML =
             drug.indications
-                .map(item => "• " + item)
+                .map(
+                    item =>
+                        "• " + item
+                )
                 .join("<br>");
 
-        // Routes
-        document.getElementById("resultRoute").innerHTML =
+
+        // =========================
+        // ROUTES
+        // =========================
+
+        document.getElementById(
+            "resultRoute"
+        ).innerHTML =
             drug.routes
-                .map(item => "• " + item)
+                .map(
+                    item =>
+                        "• " + item
+                )
                 .join("<br>");
 
-        // Preparation
-        document.getElementById("resultNote").innerHTML =
+
+        // =========================
+        // PREPARATION
+        // =========================
+
+        document.getElementById(
+            "resultNote"
+        ).innerHTML =
+
             "<strong>Status:</strong> " +
             drug.preparation.status +
+
             "<br><br>" +
 
             "<strong>Dilution:</strong> " +
             drug.preparation.dilution +
+
             "<br><br>" +
 
             "<strong>Infusion Time:</strong> " +
             drug.preparation.infusion_time;
 
-        // Warnings
-        document.getElementById("resultWarnings").innerHTML =
+
+        // =========================
+        // WARNINGS
+        // =========================
+
+        document.getElementById(
+            "resultWarnings"
+        ).innerHTML =
             drug.warnings
-                .map(item => "• " + item)
+                .map(
+                    item =>
+                        "• " + item
+                )
                 .join("<br>");
 
-        // Adverse effects
-        document.getElementById("resultAdverse").innerHTML =
+
+        // =========================
+        // ADVERSE EFFECTS
+        // =========================
+
+        document.getElementById(
+            "resultAdverse"
+        ).innerHTML =
             drug.adverse_effects
-                .map(item => "• " + item)
+                .map(
+                    item =>
+                        "• " + item
+                )
                 .join("<br>");
 
-        // References
-        document.getElementById("resultReferences").innerHTML =
-    drug.references
-       .map(ref => {
 
-    if (ref.url) {
-        return `• <a href="${ref.url}" target="_blank" rel="noopener noreferrer">
-            ${ref.name}
-        </a> (${ref.type})`;
-    }
+        // =========================
+        // REFERENCES
+        // =========================
 
-    return `• ${ref.name} (${ref.type})`;
+        document.getElementById(
+            "resultReferences"
+        ).innerHTML =
 
-})
-        .join("<br>");
+            drug.references
+                .map(ref => {
 
-        // Show result
-        document.getElementById("drugResult").style.display = "block";
+                    if (ref.url) {
 
-        // Scroll to result
-        document.getElementById("drugResult").scrollIntoView({
+                        return `
+                            • <a
+                                href="${ref.url}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                ${ref.name}
+                            </a>
+                            (${ref.type})
+                        `;
+                    }
+
+                    return `
+                        • ${ref.name}
+                        (${ref.type})
+                    `;
+                })
+                .join("<br>");
+
+
+        // =========================
+        // SHOW RESULT
+        // =========================
+
+        document.getElementById(
+            "drugResult"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "drugResult"
+        ).scrollIntoView({
             behavior: "smooth"
         });
 
-    } catch (error) {
+    }
 
-        console.error(error);
+    catch (error) {
+
+        console.error(
+            "Search error:",
+            error
+        );
 
         alert(
             "Unable to connect to the drug database."
         );
     }
 }
-    function calculateDrugVolume() {
+
+
+// =====================================================
+// CALCULATE DRUG VOLUME
+// =====================================================
+
+function calculateDrugVolume() {
 
     const productIndex =
-        document.getElementById("calculatorProduct").value;
+        document.getElementById(
+            "calculatorProduct"
+        ).value;
 
     const dose =
-        parseFloat(document.getElementById("calculatorDose").value);
+        parseFloat(
+            document.getElementById(
+                "calculatorDose"
+            ).value
+        );
 
     const result =
-        document.getElementById("calculatorResult");
+        document.getElementById(
+            "calculatorResult"
+        );
+
 
     if (productIndex === "") {
-        alert("Please select a product.");
+
+        alert(
+            "Please select a product."
+        );
+
         return;
     }
+
 
     if (!dose || dose <= 0) {
-        alert("Please enter a valid dose.");
+
+        alert(
+            "Please enter a valid dose."
+        );
+
         return;
     }
-        const product =
-    window.currentDrug.products[productIndex];
 
-// Subcutaneous products do not use the IV bag calculator
-if (product.route === "Subcutaneous") {
-
-    result.style.display = "block";
-
-    result.innerHTML = `
-        <p><strong>Product:</strong> ${product.brand_name}</p>
-
-        <p style="margin-top:8px;">
-            <strong>Route:</strong> Subcutaneous
-        </p>
-
-        <p style="margin-top:8px;">
-            <strong>Preparation:</strong>
-            ${product.sc_preparation?.preparation || "Product-specific preparation required."}
-        </p>
-
-        <p style="margin-top:8px;">
-            <strong>Administration:</strong>
-            ${product.sc_preparation?.administration || "Subcutaneous administration"}
-        </p>
-
-        <p style="margin-top:8px;">
-            <strong>Frequency:</strong>
-            ${product.sc_preparation?.frequency || "Product-specific"}
-        </p>
-
-        <p style="
-            margin-top:15px;
-            padding:12px;
-            background:#fff8e6;
-            border-radius:8px;
-            color:#8a5a00;
-            font-weight:bold;
-        ">
-            ⚠ This product is administered subcutaneously and does not require IV bag preparation.
-        </p>
-    `;
-
-    return;
-}
-
-const concentration =
-    parseFloat(product.concentration);
-
-const drugVolume =
-    dose / concentration;
-
-         let finalBagVolume;
-
-// Product-specific bag volume rule
-const bagRule = product.iv_preparation?.bag_volume_rule;
-
-if (bagRule?.type === "dose-dependent") {
-
-    const threshold =
-        parseFloat(bagRule.high_dose_threshold);
-
-    const standardVolume =
-        parseFloat(bagRule.standard_volume);
-
-    const highDoseVolume =
-        parseFloat(bagRule.high_dose_volume);
-
-    finalBagVolume =
-        dose > threshold
-            ? highDoseVolume
-            : standardVolume;
-
-} else {
-
-    finalBagVolume =
-        parseFloat(document.getElementById("finalBagVolume").value);
-
-    if (!finalBagVolume || finalBagVolume <= 0) {
-        alert("Please enter a valid final bag volume.");
-        return;
-    }
-}
-
-const totalFinalVolume =
-    finalBagVolume + drugVolume;
-
-// Final concentration
-const finalConcentration =
-    dose / totalFinalVolume;
-
-// Product-specific concentration range
-const concentrationRange =
-    product.iv_preparation?.target_concentration;
-
-let concentrationStatus = "";
-
-if (concentrationRange) {
-
-    const minimum =
-        parseFloat(concentrationRange.minimum);
-
-    const maximum =
-        parseFloat(concentrationRange.maximum);
 
     if (
-        finalConcentration >= minimum &&
-        finalConcentration <= maximum
+        !window.currentDrug ||
+        !window.currentDrug.products
     ) {
-        concentrationStatus = `
-            <p style="
-                margin-top:12px;
-                color:#176b3a;
-                font-weight:bold;
-            ">
-                ✓ Within product-specific concentration range
-                (${minimum}–${maximum} ${concentrationRange.unit})
-            </p>
-        `;
-    } else {
-        concentrationStatus = `
-            <p style="
-                margin-top:12px;
-                color:#9b3030;
-                font-weight:bold;
-            ">
-                ⚠ Outside product-specific concentration range
-                (${minimum}–${maximum} ${concentrationRange.unit})
-            </p>
-        `;
-    }
 
-} else {
-
-    concentrationStatus = `
-        <p style="
-            margin-top:12px;
-            color:#b06b00;
-            font-weight:bold;
-        ">
-            ℹ No product-specific final concentration range is specified.
-            Follow the product-specific dilution and bag requirements.
-        </p>
-    `;
-}
-
-const diluentVolume =
-    finalBagVolume;
-  // Recommended Bag Options
-const bagRule =
-    product.iv_preparation?.bag_volume_rule;
-
-const bagOptions =
-    product.iv_preparation?.available_bag_sizes || [];
-
-let bagOptionsHTML = "";
-
-if (
-    bagOptions.length > 0 &&
-    bagRule?.type !== "user_selected"
-) {
-
-    const range =
-        product.iv_preparation?.target_concentration;
-
-    const evaluatedBags =
-        bagOptions.map(bagSize => {
-
-            const totalVolume =
-                bagSize + drugVolume;
-
-            const concentration =
-                dose / totalVolume;
-
-            let withinRange = null;
-
-            if (range) {
-
-                const minimum =
-                    parseFloat(range.minimum);
-
-                const maximum =
-                    parseFloat(range.maximum);
-
-                withinRange =
-                    concentration >= minimum &&
-                    concentration <= maximum;
-            }
-
-            return {
-                bagSize,
-                totalVolume,
-                concentration,
-                withinRange
-            };
-        });
-
-    const recommendedBag =
-        evaluatedBags
-            .filter(
-                bag => bag.withinRange === true
-            )
-            .sort(
-                (a, b) =>
-                    a.bagSize - b.bagSize
-            )[0];
-
-    evaluatedBags.sort(
-        (a, b) =>
-            a.bagSize - b.bagSize
-    );
-
-    bagOptionsHTML = `
-        <div style="
-            margin-top:20px;
-            padding:20px;
-            background:#f8fbff;
-            border:1px solid #dce8f5;
-            border-radius:12px;
-        ">
-
-            <h3 style="
-                color:#0b5cab;
-                margin-bottom:15px;
-            ">
-                Recommended Bag Options
-            </h3>
-
-            ${evaluatedBags.map(bag => {
-
-                const isRecommended =
-                    recommendedBag &&
-                    bag.bagSize ===
-                    recommendedBag.bagSize;
-
-                let statusText = "";
-                let statusColor = "#b06b00";
-
-                if (bag.withinRange === true) {
-
-                    statusText =
-                        isRecommended
-                            ? "✓ Recommended"
-                            : "✓ Within concentration range";
-
-                    statusColor = "#176b3a";
-
-                } else if (
-                    bag.withinRange === false
-                ) {
-
-                    statusText =
-                        "⚠ Outside concentration range";
-
-                    statusColor = "#9b3030";
-
-                } else {
-
-                    statusText =
-                        "Concentration range not specified";
-
-                    statusColor = "#b06b00";
-                }
-
-                return `
-                    <div style="
-                        padding:15px;
-                        margin-bottom:10px;
-                        background:white;
-                        border:
-                            ${isRecommended
-                                ? "2px solid #176b3a"
-                                : "1px solid #e2eaf3"};
-                        border-radius:8px;
-                    ">
-
-                        <strong>
-                            ${bag.bagSize} mL bag
-                        </strong>
-
-                        <div style="margin-top:7px;">
-                            Total volume after drug addition:
-                            ${bag.totalVolume.toFixed(2)} mL
-                        </div>
-
-                        <div style="margin-top:7px;">
-                            Final concentration:
-                            ${bag.concentration.toFixed(2)} mg/mL
-                        </div>
-
-                        <div style="
-                            margin-top:7px;
-                            font-weight:bold;
-                            color:${statusColor};
-                        ">
-                            ${statusText}
-                        </div>
-
-                    </div>
-                `;
-
-            }).join("")}
-
-        </div>
-    `;
-}
-        // Vial selection
-const vialSizes = product.presentations
-    .map(item => {
-
-        const match = item.match(/(\d+)\s*mg\/(\d+)\s*mL/);
-
-        if (!match) return null;
-
-        return {
-            mg: parseFloat(match[1]),
-            ml: parseFloat(match[2])
-        };
-    })
-    .filter(Boolean);
-
-let bestCombination = null;
-let bestTotalMg = Infinity;
-let bestVialCount = Infinity;
-
-function findCombination(index, remainingDose, combination) {
-
-    if (remainingDose <= 0) {
-
-        const totalMg = combination.reduce(
-            (sum, vial) => sum + vial.mg,
-            0
+        alert(
+            "Please search for a drug first."
         );
-
-        if (
-            totalMg < bestTotalMg ||
-            (
-                totalMg === bestTotalMg &&
-                combination.length < bestVialCount
-            )
-        ) {
-            bestTotalMg = totalMg;
-            bestVialCount = combination.length;
-            bestCombination = [...combination];
-        }
 
         return;
     }
 
-    if (index >= vialSizes.length) return;
 
-    const vial = vialSizes[index];
+    const product =
+        window.currentDrug.products[
+            productIndex
+        ];
 
-    const maxVials =
-        Math.ceil(remainingDose / vial.mg) + 1;
 
-    for (let count = 0; count <= maxVials; count++) {
+    // =================================================
+    // SUBCUTANEOUS PRODUCT
+    // =================================================
 
-        for (let i = 0; i < count; i++) {
-            combination.push(vial);
-        }
+    if (
+        product.route ===
+        "Subcutaneous"
+    ) {
 
-        findCombination(
-            index + 1,
-            remainingDose - (count * vial.mg),
-            combination
+        result.style.display =
+            "block";
+
+        result.innerHTML = `
+
+            <p>
+                <strong>
+                    Product:
+                </strong>
+                ${product.brand_name}
+            </p>
+
+            <p style="margin-top:8px;">
+                <strong>
+                    Route:
+                </strong>
+                Subcutaneous
+            </p>
+
+            <p style="margin-top:8px;">
+                <strong>
+                    Preparation:
+                </strong>
+                ${
+                    product.sc_preparation
+                        ?.preparation ||
+                    "Product-specific preparation required."
+                }
+            </p>
+
+            <p style="margin-top:8px;">
+                <strong>
+                    Administration:
+                </strong>
+                ${
+                    product.sc_preparation
+                        ?.administration ||
+                    "Subcutaneous administration"
+                }
+            </p>
+
+            <p style="margin-top:8px;">
+                <strong>
+                    Frequency:
+                </strong>
+                ${
+                    product.sc_preparation
+                        ?.frequency ||
+                    "Product-specific"
+                }
+            </p>
+
+            <p style="
+                margin-top:15px;
+                padding:12px;
+                background:#fff8e6;
+                border-radius:8px;
+                color:#8a5a00;
+                font-weight:bold;
+            ">
+                ⚠ This product is administered
+                subcutaneously and does not require
+                IV bag preparation.
+            </p>
+
+        `;
+
+        return;
+    }
+
+
+    // =================================================
+    // CONCENTRATION
+    // =================================================
+
+    const concentration =
+        parseFloat(
+            product.concentration
         );
 
-        for (let i = 0; i < count; i++) {
-            combination.pop();
+
+    if (
+        !concentration ||
+        concentration <= 0
+    ) {
+
+        alert(
+            "Product concentration is not available."
+        );
+
+        return;
+    }
+
+
+    const drugVolume =
+        dose / concentration;
+
+
+    // =================================================
+    // BAG VOLUME
+    // =================================================
+
+    let finalBagVolume;
+
+
+    const bagRule =
+        product.iv_preparation
+            ?.bag_volume_rule;
+
+
+    if (
+        bagRule?.type ===
+        "dose-dependent"
+    ) {
+
+        const threshold =
+            parseFloat(
+                bagRule.high_dose_threshold
+            );
+
+        const standardVolume =
+            parseFloat(
+                bagRule.standard_volume
+            );
+
+        const highDoseVolume =
+            parseFloat(
+                bagRule.high_dose_volume
+            );
+
+
+        finalBagVolume =
+            dose > threshold
+                ? highDoseVolume
+                : standardVolume;
+
+    }
+
+    else {
+
+        finalBagVolume =
+            parseFloat(
+                document.getElementById(
+                    "finalBagVolume"
+                ).value
+            );
+
+
+        if (
+            !finalBagVolume ||
+            finalBagVolume <= 0
+        ) {
+
+            alert(
+                "Please select a valid final bag volume."
+            );
+
+            return;
         }
     }
-}
 
-findCombination(0, dose, []);
 
-let vialSummary = "No vial combination available.";
+    // =================================================
+    // TOTAL FINAL VOLUME
+    // =================================================
 
-if (bestCombination) {
+    const totalFinalVolume =
+        finalBagVolume +
+        drugVolume;
 
-    const vialCounts = {};
 
-    bestCombination.forEach(vial => {
+    // =================================================
+    // FINAL CONCENTRATION
+    // =================================================
 
-        vialCounts[vial.mg] =
-            (vialCounts[vial.mg] || 0) + 1;
-    });
+    const finalConcentration =
+        dose /
+        totalFinalVolume;
 
-    vialSummary = Object.entries(vialCounts)
-        .map(([mg, count]) =>
-            `${count} × ${mg} mg vial`
-        )
-        .join("<br>");
 
-    const totalVialMg = bestCombination.reduce(
-        (sum, vial) => sum + vial.mg,
-        0
+    // =================================================
+    // CONCENTRATION RANGE
+    // =================================================
+
+    const concentrationRange =
+        product.iv_preparation
+            ?.target_concentration;
+
+
+    let concentrationStatus =
+        "";
+
+
+    if (
+        concentrationRange
+    ) {
+
+        const minimum =
+            parseFloat(
+                concentrationRange.minimum
+            );
+
+        const maximum =
+            parseFloat(
+                concentrationRange.maximum
+            );
+
+
+        if (
+            finalConcentration >= minimum &&
+            finalConcentration <= maximum
+        ) {
+
+            concentrationStatus = `
+
+                <p style="
+                    margin-top:12px;
+                    color:#176b3a;
+                    font-weight:bold;
+                ">
+
+                    ✓ Within product-specific
+                    concentration range
+
+                    (${minimum}–${maximum}
+                    ${concentrationRange.unit})
+
+                </p>
+            `;
+
+        }
+
+        else {
+
+            concentrationStatus = `
+
+                <p style="
+                    margin-top:12px;
+                    color:#9b3030;
+                    font-weight:bold;
+                ">
+
+                    ⚠ Outside product-specific
+                    concentration range
+
+                    (${minimum}–${maximum}
+                    ${concentrationRange.unit})
+
+                </p>
+            `;
+        }
+
+    }
+
+    else {
+
+        concentrationStatus = `
+
+            <p style="
+                margin-top:12px;
+                color:#b06b00;
+                font-weight:bold;
+            ">
+
+                ℹ No product-specific final
+                concentration range is specified.
+                Follow the product-specific
+                dilution and bag requirements.
+
+            </p>
+        `;
+    }
+
+
+    // =================================================
+    // DILUENT VOLUME
+    // =================================================
+
+    const diluentVolume =
+        finalBagVolume;
+
+
+    // =================================================
+    // RECOMMENDED BAG OPTIONS
+    // =================================================
+
+    let bagOptionsHTML = "";
+
+
+    const bagOptions =
+        product.iv_preparation
+            ?.available_bag_sizes || [];
+
+
+    // Only show recommendations when
+    // a concentration range exists.
+
+    if (
+        bagOptions.length > 0 &&
+        concentrationRange
+    ) {
+
+        const evaluatedBags =
+            bagOptions.map(
+                bagSize => {
+
+                    const totalVolume =
+                        bagSize +
+                        drugVolume;
+
+                    const concentration =
+                        dose /
+                        totalVolume;
+
+                    const minimum =
+                        parseFloat(
+                            concentrationRange.minimum
+                        );
+
+                    const maximum =
+                        parseFloat(
+                            concentrationRange.maximum
+                        );
+
+                    const withinRange =
+                        concentration >= minimum &&
+                        concentration <= maximum;
+
+
+                    return {
+                        bagSize,
+                        totalVolume,
+                        concentration,
+                        withinRange
+                    };
+                }
+            );
+
+
+        const recommendedBag =
+            evaluatedBags
+                .filter(
+                    bag =>
+                        bag.withinRange === true
+                )
+                .sort(
+                    (a, b) =>
+                        a.bagSize -
+                        b.bagSize
+                )[0];
+
+
+        evaluatedBags.sort(
+            (a, b) =>
+                a.bagSize -
+                b.bagSize
+        );
+
+
+        bagOptionsHTML = `
+
+            <div style="
+                margin-top:20px;
+                padding:20px;
+                background:#f8fbff;
+                border:1px solid #dce8f5;
+                border-radius:12px;
+            ">
+
+                <h3 style="
+                    color:#0b5cab;
+                    margin-bottom:15px;
+                ">
+                    Recommended Bag Options
+                </h3>
+
+
+                ${evaluatedBags
+                    .map(
+                        bag => {
+
+                            const isRecommended =
+                                recommendedBag &&
+                                bag.bagSize ===
+                                recommendedBag.bagSize;
+
+
+                            let statusText =
+                                "";
+
+                            let statusColor =
+                                "#b06b00";
+
+
+                            if (
+                                bag.withinRange
+                            ) {
+
+                                statusText =
+                                    isRecommended
+                                        ? "✓ Recommended"
+                                        : "✓ Within concentration range";
+
+                                statusColor =
+                                    "#176b3a";
+
+                            }
+
+                            else {
+
+                                statusText =
+                                    "⚠ Outside concentration range";
+
+                                statusColor =
+                                    "#9b3030";
+                            }
+
+
+                            return `
+
+                                <div style="
+                                    padding:15px;
+                                    margin-bottom:10px;
+                                    background:white;
+                                    border:
+                                        ${
+                                            isRecommended
+                                                ? "2px solid #176b3a"
+                                                : "1px solid #e2eaf3"
+                                        };
+                                    border-radius:8px;
+                                ">
+
+                                    <strong>
+                                        ${bag.bagSize}
+                                        mL bag
+                                    </strong>
+
+
+                                    <div style="
+                                        margin-top:7px;
+                                    ">
+                                        Total volume after
+                                        drug addition:
+                                        ${bag.totalVolume.toFixed(2)}
+                                        mL
+                                    </div>
+
+
+                                    <div style="
+                                        margin-top:7px;
+                                    ">
+                                        Final concentration:
+                                        ${bag.concentration.toFixed(2)}
+                                        mg/mL
+                                    </div>
+
+
+                                    <div style="
+                                        margin-top:7px;
+                                        font-weight:bold;
+                                        color:${statusColor};
+                                    ">
+                                        ${statusText}
+                                    </div>
+
+                                </div>
+                            `;
+                        }
+                    )
+                    .join("")
+                }
+
+            </div>
+        `;
+    }
+
+
+    // =================================================
+    // VIAL SELECTION
+    // =================================================
+
+    const vialSizes =
+        product.presentations
+            .map(
+                item => {
+
+                    const match =
+                        item.match(
+                            /(\d+(?:\.\d+)?)\s*mg\/(\d+(?:\.\d+)?)\s*mL/i
+                        );
+
+
+                    if (!match) {
+                        return null;
+                    }
+
+
+                    return {
+
+                        mg:
+                            parseFloat(
+                                match[1]
+                            ),
+
+                        ml:
+                            parseFloat(
+                                match[2]
+                            )
+                    };
+                }
+            )
+            .filter(Boolean);
+
+
+    let bestCombination =
+        null;
+
+    let bestTotalMg =
+        Infinity;
+
+    let bestVialCount =
+        Infinity;
+
+
+    function findCombination(
+        index,
+        remainingDose,
+        combination
+    ) {
+
+        if (
+            remainingDose <= 0
+        ) {
+
+            const totalMg =
+                combination.reduce(
+                    (sum, vial) =>
+                        sum + vial.mg,
+                    0
+                );
+
+
+            if (
+                totalMg < bestTotalMg ||
+                (
+                    totalMg === bestTotalMg &&
+                    combination.length <
+                    bestVialCount
+                )
+            ) {
+
+                bestTotalMg =
+                    totalMg;
+
+                bestVialCount =
+                    combination.length;
+
+                bestCombination =
+                    [...combination];
+            }
+
+
+            return;
+        }
+
+
+        if (
+            index >=
+            vialSizes.length
+        ) {
+
+            return;
+        }
+
+
+        const vial =
+            vialSizes[index];
+
+
+        const maxVials =
+            Math.ceil(
+                remainingDose /
+                vial.mg
+            ) + 1;
+
+
+        for (
+            let count = 0;
+            count <= maxVials;
+            count++
+        ) {
+
+            for (
+                let i = 0;
+                i < count;
+                i++
+            ) {
+
+                combination.push(
+                    vial
+                );
+            }
+
+
+            findCombination(
+                index + 1,
+                remainingDose -
+                    (
+                        count *
+                        vial.mg
+                    ),
+                combination
+            );
+
+
+            for (
+                let i = 0;
+                i < count;
+                i++
+            ) {
+
+                combination.pop();
+            }
+        }
+    }
+
+
+    findCombination(
+        0,
+        dose,
+        []
     );
 
-    const wastageMg =
-        totalVialMg - dose;
 
-    const wastageVolume =
-        wastageMg / concentration;
+    let vialSummary =
+        "No vial combination available.";
 
-    vialSummary += `
-        <br><br>
-        <strong>Total vial amount:</strong>
-        ${totalVialMg} mg
 
-        <br>
-        <strong>Wastage:</strong>
-        ${wastageMg} mg
-        (${wastageVolume.toFixed(2)} mL)
+    if (bestCombination) {
+
+        const vialCounts =
+            {};
+
+
+        bestCombination.forEach(
+            vial => {
+
+                vialCounts[vial.mg] =
+                    (
+                        vialCounts[vial.mg] ||
+                        0
+                    ) + 1;
+            }
+        );
+
+
+        vialSummary =
+            Object.entries(
+                vialCounts
+            )
+            .map(
+                ([mg, count]) =>
+                    `${count} × ${mg} mg vial`
+            )
+            .join("<br>");
+
+
+        const totalVialMg =
+            bestCombination.reduce(
+                (sum, vial) =>
+                    sum + vial.mg,
+                0
+            );
+
+
+        const wastageMg =
+            totalVialMg -
+            dose;
+
+
+        const wastageVolume =
+            wastageMg /
+            concentration;
+
+
+        vialSummary += `
+
+            <br><br>
+
+            <strong>
+                Total vial amount:
+            </strong>
+            ${totalVialMg} mg
+
+            <br>
+
+            <strong>
+                Wastage:
+            </strong>
+            ${wastageMg} mg
+            (${wastageVolume.toFixed(2)} mL)
+        `;
+    }
+
+
+    // =================================================
+    // FINAL RESULT
+    // =================================================
+
+    result.style.display =
+        "block";
+
+
+    result.innerHTML = `
+
+        <p>
+            <strong>
+                Product:
+            </strong>
+            ${product.brand_name}
+        </p>
+
+
+        <p style="margin-top:8px;">
+            <strong>
+                Prescribed dose:
+            </strong>
+            ${dose} mg
+        </p>
+
+
+        <p style="margin-top:8px;">
+            <strong>
+                Concentration:
+            </strong>
+            ${product.concentration}
+        </p>
+
+
+        <p style="margin-top:8px;">
+            <strong>
+                Vial selection:
+            </strong>
+            <br>
+            ${vialSummary}
+        </p>
+
+
+        <p style="margin-top:8px;">
+            <strong>
+                Required drug volume:
+            </strong>
+            ${drugVolume.toFixed(2)}
+            mL
+        </p>
+
+
+        <p style="margin-top:8px;">
+            <strong>
+                IV bag volume:
+            </strong>
+            ${finalBagVolume.toFixed(2)}
+            mL
+        </p>
+
+
+        <p style="margin-top:8px;">
+            <strong>
+                Total volume after drug addition:
+            </strong>
+            ${totalFinalVolume.toFixed(2)}
+            mL
+        </p>
+
+
+        <p style="margin-top:8px;">
+            <strong>
+                Diluent volume:
+            </strong>
+            ${diluentVolume.toFixed(2)}
+            mL
+        </p>
+
+
+        <p style="margin-top:8px;">
+            <strong>
+                Calculated final concentration:
+            </strong>
+            ${finalConcentration.toFixed(2)}
+            mg/mL
+        </p>
+
+
+        ${concentrationStatus}
+
+
+        ${bagOptionsHTML}
+
     `;
-}
-
-    result.style.display = "block";
-
-   result.innerHTML = `
-    <p><strong>Product:</strong> ${product.brand_name}</p>
-
-    <p style="margin-top:8px;">
-        <strong>Prescribed dose:</strong> ${dose} mg
-    </p>
-
-    <p style="margin-top:8px;">
-        <strong>Concentration:</strong> ${product.concentration}
-    </p>
-
-    <p style="margin-top:8px;">
-        <strong>Vial selection:</strong><br>
-        ${vialSummary}
-    </p>
-
-    <p style="margin-top:8px;">
-        <strong>Required drug volume:</strong>
-        ${drugVolume.toFixed(2)} mL
-    </p>
-
-    <p style="margin-top:8px;">
-        <strong>IV bag volume:</strong>
-        ${finalBagVolume.toFixed(2)} mL
-    </p>
-
-    <p style="margin-top:8px;">
-        <strong>Total volume after drug addition:</strong>
-        ${totalFinalVolume.toFixed(2)} mL
-    </p>
-
-    <p style="margin-top:8px;">
-        <strong>Diluent volume:</strong>
-        ${diluentVolume.toFixed(2)} mL
-    </p>
-
-    <p style="margin-top:8px;">
-        <strong>Calculated final concentration:</strong>
-        ${finalConcentration.toFixed(2)} mg/mL
-    </p>
-
-    ${concentrationStatus}
-
-    ${bagOptionsHTML}
-`;
 }
 </script>
 </body>
