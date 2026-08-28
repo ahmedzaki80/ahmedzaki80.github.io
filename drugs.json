@@ -951,7 +951,7 @@
     }
   ]
 },
-  "doxorubicin": {
+"doxorubicin": {
   "generic_name": "Doxorubicin",
   "brand_names": [
     "Adricin"
@@ -965,8 +965,8 @@
       "active_ingredient": "doxorubicin hydrochloride",
       "concentration": "2 mg/mL",
       "presentations": [
-        "10 mg/5 mL single-dose vial",
-        "50 mg/25 mL single-dose vial"
+        "10 mg/5 mL solution",
+        "50 mg/25 mL solution"
       ],
       "route": "Intravenous",
 
@@ -977,43 +977,43 @@
         ],
 
         "do_not_use": [
-          "Do not administer undiluted as a routine infusion",
-          "Do not administer as IV push or bolus outside the approved administration procedure"
+          "Do not administer outside the product-specific and regimen-specific administration instructions"
         ],
 
         "available_bag_sizes": [
           50,
-          100
+          100,
+          250,
+          500
         ],
 
         "bag_volume_rule": {
-          "type": "fixed",
-          "volume": 100,
+          "type": "user_selected",
           "unit": "mL",
-          "description": "Dilute the required dose in a suitable 0.9% Sodium Chloride or 5% Dextrose infusion bag according to the institutional protocol and current product information."
+          "description": "Bag size is selected according to the prescribed regimen, institutional protocol, and current product-specific information. No fixed product-specific bag size is imposed."
         },
 
-        "administration": "Intravenous injection or infusion according to regimen and product-specific instructions",
+        "administration": "Intravenous administration according to regimen",
 
-        "iv_push_or_bolus": "Administration method is regimen-dependent; follow the current product-specific prescribing information",
+        "iv_push_or_bolus": "Administration method is regimen-dependent",
 
-        "mixing": "Gently mix after addition; avoid vigorous shaking",
+        "mixing": "Gently mix after dilution; avoid vigorous shaking",
 
-        "line": "Administer through a secure, free-flowing intravenous line. Verify patency before and during administration.",
+        "line": "Administer through a secure, patent intravenous line. Verify venous access before and during administration.",
 
-        "compatibility": "Compatible diluents include 0.9% Sodium Chloride and 5% Dextrose according to current prescribing information.",
+        "compatibility": "Use 0.9% Sodium Chloride or 5% Dextrose according to current product information and institutional protocol.",
 
         "product_stability": {
-          "undiluted_solution": "Store refrigerated at 2–8°C and protect from light according to product labeling.",
-          "diluted_solution": "Protect from light after preparation and use according to the current product-specific stability information."
+          "undiluted_solution": "Store according to the current product-specific manufacturer information and protect from light.",
+          "diluted_solution": "Use according to current product-specific stability information and institutional policy."
         },
 
         "special_notes": [
           "Ready-to-use solution; no reconstitution required.",
-          "Doxorubicin is a cytotoxic and vesicant drug.",
+          "Doxorubicin is a vesicant.",
           "Verify IV access and monitor closely for extravasation.",
-          "Protect the prepared solution from light.",
-          "Inspect visually for particulate matter or discoloration before administration.",
+          "Protect solution from light.",
+          "Inspect visually before administration.",
           "Discard unused portion from single-dose vial.",
           "Follow institutional hazardous-drug handling procedures."
         ],
@@ -1032,13 +1032,12 @@
   ],
 
   "routes": [
-    "Intravenous injection",
-    "Intravenous infusion"
+    "Intravenous administration"
   ],
 
   "preparation": {
     "status": "Ready-to-use solution; no reconstitution required",
-    "dilution": "Dilute with 0.9% Sodium Chloride or 5% Dextrose according to the prescribed regimen and current product information",
+    "dilution": "Dilution and final volume are regimen- and protocol-dependent",
     "infusion_time": "Regimen-dependent"
   },
 
@@ -1046,7 +1045,7 @@
     "Doxorubicin is a vesicant and extravasation may cause severe tissue injury.",
     "Cumulative dose-related cardiotoxicity may occur.",
     "Severe myelosuppression may occur.",
-    "Hypersensitivity and infusion-related reactions may occur.",
+    "Hypersensitivity reactions may occur.",
     "Doxorubicin is a hazardous cytotoxic drug."
   ],
 
