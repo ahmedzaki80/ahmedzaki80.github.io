@@ -1482,123 +1482,137 @@ function calculateDrugVolume() {
         product.iv_preparation || {};
 
 
-    // =================================================
-    // BAG VOLUME
-    // =================================================
+   // =================================================
+// BAG VOLUME
+// =================================================
 
-    let finalBagVolume =
-        null;
+let finalBagVolume = null;
+
+// Defines whether the specified volume is:
+// 1. The bag/diluent volume BEFORE drug addition
+// 2. The FINAL TOTAL volume AFTER drug addition
+let volumeBasis = "bag";
+
+const bagRule =
+    ivPreparation.bag_volume_rule;
 
 
-    const bagRule =
-        ivPreparation.bag_volume_rule;
+// -------------------------------------------------
+// DOSE-DEPENDENT BAG
+// -------------------------------------------------
 
+if (
+    bagRule?.type ===
+    "dose-dependent"
+) {
 
-    // -------------------------------------------------
-    // DOSE-DEPENDENT BAG
-    // -------------------------------------------------
+    const threshold =
+        parseFloat(
+            bagRule.high_dose_threshold
+        );
+
+    const standardVolume =
+        parseFloat(
+            bagRule.standard_volume
+        );
+
+    const highDoseVolume =
+        parseFloat(
+            bagRule.high_dose_volume
+        );
+
 
     if (
-        bagRule?.type ===
-        "dose-dependent"
-    ) {
-
-        const threshold =
-            parseFloat(
-                bagRule.high_dose_threshold
-            );
-
-        const standardVolume =
-            parseFloat(
-                bagRule.standard_volume
-            );
-
-        const highDoseVolume =
-            parseFloat(
-                bagRule.high_dose_volume
-            );
-
-
-        if (
-            !isNaN(threshold) &&
-            !isNaN(standardVolume) &&
-            !isNaN(highDoseVolume)
-        ) {
-
-            finalBagVolume =
-                dose > threshold
-                    ? highDoseVolume
-                    : standardVolume;
-        }
-    }
-
-
-    // -------------------------------------------------
-    // FIXED BAG
-    // -------------------------------------------------
-
-    else if (
-        bagRule?.type ===
-        "fixed"
-    ) {
-
-        const fixedVolume =
-            parseFloat(
-                bagRule.volume ??
-                bagRule.fixed_volume ??
-                bagRule.bag_volume
-            );
-
-
-        if (
-            !isNaN(fixedVolume) &&
-            fixedVolume > 0
-        ) {
-
-            finalBagVolume =
-                fixedVolume;
-        }
-    }
-
-
-    // -------------------------------------------------
-    // USER SELECTED BAG
-    // -------------------------------------------------
-
-    if (
-        finalBagVolume === null
+        !isNaN(threshold) &&
+        !isNaN(standardVolume) &&
+        !isNaN(highDoseVolume)
     ) {
 
         finalBagVolume =
-            parseFloat(
-                document.getElementById(
-                    "finalBagVolume"
-                ).value
-            );
+            dose > threshold
+                ? highDoseVolume
+                : standardVolume;
+
+        volumeBasis =
+            bagRule.basis === "final_total"
+                ? "final_total"
+                : "bag";
+    }
+}
 
 
-        if (
-            !finalBagVolume ||
-            finalBagVolume <= 0
-        ) {
+// -------------------------------------------------
+// FIXED BAG
+// -------------------------------------------------
 
-            alert(
-                "Please select a valid final bag volume."
-            );
+else if (
+    bagRule?.type ===
+    "fixed"
+) {
 
-            return;
-        }
+    const fixedVolume =
+        parseFloat(
+            bagRule.volume ??
+            bagRule.fixed_volume ??
+            bagRule.bag_volume
+        );
+
+
+    if (
+        !isNaN(fixedVolume) &&
+        fixedVolume > 0
+    ) {
+
+        finalBagVolume =
+            fixedVolume;
+
+        volumeBasis =
+            bagRule.basis === "final_total"
+                ? "final_total"
+                : "bag";
+    }
+}
+
+
+// -------------------------------------------------
+// USER SELECTED BAG
+// -------------------------------------------------
+
+if (
+    finalBagVolume === null
+) {
+
+    finalBagVolume =
+        parseFloat(
+            document.getElementById(
+                "finalBagVolume"
+            ).value
+        );
+
+
+    if (
+        !finalBagVolume ||
+        finalBagVolume <= 0
+    ) {
+
+        alert(
+            "Please select a valid final bag volume."
+        );
+
+        return;
     }
 
+    volumeBasis = "bag";
+}
 
-    // =================================================
-    // TOTAL VOLUME
-    // =================================================
+   // =================================================
+// TOTAL VOLUME
+// =================================================
 
-    const totalFinalVolume =
-        finalBagVolume +
-        drugVolume;
-
+const totalFinalVolume =
+    volumeBasis === "final_total"
+        ? finalBagVolume
+        : finalBagVolume + drugVolume;
 
     // =================================================
     // FINAL CONCENTRATION
@@ -1779,12 +1793,17 @@ function calculateDrugVolume() {
     }
 
 
-    // =================================================
-    // DILUENT VOLUME
-    // =================================================
+   // =================================================
+// DILUENT VOLUME
+// =================================================
 
-    const diluentVolume =
-        finalBagVolume;
+const diluentVolume =
+    volumeBasis === "final_total"
+        ? Math.max(
+            0,
+            finalBagVolume - drugVolume
+        )
+        : finalBagVolume;
 
 
     // =================================================
@@ -1841,8 +1860,9 @@ function calculateDrugVolume() {
 
 
                         const totalVolume =
-                            numericBagSize +
-                            drugVolume;
+    volumeBasis === "final_total"
+        ? numericBagSize
+        : numericBagSize + drugVolume;
 
 
                         const concentration =
@@ -2448,14 +2468,17 @@ function calculateDrugVolume() {
         </p>
 
 
-        <p style="margin-top:8px;">
-            <strong>
-                IV bag volume before drug addition:
-            </strong>
-            ${finalBagVolume.toFixed(2)}
-            mL
-        </p>
-
+       <p style="margin-top:8px;">
+    <strong>
+        ${
+            volumeBasis === "final_total"
+                ? "Final total volume:"
+                : "IV bag volume before drug addition:"
+        }
+    </strong>
+    ${finalBagVolume.toFixed(2)}
+    mL
+</p>
 
         <p style="margin-top:8px;">
             <strong>
