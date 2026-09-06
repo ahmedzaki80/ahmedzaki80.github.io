@@ -409,18 +409,6 @@
         font-weight:bold;
         margin-bottom:7px;
     ">
-        Final Bag Volume (mL)
-    </label>
-
-    <input
-        type="number"
-        <div style="margin-bottom:15px;">
-
-    <label style="
-        display:block;
-        font-weight:bold;
-        margin-bottom:7px;
-    ">
         IV Bag Size (before drug addition)
     </label>
 
@@ -435,11 +423,10 @@
             background:white;
         "
     >
-       <option value="">Select bag size</option>
+        <option value="">Select bag size</option>
     </select>
 
 </div>
-
 </div>
     <button
         onclick="calculateDrugVolume()"
@@ -1320,6 +1307,10 @@ function calculateDrugVolume() {
         );
 
 
+    // =================================================
+    // BASIC VALIDATION
+    // =================================================
+
     if (productIndex === "") {
 
         alert(
@@ -1355,8 +1346,18 @@ function calculateDrugVolume() {
 
     const product =
         window.currentDrug.products[
-            productIndex
+            parseInt(productIndex)
         ];
+
+
+    if (!product) {
+
+        alert(
+            "Selected product could not be found."
+        );
+
+        return;
+    }
 
 
     // =================================================
@@ -1440,7 +1441,7 @@ function calculateDrugVolume() {
 
 
     // =================================================
-    // CONCENTRATION
+    // PRODUCT CONCENTRATION
     // =================================================
 
     const concentration =
@@ -1462,21 +1463,40 @@ function calculateDrugVolume() {
     }
 
 
+    // Required volume from the product
+    // concentration.
+    //
+    // Example:
+    // 750 mg ÷ 10 mg/mL = 75 mL
+
     const drugVolume =
-        dose / concentration;
+        dose /
+        concentration;
+
+
+    // =================================================
+    // IV PREPARATION DATA
+    // =================================================
+
+    const ivPreparation =
+        product.iv_preparation || {};
 
 
     // =================================================
     // BAG VOLUME
     // =================================================
 
-    let finalBagVolume;
+    let finalBagVolume =
+        null;
 
 
     const bagRule =
-        product.iv_preparation
-            ?.bag_volume_rule;
+        ivPreparation.bag_volume_rule;
 
+
+    // -------------------------------------------------
+    // DOSE-DEPENDENT BAG
+    // -------------------------------------------------
 
     if (
         bagRule?.type ===
@@ -1499,14 +1519,55 @@ function calculateDrugVolume() {
             );
 
 
-        finalBagVolume =
-            dose > threshold
-                ? highDoseVolume
-                : standardVolume;
+        if (
+            !isNaN(threshold) &&
+            !isNaN(standardVolume) &&
+            !isNaN(highDoseVolume)
+        ) {
 
+            finalBagVolume =
+                dose > threshold
+                    ? highDoseVolume
+                    : standardVolume;
+        }
     }
 
-    else {
+
+    // -------------------------------------------------
+    // FIXED BAG
+    // -------------------------------------------------
+
+    else if (
+        bagRule?.type ===
+        "fixed"
+    ) {
+
+        const fixedVolume =
+            parseFloat(
+                bagRule.volume ??
+                bagRule.fixed_volume ??
+                bagRule.bag_volume
+            );
+
+
+        if (
+            !isNaN(fixedVolume) &&
+            fixedVolume > 0
+        ) {
+
+            finalBagVolume =
+                fixedVolume;
+        }
+    }
+
+
+    // -------------------------------------------------
+    // USER SELECTED BAG
+    // -------------------------------------------------
+
+    if (
+        finalBagVolume === null
+    ) {
 
         finalBagVolume =
             parseFloat(
@@ -1531,7 +1592,7 @@ function calculateDrugVolume() {
 
 
     // =================================================
-    // TOTAL FINAL VOLUME
+    // TOTAL VOLUME
     // =================================================
 
     const totalFinalVolume =
@@ -1549,56 +1610,135 @@ function calculateDrugVolume() {
 
 
     // =================================================
-    // CONCENTRATION RANGE
+    // CONCENTRATION REQUIREMENT
     // =================================================
 
-    const concentrationRange =
-        product.iv_preparation
-            ?.target_concentration;
+    const targetConcentration =
+        ivPreparation.target_concentration;
+
+
+    const concentrationRequirement =
+        ivPreparation.concentration_requirement;
+
+
+    /*
+        Support both data structures:
+
+        1. target_concentration
+           {
+               minimum: 1,
+               maximum: 4,
+               unit: "mg/mL"
+           }
+
+        2. concentration_requirement
+           {
+               minimum: 2,
+               unit: "mg/mL"
+           }
+    */
+
+    const concentrationRule =
+        targetConcentration ||
+        concentrationRequirement;
 
 
     let concentrationStatus =
         "";
 
 
-    if (
-        concentrationRange
-    ) {
+    if (concentrationRule) {
 
         const minimum =
             parseFloat(
-                concentrationRange.minimum
+                concentrationRule.minimum
             );
 
         const maximum =
             parseFloat(
-                concentrationRange.maximum
+                concentrationRule.maximum
             );
 
+        const unit =
+            concentrationRule.unit ||
+            "mg/mL";
+
+
+        // ---------------------------------------------
+        // MINIMUM + MAXIMUM
+        // ---------------------------------------------
 
         if (
-            finalConcentration >= minimum &&
-            finalConcentration <= maximum
+            !isNaN(minimum) &&
+            !isNaN(maximum)
         ) {
+
+            const withinRange =
+                finalConcentration >= minimum &&
+                finalConcentration <= maximum;
+
 
             concentrationStatus = `
 
                 <p style="
                     margin-top:12px;
-                    color:#176b3a;
+                    color:${withinRange ? "#176b3a" : "#9b3030"};
                     font-weight:bold;
                 ">
 
-                    ✓ Within product-specific
+                    ${
+                        withinRange
+                            ? "✓ Within"
+                            : "⚠ Outside"
+                    }
+
+                    product-specific
                     concentration range
 
                     (${minimum}–${maximum}
-                    ${concentrationRange.unit})
+                    ${unit})
 
                 </p>
             `;
-
         }
+
+
+        // ---------------------------------------------
+        // MINIMUM ONLY
+        // ---------------------------------------------
+
+        else if (
+            !isNaN(minimum)
+        ) {
+
+            const meetsMinimum =
+                finalConcentration >= minimum;
+
+
+            concentrationStatus = `
+
+                <p style="
+                    margin-top:12px;
+                    color:${meetsMinimum ? "#176b3a" : "#9b3030"};
+                    font-weight:bold;
+                ">
+
+                    ${
+                        meetsMinimum
+                            ? "✓ Meets"
+                            : "⚠ Below"
+                    }
+
+                    minimum product-specific
+                    concentration
+
+                    (minimum ${minimum}
+                    ${unit})
+
+                </p>
+            `;
+        }
+
 
         else {
 
@@ -1606,15 +1746,13 @@ function calculateDrugVolume() {
 
                 <p style="
                     margin-top:12px;
-                    color:#9b3030;
+                    color:#b06b00;
                     font-weight:bold;
                 ">
 
-                    ⚠ Outside product-specific
-                    concentration range
-
-                    (${minimum}–${maximum}
-                    ${concentrationRange.unit})
+                    ℹ Product-specific
+                    concentration requirement
+                    is not fully specified.
 
                 </p>
             `;
@@ -1633,9 +1771,8 @@ function calculateDrugVolume() {
             ">
 
                 ℹ No product-specific final
-                concentration range is specified.
-                Follow the product-specific
-                dilution and bag requirements.
+                concentration requirement
+                is specified.
 
             </p>
         `;
@@ -1654,58 +1791,110 @@ function calculateDrugVolume() {
     // RECOMMENDED BAG OPTIONS
     // =================================================
 
-    let bagOptionsHTML = "";
+    let bagOptionsHTML =
+        "";
 
 
     const bagOptions =
-        product.iv_preparation
-            ?.available_bag_sizes || [];
+        Array.isArray(
+            ivPreparation.available_bag_sizes
+        )
+            ? ivPreparation.available_bag_sizes
+            : [];
 
-
-    // Only show recommendations when
-    // a concentration range exists.
 
     if (
         bagOptions.length > 0 &&
-        concentrationRange
+        concentrationRule
     ) {
 
-        const evaluatedBags =
-            bagOptions.map(
-                bagSize => {
-
-                    const totalVolume =
-                        bagSize +
-                        drugVolume;
-
-                    const concentration =
-                        dose /
-                        totalVolume;
-
-                    const minimum =
-                        parseFloat(
-                            concentrationRange.minimum
-                        );
-
-                    const maximum =
-                        parseFloat(
-                            concentrationRange.maximum
-                        );
-
-                    const withinRange =
-                        concentration >= minimum &&
-                        concentration <= maximum;
-
-
-                    return {
-                        bagSize,
-                        totalVolume,
-                        concentration,
-                        withinRange
-                    };
-                }
+        const minimum =
+            parseFloat(
+                concentrationRule.minimum
             );
 
+        const maximum =
+            parseFloat(
+                concentrationRule.maximum
+            );
+
+
+        const evaluatedBags =
+            bagOptions
+                .map(
+                    bagSize => {
+
+                        const numericBagSize =
+                            parseFloat(
+                                bagSize
+                            );
+
+
+                        if (
+                            isNaN(
+                                numericBagSize
+                            )
+                        ) {
+
+                            return null;
+                        }
+
+
+                        const totalVolume =
+                            numericBagSize +
+                            drugVolume;
+
+
+                        const concentration =
+                            dose /
+                            totalVolume;
+
+
+                        let withinRange =
+                            true;
+
+
+                        if (
+                            !isNaN(minimum)
+                        ) {
+
+                            withinRange =
+                                concentration >=
+                                minimum;
+                        }
+
+
+                        if (
+                            !isNaN(maximum)
+                        ) {
+
+                            withinRange =
+                                withinRange &&
+                                concentration <=
+                                maximum;
+                        }
+
+
+                        return {
+
+                            bagSize:
+                                numericBagSize,
+
+                            totalVolume,
+
+                            concentration,
+
+                            withinRange
+                        };
+                    }
+                )
+                .filter(Boolean);
+
+
+        // ---------------------------------------------
+        // Find the smallest bag that satisfies
+        // the concentration requirement.
+        // ---------------------------------------------
 
         const recommendedBag =
             evaluatedBags
@@ -1758,6 +1947,7 @@ function calculateDrugVolume() {
                             let statusText =
                                 "";
 
+
                             let statusColor =
                                 "#b06b00";
 
@@ -1769,7 +1959,7 @@ function calculateDrugVolume() {
                                 statusText =
                                     isRecommended
                                         ? "✓ Recommended"
-                                        : "✓ Within concentration range";
+                                        : "✓ Within concentration requirement";
 
                                 statusColor =
                                     "#176b3a";
@@ -1779,7 +1969,7 @@ function calculateDrugVolume() {
                             else {
 
                                 statusText =
-                                    "⚠ Outside concentration range";
+                                    "⚠ Outside concentration requirement";
 
                                 statusColor =
                                     "#9b3030";
@@ -1851,37 +2041,150 @@ function calculateDrugVolume() {
     // =================================================
 
     const vialSizes =
-        product.presentations
+        (product.presentations || [])
             .map(
                 item => {
 
-                    const match =
-                        item.match(
-                            /(\d+(?:\.\d+)?)\s*mg\/(\d+(?:\.\d+)?)\s*mL/i
+                    const text =
+                        String(item);
+
+
+                    // ---------------------------------
+                    // Solution presentation
+                    //
+                    // Example:
+                    // 100 mg/10 mL
+                    // 500 mg/50 mL
+                    // ---------------------------------
+
+                    const solutionMatch =
+                        text.match(
+                            /(\d+(?:\.\d+)?)\s*mg\s*\/\s*(\d+(?:\.\d+)?)\s*mL/i
                         );
 
 
-                    if (!match) {
-                        return null;
+                    if (
+                        solutionMatch
+                    ) {
+
+                        return {
+
+                            mg:
+                                parseFloat(
+                                    solutionMatch[1]
+                                ),
+
+                            ml:
+                                parseFloat(
+                                    solutionMatch[2]
+                                )
+                        };
                     }
 
 
-                    return {
+                    // ---------------------------------
+                    // Powder in grams
+                    //
+                    // Example:
+                    // 1 g powder for solution
+                    // ---------------------------------
 
-                        mg:
-                            parseFloat(
-                                match[1]
-                            ),
+                    const gramMatch =
+                        text.match(
+                            /(\d+(?:\.\d+)?)\s*g\b/i
+                        );
 
-                        ml:
+
+                    if (
+                        gramMatch
+                    ) {
+
+                        return {
+
+                            mg:
+                                parseFloat(
+                                    gramMatch[1]
+                                ) * 1000,
+
+                            ml:
+                                parseFloat(
+                                    gramMatch[1]
+                                ) * 1000 /
+                                concentration
+                        };
+                    }
+
+
+                    // ---------------------------------
+                    // Powder in mg
+                    //
+                    // Example:
+                    // 200 mg powder for solution
+                    // ---------------------------------
+
+                    const mgMatch =
+                        text.match(
+                            /(\d+(?:\.\d+)?)\s*mg\b/i
+                        );
+
+
+                    if (
+                        mgMatch
+                    ) {
+
+                        const vialMg =
                             parseFloat(
-                                match[2]
-                            )
-                    };
+                                mgMatch[1]
+                            );
+
+
+                        return {
+
+                            mg:
+                                vialMg,
+
+                            ml:
+                                vialMg /
+                                concentration
+                        };
+                    }
+
+
+                    return null;
                 }
             )
             .filter(Boolean);
 
+
+    // Remove duplicate vial strengths
+    const uniqueVialSizes =
+        [];
+
+
+    vialSizes.forEach(
+        vial => {
+
+            const exists =
+                uniqueVialSizes.some(
+                    existing =>
+                        existing.mg ===
+                        vial.mg
+                );
+
+
+            if (!exists) {
+
+                uniqueVialSizes.push(
+                    vial
+                );
+            }
+        }
+    );
+
+
+    // =================================================
+    // VIAL COMBINATION
+    // =================================================
 
     let bestCombination =
         null;
@@ -1911,11 +2214,15 @@ function calculateDrugVolume() {
                 );
 
 
+            const vialCount =
+                combination.length;
+
+
             if (
                 totalMg < bestTotalMg ||
                 (
                     totalMg === bestTotalMg &&
-                    combination.length <
+                    vialCount <
                     bestVialCount
                 )
             ) {
@@ -1924,7 +2231,7 @@ function calculateDrugVolume() {
                     totalMg;
 
                 bestVialCount =
-                    combination.length;
+                    vialCount;
 
                 bestCombination =
                     [...combination];
@@ -1937,7 +2244,7 @@ function calculateDrugVolume() {
 
         if (
             index >=
-            vialSizes.length
+            uniqueVialSizes.length
         ) {
 
             return;
@@ -1945,7 +2252,7 @@ function calculateDrugVolume() {
 
 
         const vial =
-            vialSizes[index];
+            uniqueVialSizes[index];
 
 
         const maxVials =
@@ -1996,18 +2303,30 @@ function calculateDrugVolume() {
     }
 
 
-    findCombination(
-        0,
-        dose,
-        []
-    );
+    if (
+        uniqueVialSizes.length > 0
+    ) {
 
+        findCombination(
+            0,
+            dose,
+            []
+        );
+    }
+
+
+    // =================================================
+    // VIAL SUMMARY
+    // =================================================
 
     let vialSummary =
         "No vial combination available.";
 
 
-    if (bestCombination) {
+    if (
+        bestCombination &&
+        bestCombination.length > 0
+    ) {
 
         const vialCounts =
             {};
@@ -2045,8 +2364,11 @@ function calculateDrugVolume() {
 
 
         const wastageMg =
-            totalVialMg -
-            dose;
+            Math.max(
+                0,
+                totalVialMg -
+                dose
+            );
 
 
         const wastageVolume =
@@ -2068,7 +2390,7 @@ function calculateDrugVolume() {
             <strong>
                 Wastage:
             </strong>
-            ${wastageMg} mg
+            ${wastageMg.toFixed(2)} mg
             (${wastageVolume.toFixed(2)} mL)
         `;
     }
@@ -2102,7 +2424,7 @@ function calculateDrugVolume() {
 
         <p style="margin-top:8px;">
             <strong>
-                Concentration:
+                Product concentration:
             </strong>
             ${product.concentration}
         </p>
@@ -2128,7 +2450,7 @@ function calculateDrugVolume() {
 
         <p style="margin-top:8px;">
             <strong>
-                IV bag volume:
+                IV bag volume before drug addition:
             </strong>
             ${finalBagVolume.toFixed(2)}
             mL
