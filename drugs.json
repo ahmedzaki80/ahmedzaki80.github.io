@@ -1,194 +1,254 @@
-{
-  "rituximab": {
-    "generic_name": "Rituximab",
-   "brand_names": [
-  "Rituxan",
-  "Truxima",
-  "Riabni",
-  "Ruxience"
-],
+"rituximab": {
+  "generic_name": "Rituximab",
 
-"products": [
-  {
-    "brand_name": "Rituxan",
-    "active_ingredient": "rituximab",
-    "concentration": "10 mg/mL",
-    "presentations": [
-      "100 mg/10 mL single-dose vial",
-      "500 mg/50 mL single-dose vial"
-    ],
-    "route": "Intravenous",
-  "iv_preparation": {
-  "diluent_options": [
-    "0.9% Sodium Chloride",
-    "5% Dextrose in Water"
+  "brand_names": [
+    "Rituxan",
+    "Truxima",
+    "Riabni",
+    "Ruxience"
   ],
-  "target_concentration": {
-    "minimum": 1,
-    "maximum": 4,
-    "unit": "mg/mL"
-  },
-  "final_bag_volume": {
-    "minimum": 250,
-    "maximum": 500,
-    "unit": "mL"
-  },
-    "available_bag_sizes": [
-  250,
-  500
-],
-  "administration": "Intravenous infusion",
-  "iv_push_or_bolus": "Do not administer as IV push or bolus",
-  "mixing": "Gently invert the infusion bag to mix; avoid foaming",
-  "vial_stability": "Discard unused portion",
-  "product_stability": {
-    "normal_saline": "10 days refrigerated + 24 hours room temperature",
-    "d5w": "24 hours refrigerated + 12 hours room temperature"
-  },
-  "source": "BC Cancer Chemotherapy Preparation and Stability Chart — verify against current chart before clinical use"
-    }
-   },
-  {
-    "brand_name": "Truxima",
-    "active_ingredient": "rituximab-abbs",
-    "concentration": "10 mg/mL",
-    "presentations": [
-      "100 mg/10 mL single-dose vial",
-      "500 mg/50 mL single-dose vial"
-    ],
-    "route": "Intravenous"
-    ,
-"iv_preparation": {
-  "diluent_options": [
-    "0.9% Sodium Chloride",
-    "5% Dextrose in Water"
-  ],
-  "target_concentration": {
-    "minimum": 1,
-    "maximum": 4,
-    "unit": "mg/mL"
-  },
-  "final_bag_volume": {
-    "minimum": 250,
-    "maximum": 500,
-    "unit": "mL"
-  },
-  "available_bag_sizes": [
-    250,
-    500
-  ],
-  "administration": "Intravenous infusion",
-  "iv_push_or_bolus": "Do not administer as IV push or bolus",
-  "mixing": "Gently invert the infusion bag to mix; avoid foaming",
-  "line": "Administer through a dedicated line",
-  "compatibility": "Compatible with PVC or polyethylene bags",
-  "vial_stability": "Discard unused portion",
-  "product_stability": {
-    "refrigerated": "24 hours refrigerated + 24 hours room temperature after dilution"
-  },
-  "source": "FDA Truxima Prescribing Information and BC Cancer — verify against current product-specific instructions before clinical use"
-    }
-   },
-  {
-    "brand_name": "Riabni",
-    "active_ingredient": "rituximab-arrx",
-    "concentration": "10 mg/mL",
-    "presentations": [
-      "100 mg/10 mL single-dose vial",
-      "500 mg/50 mL single-dose vial"
-    ],
-    "route": "Intravenous"
-  },
-  {
-    "brand_name": "Ruxience",
-    "active_ingredient": "rituximab-pvvr",
-    "concentration": "10 mg/mL",
-    "presentations": [
-      "100 mg/10 mL single-dose vial",
-      "500 mg/50 mL single-dose vial"
-    ],
-   "route": "Intravenous",
-"iv_preparation": {
-  "diluent_options": [
-    "0.9% Sodium Chloride",
-    "5% Dextrose in Water"
-  ],
-  "target_concentration": {
-    "minimum": 1,
-    "maximum": 4,
-    "unit": "mg/mL"
-  },
-  "final_bag_volume": {
-    "minimum": 250,
-    "maximum": 500,
-    "unit": "mL"
-  },
-  "available_bag_sizes": [
-    250,
-    500
-  ],
-  "administration": "Intravenous infusion",
-  "iv_push_or_bolus": "Do not administer as IV push or bolus",
-  "mixing": "Gently invert the bag to mix; avoid foaming",
-  "vial_stability": "Discard unused portion",
-  "compatibility": "No incompatibilities observed with PVC bags",
-  "source": "Ruxience product information — verify current local product information before clinical use"
-   }
-  }
-],
-    "drug_class": "Monoclonal antibody",
-    "category": "Oncology / Immunology",
 
-    "indications": [
-      "Non-Hodgkin lymphoma",
-      "Chronic lymphocytic leukemia",
-      "Rheumatoid arthritis",
-      "Granulomatosis with polyangiitis",
-      "Microscopic polyangiitis"
-    ],
+  "products": [
+    {
+      "brand_name": "Rituxan",
+      "active_ingredient": "rituximab",
+      "concentration": "10 mg/mL",
 
-    "routes": [
-      "Intravenous infusion"
-    ],
+      "presentations": [
+        "100 mg/10 mL single-dose vial",
+        "500 mg/50 mL single-dose vial"
+      ],
 
-    "preparation": {
-      "status": "Verify current product-specific instructions before preparation",
-      "dilution": "Refer to the current official product information",
-      "infusion_time": "Product- and regimen-dependent"
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "target_concentration": {
+          "minimum": 1,
+          "maximum": 4,
+          "unit": "mg/mL"
+        },
+
+        "available_bag_sizes": [
+          250,
+          500
+        ],
+
+        "administration": "Intravenous infusion",
+
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently invert the infusion bag to mix. Do not shake.",
+
+        "vial_stability": "Discard unused portion.",
+
+        "product_stability": {
+          "diluted_solution": "If not used immediately, store according to current product-specific stability requirements."
+        },
+
+        "source": "FDA Rituxan Prescribing Information — verify current product-specific instructions before clinical use"
+      }
     },
 
-    "warnings": [
-      "Infusion-related reactions may occur.",
-      "Screening and monitoring requirements depend on the indication and clinical protocol."
-    ],
+    {
+      "brand_name": "Truxima",
+      "active_ingredient": "rituximab-abbs",
+      "concentration": "10 mg/mL",
 
-    "adverse_effects": [
-      "Infusion-related reactions",
-      "Infections",
-      "Fatigue",
-      "Nausea"
-    ],
+      "presentations": [
+        "100 mg/10 mL single-dose vial",
+        "500 mg/50 mL single-dose vial"
+      ],
 
- "references": [
-  {
-    "name": "FDA — Rituxan Prescribing Information",
-    "type": "Regulatory",
-    "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/103705s5464lbl.pdf"
-  },
-  {
-    "name": "BC Cancer — Cancer Drug Manual",
-    "type": "Cancer Drug Manual",
-    "url": "https://www.bccancer.bc.ca/health-professionals/clinical-resources/cancer-drug-manual"
-  },
- {
-  "name": "Cancer Care Ontario — Rituximab",
-  "type": "Cancer Drug Monograph",
-  "url": "https://www.cancercareontario.ca/en/drugformulary/drugs/rituximab"
-}
-]
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "target_concentration": {
+          "minimum": 1,
+          "maximum": 4,
+          "unit": "mg/mL"
+        },
+
+        "available_bag_sizes": [
+          250,
+          500
+        ],
+
+        "administration": "Intravenous infusion",
+
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently invert the infusion bag to mix. Do not shake.",
+
+        "vial_stability": "Discard unused portion.",
+
+        "product_stability": {
+          "diluted_solution": "Store refrigerated at 2–8°C for up to 24 hours according to current product information."
+        },
+
+        "source": "Current FDA/DailyMed Truxima Prescribing Information — verify before clinical use"
+      }
+    },
+
+    {
+      "brand_name": "Riabni",
+      "active_ingredient": "rituximab-arrx",
+      "concentration": "10 mg/mL",
+
+      "presentations": [
+        "100 mg/10 mL single-dose vial",
+        "500 mg/50 mL single-dose vial"
+      ],
+
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "target_concentration": {
+          "minimum": 1,
+          "maximum": 4,
+          "unit": "mg/mL"
+        },
+
+        "available_bag_sizes": [
+          250,
+          500
+        ],
+
+        "administration": "Intravenous infusion",
+
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently invert the infusion bag to mix. Do not shake.",
+
+        "vial_stability": "Discard unused portion.",
+
+        "source": "Current DailyMed RIABNI Prescribing Information — verify current product-specific instructions before clinical use"
+      }
+    },
+
+    {
+      "brand_name": "Ruxience",
+      "active_ingredient": "rituximab-pvvr",
+      "concentration": "10 mg/mL",
+
+      "presentations": [
+        "100 mg/10 mL single-dose vial",
+        "500 mg/50 mL single-dose vial"
+      ],
+
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "target_concentration": {
+          "minimum": 1,
+          "maximum": 4,
+          "unit": "mg/mL"
+        },
+
+        "available_bag_sizes": [
+          250,
+          500
+        ],
+
+        "administration": "Intravenous infusion",
+
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+
+        "mixing": "Gently invert the infusion bag to mix. Do not shake.",
+
+        "vial_stability": "Discard unused portion.",
+
+        "product_stability": {
+          "0.9% Sodium Chloride": "Store refrigerated at 2–8°C for up to 16 days according to current US prescribing information.",
+          "5% Dextrose": "Store refrigerated at 2–8°C for up to 24 hours according to current US prescribing information."
+        },
+
+        "source": "Current DailyMed Ruxience Prescribing Information — verify current product-specific instructions before clinical use"
+      }
+    }
+  ],
+
+  "drug_class": "Monoclonal antibody",
+  "category": "Oncology / Immunology",
+
+  "indications": [
+    "Non-Hodgkin lymphoma",
+    "Chronic lymphocytic leukemia",
+    "Rheumatoid arthritis",
+    "Granulomatosis with polyangiitis",
+    "Microscopic polyangiitis"
+  ],
+
+  "routes": [
+    "Intravenous infusion"
+  ],
+
+  "preparation": {
+    "status": "Verify current product-specific instructions before preparation",
+    "dilution": "Withdraw the required dose and dilute to a final concentration of 1–4 mg/mL using an approved diluent.",
+    "infusion_time": "Product- and regimen-dependent"
   },
 
-  "trastuzumab": {
+  "warnings": [
+    "Infusion-related reactions may occur.",
+    "Screening and monitoring requirements depend on the indication and clinical protocol."
+  ],
+
+  "adverse_effects": [
+    "Infusion-related reactions",
+    "Infections",
+    "Fatigue",
+    "Nausea"
+  ],
+
+  "references": [
+    {
+      "name": "FDA — Rituxan Prescribing Information",
+      "type": "Regulatory",
+      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2020/103705s5460lbl.pdf"
+    },
+    {
+      "name": "DailyMed — Truxima",
+      "type": "Regulatory"
+    },
+    {
+      "name": "DailyMed — Riabni",
+      "type": "Regulatory"
+    },
+    {
+      "name": "DailyMed — Ruxience",
+      "type": "Regulatory"
+    },
+    {
+      "name": "BC Cancer — Cancer Drug Manual",
+      "type": "Cancer Drug Manual"
+    },
+    {
+      "name": "Cancer Care Ontario — Rituximab",
+      "type": "Cancer Drug Monograph"
+    }
+  ]
+},
+"trastuzumab": {
     "generic_name": "Trastuzumab",
     "brand_names": [
   "Herceptin",
