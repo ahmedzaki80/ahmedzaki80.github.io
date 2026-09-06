@@ -1088,8 +1088,6 @@
 "1 g powder for solution"
 ],
 "route": "Intravenous",
-
-```
   "reconstitution": {
     "200 mg": {
       "diluent": [
@@ -1173,8 +1171,6 @@
     "source": "Cyclophosphamide Injection Prescribing Information / DailyMed; Endoxan product information. Verify current local Endoxan product information before clinical use."
   }
 }
-```
-
 ],
 
 "indications": [
