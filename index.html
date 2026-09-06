@@ -1679,7 +1679,7 @@ const totalFinalVolume =
             "mg/mL";
 
 
-        // ---------------------------------------------
+             // ---------------------------------------------
         // MINIMUM + MAXIMUM
         // ---------------------------------------------
 
@@ -1711,6 +1711,43 @@ const totalFinalVolume =
                     concentration range
 
                     (${minimum}–${maximum}
+                    ${unit})
+
+                </p>
+            `;
+        }
+
+
+        // ---------------------------------------------
+        // MAXIMUM ONLY
+        // ---------------------------------------------
+
+        else if (
+            !isNaN(maximum)
+        ) {
+
+            const meetsMaximum =
+                finalConcentration <= maximum;
+
+
+            concentrationStatus = `
+
+                <p style="
+                    margin-top:12px;
+                    color:${meetsMaximum ? "#176b3a" : "#9b3030"};
+                    font-weight:bold;
+                ">
+
+                    ${
+                        meetsMaximum
+                            ? "✓ Meets"
+                            : "⚠ Exceeds"
+                    }
+
+                    maximum product-specific
+                    concentration
+
+                    (maximum ${maximum}
                     ${unit})
 
                 </p>
