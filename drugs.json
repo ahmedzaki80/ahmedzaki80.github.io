@@ -403,7 +403,7 @@
       "type": "Cancer Drug Monograph"
     }
   ]
-},  "pertuzumab": {
+}, "pertuzumab": {
   "generic_name": "Pertuzumab",
   "brand_names": [
     "Perjeta"
@@ -414,7 +414,7 @@
   "products": [
     {
       "brand_name": "Perjeta",
-      "active_ingredient": "Pertuzumab",
+      "active_ingredient": "pertuzumab",
       "concentration": "30 mg/mL",
       "presentations": [
         "420 mg/14 mL single-dose vial"
@@ -423,7 +423,8 @@
 
       "iv_preparation": {
         "diluent_options": [
-          "0.9% Sodium Chloride"
+          "0.45% Sodium Chloride Injection",
+          "0.9% Sodium Chloride Injection"
         ],
 
         "do_not_use": [
@@ -438,19 +439,19 @@
           "type": "fixed",
           "volume": 250,
           "unit": "mL",
-          "description": "Dilute the required volume of Perjeta concentrate in a 250 mL 0.9% Sodium Chloride infusion bag."
+          "description": "Withdraw the required volume of Perjeta and dilute in a 250 mL infusion bag containing 0.45% or 0.9% Sodium Chloride Injection."
         },
 
         "administration": "Intravenous infusion",
         "iv_push_or_bolus": "Do not administer as IV push or bolus",
 
-        "mixing": "Gently invert the infusion bag to mix; do not shake",
+        "mixing": "Gently invert the infusion bag to mix. Do not shake.",
 
         "product_stability": {
-          "diluted_infusion": "Store at 2–8°C for up to 24 hours prior to use. Do not freeze."
+          "diluted_infusion": "Administer immediately after preparation. If not used immediately, store refrigerated at 2–8°C for up to 24 hours. Do not freeze."
         },
 
-        "source": "Perjeta FDA Prescribing Information and EDA Targeted Anticancer Formulary — verify current manufacturer information before clinical use"
+        "source": "Current FDA Perjeta Prescribing Information — verify current product-specific information before clinical use"
       }
     }
   ],
@@ -466,35 +467,35 @@
 
   "preparation": {
     "status": "Product-specific preparation requirements apply",
-    "dilution": "Dilute the required dose in 250 mL of 0.9% Sodium Chloride",
+    "dilution": "Withdraw the required dose and dilute in a 250 mL infusion bag containing 0.45% or 0.9% Sodium Chloride Injection. Do not use 5% Dextrose.",
     "infusion_time": "Loading dose: 60 minutes; maintenance dose: 30–60 minutes"
   },
 
- "warnings": [
-  "Cardiac function monitoring may be required.",
-  "Infusion-related reactions may occur.",
-  "Severe hypersensitivity reactions may occur."
-],
+  "warnings": [
+    "Left ventricular dysfunction may occur; cardiac function monitoring may be required.",
+    "Infusion-related reactions may occur.",
+    "Severe hypersensitivity reactions including anaphylaxis may occur."
+  ],
 
-"adverse_effects": [
-  "Diarrhea",
-  "Alopecia",
-  "Nausea",
-  "Fatigue",
-  "Rash",
-  "Infusion-related reactions"
-],
+  "adverse_effects": [
+    "Diarrhea",
+    "Alopecia",
+    "Nausea",
+    "Fatigue",
+    "Rash",
+    "Infusion-related reactions"
+  ],
 
-"references": [
-  {
-    "name": "FDA Prescribing Information",
-    "type": "Regulatory"
-  },
-  {
-    "name": "Egyptian Drug Authority — Targeted Anticancer Formulary",
-    "type": "Regulatory"
-  }
-]
+  "references": [
+    {
+      "name": "FDA — Perjeta Prescribing Information",
+      "type": "Regulatory"
+    },
+    {
+      "name": "Cancer Care Ontario — Pertuzumab",
+      "type": "Cancer Drug Monograph"
+    }
+  ]
 },
   "bevacizumab": {
   "generic_name": "Bevacizumab",
