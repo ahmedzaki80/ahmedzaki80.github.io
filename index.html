@@ -1533,10 +1533,7 @@ if (
                 ? highDoseVolume
                 : standardVolume;
 
-        volumeBasis =
-            bagRule.basis === "final_total"
-                ? "final_total"
-                : "bag";
+       volumeBasis = bagRule.basis || "bag";
     }
 }
 
