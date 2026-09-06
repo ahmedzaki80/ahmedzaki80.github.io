@@ -532,11 +532,12 @@
         ],
 
         "bag_volume_rule": {
-          "type": "fixed",
-          "volume": 100,
-          "unit": "mL",
-          "description": "Dilute the required volume of bevacizumab in a 100 mL 0.9% Sodium Chloride infusion bag."
-        },
+  "type": "fixed",
+  "volume": 100,
+  "unit": "mL",
+  "basis": "final_total",
+  "description": "Dilute the required dose to a final total volume of 100 mL using 0.9% Sodium Chloride."
+},
 
         "administration": "Intravenous infusion",
         "iv_push_or_bolus": "Do not administer as IV push or bolus",
@@ -571,11 +572,12 @@
         ],
 
         "bag_volume_rule": {
-          "type": "fixed",
-          "volume": 100,
-          "unit": "mL",
-          "description": "Dilute the required volume of bevacizumab in a 100 mL 0.9% Sodium Chloride infusion bag."
-        },
+  "type": "fixed",
+  "volume": 100,
+  "unit": "mL",
+  "basis": "final_total",
+  "description": "Dilute the required dose to a final total volume of 100 mL using 0.9% Sodium Chloride."
+},
 
         "administration": "Intravenous infusion",
         "iv_push_or_bolus": "Do not administer as IV push or bolus",
@@ -610,11 +612,12 @@
         ],
 
         "bag_volume_rule": {
-          "type": "fixed",
-          "volume": 100,
-          "unit": "mL",
-          "description": "Dilute the required volume of bevacizumab in a 100 mL 0.9% Sodium Chloride infusion bag."
-        },
+  "type": "fixed",
+  "volume": 100,
+  "unit": "mL",
+  "basis": "final_total",
+  "description": "Dilute the required dose to a final total volume of 100 mL using 0.9% Sodium Chloride."
+},
 
         "administration": "Intravenous infusion",
         "iv_push_or_bolus": "Do not administer as IV push or bolus",
