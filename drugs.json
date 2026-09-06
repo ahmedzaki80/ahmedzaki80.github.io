@@ -812,11 +812,10 @@
 
         "do_not_use": [
           "Do not mix with or administer with other medicinal products",
-          "Do not add other medications to the infusion solution"
+          "Do not add other medications to solutions containing panitumumab"
         ],
 
         "target_concentration": {
-          "minimum": 0,
           "maximum": 10,
           "unit": "mg/mL",
           "description": "Final concentration must not exceed 10 mg/mL"
@@ -833,18 +832,19 @@
           "high_dose_threshold": 1000,
           "high_dose_volume": 150,
           "unit": "mL",
-          "description": "Dilute to a total volume of 100 mL for doses up to 1000 mg. Doses above 1000 mg should be diluted to a total volume of 150 mL."
+          "basis": "final_total",
+          "description": "Dilute to a final total volume of 100 mL for doses up to 1000 mg. Doses above 1000 mg should be diluted to a final total volume of 150 mL."
         },
 
         "administration": "Intravenous infusion via infusion pump",
 
         "iv_push_or_bolus": "Do not administer as IV push or bolus",
 
-        "mixing": "Mix diluted solution by gentle inversion; do not shake",
+        "mixing": "Do not shake the vial. Mix the diluted solution by gentle inversion.",
 
         "line": "Administer using a low-protein-binding 0.2 micrometer or 0.22 micrometer in-line filter",
 
-        "compatibility": "Compatible with 0.9% Sodium Chloride in PVC or polyolefin bags",
+        "compatibility": "Dilute with 0.9% Sodium Chloride injection",
 
         "product_stability": {
           "room_temperature": "Use within 6 hours of preparation.",
@@ -854,21 +854,21 @@
 
         "special_notes": [
           "Inspect solution visually before administration.",
-          "Do not use if solution is discolored or cloudy or contains foreign matter.",
+          "Do not use if the solution is discolored or cloudy or contains foreign matter.",
           "Use a 21-gauge or smaller-bore needle for withdrawal.",
           "Do not use needle-free devices for vial withdrawal.",
-          "Flush the line before and after administration with 0.9% Sodium Chloride.",
+          "Flush the infusion line before and after administration with 0.9% Sodium Chloride.",
           "Discard unused vial contents after single use."
         ],
 
-        "source": "Current Vectibix FDA/DailyMed Prescribing Information; verify current local product information before clinical use"
+        "source": "FDA/DailyMed — Vectibix (panitumumab) Prescribing Information, effective June 23, 2026; verify current local product information before clinical use"
       }
     }
   ],
 
   "indications": [
-    "KRAS wild-type, EGFR-expressing metastatic colorectal cancer",
-    "RAS wild-type, EGFR-expressing metastatic colorectal cancer"
+    "Wild-type RAS (KRAS and NRAS) metastatic colorectal cancer",
+    "KRAS G12C-mutated metastatic colorectal cancer in combination with sotorasib"
   ],
 
   "routes": [
@@ -877,15 +877,16 @@
 
   "preparation": {
     "status": "Product-specific preparation requirements apply",
-    "dilution": "Dilute with 0.9% Sodium Chloride to a total volume of 100 mL; doses above 1000 mg require 150 mL",
-    "infusion_time": "Doses ≤1000 mg: 60 minutes initially; subsequent infusions may be 30–60 minutes if tolerated. Doses >1000 mg: 90 minutes"
+    "dilution": "Dilute with 0.9% Sodium Chloride to a final total volume of 100 mL for doses up to 1000 mg; doses above 1000 mg require a final total volume of 150 mL.",
+    "infusion_time": "Doses ≤1000 mg: 60 minutes initially; subsequent infusions may be 30–60 minutes if tolerated. Doses >1000 mg: 90 minutes."
   },
 
   "warnings": [
+    "Serious dermatologic and soft tissue toxicity may occur.",
+    "Electrolyte depletion, including hypomagnesemia, may occur.",
     "Infusion-related reactions may occur.",
-    "Dermatologic toxicities may occur.",
-    "Electrolyte abnormalities, including hypomagnesemia, may occur.",
-    "Interstitial pneumonitis and pulmonary fibrosis have been reported."
+    "Interstitial lung disease and pulmonary fibrosis have been reported.",
+    "Ocular toxicities including keratitis and corneal complications may occur."
   ],
 
   "adverse_effects": [
@@ -894,12 +895,14 @@
     "Paronychia",
     "Fatigue",
     "Hypomagnesemia",
-    "Infusion-related reactions"
+    "Infusion-related reactions",
+    "Rash",
+    "Dry skin"
   ],
 
   "references": [
     {
-      "name": "FDA/DailyMed — Vectibix Prescribing Information",
+      "name": "FDA/DailyMed — Vectibix (panitumumab) Prescribing Information",
       "type": "Regulatory"
     },
     {
