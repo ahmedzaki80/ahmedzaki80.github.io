@@ -1069,5 +1069,172 @@
       "type": "Regulatory"
     }
   ]
+},
+  "cyclophosphamide": {
+"generic_name": "Cyclophosphamide",
+"brand_names": [
+"Endoxan"
+],
+"drug_class": "Alkylating agent",
+"category": "Oncology",
+
+"products": [
+{
+"brand_name": "Endoxan",
+"active_ingredient": "cyclophosphamide",
+"concentration": "20 mg/mL after reconstitution",
+"presentations": [
+"200 mg powder for solution",
+"1 g powder for solution"
+],
+"route": "Intravenous",
+
+```
+  "reconstitution": {
+    "200 mg": {
+      "diluent": [
+        "0.9% Sodium Chloride",
+        "Sterile Water for Injection"
+      ],
+      "volume_to_add": "10 mL",
+      "resulting_concentration": "20 mg/mL"
+    },
+    "1 g": {
+      "diluent": [
+        "0.9% Sodium Chloride",
+        "Sterile Water for Injection"
+      ],
+      "volume_to_add": "50 mL",
+      "resulting_concentration": "20 mg/mL"
+    }
+  },
+
+  "iv_preparation": {
+    "diluent_options": [
+      "0.45% Sodium Chloride",
+      "5% Dextrose in Water",
+      "5% Dextrose + 0.9% Sodium Chloride"
+    ],
+
+    "reconstitution_diluents": [
+      "0.9% Sodium Chloride",
+      "Sterile Water for Injection"
+    ],
+
+    "do_not_use": [
+      "For direct IV injection, do not use Sterile Water for Injection because it produces a hypotonic solution."
+    ],
+
+    "available_bag_sizes": [
+      50,
+      100,
+      250,
+      500
+    ],
+
+    "bag_volume_rule": {
+      "type": "user_selected",
+      "unit": "mL",
+      "description": "Bag size is selected according to the prescribed regimen, dose, final concentration requirement, and institutional protocol."
+    },
+
+    "concentration_requirement": {
+      "minimum": 2,
+      "unit": "mg/mL",
+      "description": "For IV infusion, further dilute the reconstituted solution to a minimum final concentration of 2 mg/mL."
+    },
+
+    "administration": "Intravenous injection or intravenous infusion according to the prescribed regimen and institutional protocol",
+
+    "iv_push_or_bolus": "If administered by direct IV injection, use 0.9% Sodium Chloride for reconstitution and administer slowly according to the product-specific instructions and regimen.",
+
+    "mixing": "Add the appropriate diluent to the vial and shake or gently mix until the powder is completely dissolved. Allow the solution to become clear before administration.",
+
+    "line": "Administer through a secure, patent intravenous line. Verify venous access before and during administration.",
+
+    "compatibility": [
+      "0.45% Sodium Chloride",
+      "5% Dextrose in Water",
+      "5% Dextrose + 0.9% Sodium Chloride"
+    ],
+
+    "special_notes": [
+      "Powder for solution; reconstitution is required before administration.",
+      "Reconstituted concentration is 20 mg/mL.",
+      "For IV infusion, final concentration should be at least 2 mg/mL.",
+      "Administer slowly because rapid administration may increase rate-related adverse effects.",
+      "Use aseptic technique because the preparation contains no antimicrobial preservative.",
+      "Inspect the prepared solution for particulate matter and discoloration before administration.",
+      "Discard unused solution according to institutional cytotoxic-drug procedures.",
+      "Cyclophosphamide is a hazardous cytotoxic drug; follow institutional hazardous-drug handling procedures.",
+      "Ensure adequate hydration according to the treatment protocol."
+    ],
+
+    "source": "Cyclophosphamide Injection Prescribing Information / DailyMed; Endoxan product information. Verify current local Endoxan product information before clinical use."
+  }
+}
+```
+
+],
+
+"indications": [
+"Lymphomas",
+"Leukemias",
+"Breast cancer",
+"Ovarian cancer",
+"Multiple myeloma",
+"Sarcomas",
+"Other solid tumors according to regimen",
+"Conditioning regimens for hematopoietic stem cell transplantation"
+],
+
+"routes": [
+"Intravenous administration"
+],
+
+"preparation": {
+"status": "Powder for solution; reconstitution required",
+"reconstitution": "200 mg vial: add 10 mL diluent to obtain 20 mg/mL. 1 g vial: add 50 mL diluent to obtain 20 mg/mL.",
+"dilution": "For IV infusion, further dilute the reconstituted solution to a minimum final concentration of 2 mg/mL.",
+"infusion_time": "Regimen- and dose-dependent; administer slowly according to the prescribed protocol."
+},
+
+"warnings": [
+"Severe myelosuppression may occur.",
+"Hemorrhagic cystitis and urotoxicity may occur.",
+"Adequate hydration and appropriate uroprotection should be considered according to the treatment regimen.",
+"Cardiotoxicity may occur, particularly with high-dose therapy.",
+"Severe infections may occur secondary to immunosuppression.",
+"Secondary malignancies may occur.",
+"Cyclophosphamide is a hazardous cytotoxic drug."
+],
+
+"adverse_effects": [
+"Myelosuppression",
+"Nausea",
+"Vomiting",
+"Alopecia",
+"Hemorrhagic cystitis",
+"Infertility / gonadal toxicity",
+"Infections",
+"Cardiotoxicity",
+"SIADH / hyponatremia",
+"Secondary malignancies"
+],
+
+"references": [
+{
+"name": "DailyMed — Cyclophosphamide Injection Prescribing Information",
+"type": "Regulatory"
+},
+{
+"name": "Endoxan Product Information",
+"type": "Manufacturer / Product Information"
+},
+{
+"name": "Egyptian Drug Authority — Conventional Anticancer Drugs Formulary",
+"type": "Regulatory"
+  }
+ ]
 }
 }
