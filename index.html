@@ -1602,7 +1602,10 @@ if (
         return;
     }
 
-    volumeBasis = "bag";
+    volumeBasis =
+        bagRule?.basis === "final_total"
+            ? "final_total"
+            : "bag";
 }
 
    // =================================================
