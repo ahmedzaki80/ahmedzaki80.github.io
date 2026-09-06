@@ -250,158 +250,160 @@
   ]
 },
 "trastuzumab": {
-    "generic_name": "Trastuzumab",
-    "brand_names": [
-  "Herceptin",
-  "Trastuza"
-],
-    "drug_class": "Monoclonal antibody",
-    "category": "Oncology",
-    "products": [
-      {
-  "brand_name": "Herceptin",
-  "active_ingredient": "trastuzumab",
-  "concentration": "21 mg/mL after reconstitution",
-  "presentations": [
-    "150 mg single-dose vial"
+  "generic_name": "Trastuzumab",
+  "brand_names": [
+    "Herceptin",
+    "Herceptin Hylecta",
+    "Trastuza"
   ],
-  "route": "Intravenous",
-  "iv_preparation": {
-    "reconstitution": {
-      "diluent": "Sterile Water for Injection (SWFI)",
-      "volume": "7.4 mL",
-      "resulting_concentration": "21 mg/mL",
-      "resulting_volume": "Approximately 7.15 mL deliverable",
-      "method": "Slowly inject 7.4 mL SWFI into the vial, directing the stream into the cake. Gently swirl to aid reconstitution; do not shake. Allow the vial to stand undisturbed for approximately 5 minutes if slight foaming is present."
-    },
-    "diluent_options": [
-      "0.9% Sodium Chloride"
-    ],
-    "do_not_use": [
-      "5% Dextrose in Water"
-    ],
-    "available_bag_sizes": [
-      250
-    ],
-    "bag_volume_rule": {
-      "type": "fixed",
-      "volume": 250,
-      "unit": "mL",
-      "description": "Add the required volume of reconstituted Herceptin to a 250 mL 0.9% Sodium Chloride infusion bag."
-    },
-    "administration": "Intravenous infusion",
-    "iv_push_or_bolus": "Do not administer as IV push or bolus",
-    "mixing": "Gently invert the infusion bag to mix; do not shake",
-    "product_stability": {
-      "reconstituted_vial": "Use immediately after reconstitution. If not used immediately, store at 2–8°C for up to 24 hours. Do not freeze. Discard unused solution after 24 hours.",
-      "normal_saline": "Store diluted infusion at 2–8°C for no more than 24 hours prior to use. Do not freeze."
-    },
-    "source": "Herceptin FDA Prescribing Information; verify current manufacturer information before clinical use"
-    }
-   },
-      {
-  "brand_name": "Herceptin Hylecta",
-  "active_ingredient": "trastuzumab + hyaluronidase",
-  "concentration": "120 mg trastuzumab + 2,000 units hyaluronidase per mL",
-  "presentations": [
-    "600 mg trastuzumab + 10,000 units hyaluronidase / 5 mL single-dose vial"
-  ],
-  "route": "Subcutaneous",
-  "sc_preparation": {
-    "dose": "600 mg trastuzumab + 10,000 units hyaluronidase",
-    "volume": "5 mL",
-    "frequency": "Every 3 weeks",
-    "administration": "Subcutaneous injection over approximately 2–5 minutes",
-    "iv_use": "Do not administer intravenously",
-    "preparation": "Ready-to-use solution; no reconstitution or dilution required",
-    "storage": "Store refrigerated at 2–8°C in the original carton and protect from light. Do not freeze or shake.",
-    "source": "Herceptin Hylecta FDA Prescribing Information — verify current manufacturer information before clinical use"
-    }
-   },
-  {
-    "brand_name": "Trastuza",
-    "active_ingredient": "trastuzumab",
-    "concentration": "21 mg/mL after reconstitution",
-    "presentations": [
-      "440 mg multidose vial + 20 mL WFI"
-    ],
-    "route": "Intravenous",
-    "iv_preparation": {
-      "reconstitution": {
-  "diluent": "Bacteriostatic Water for Injection (BWFI), USP",
-  "alternative_diluent": "Sterile Water for Injection (SWFI) without preservative in patients with known hypersensitivity to benzyl alcohol",
-  "volume": "20 mL",
-  "resulting_concentration": "21 mg/mL",
-  "resulting_volume": "Approximately 21 mL",
-  "method": "Slowly inject 20 mL of diluent into the vial, directing the stream into the lyophilized cake. Gently swirl to aid reconstitution; do not shake. Allow the vial to stand undisturbed for approximately 5 minutes if slight foaming is present."
-},
-     "diluent_options": [
-  "0.9% Sodium Chloride"
-],
-"do_not_use": [
-  "5% Dextrose in Water"
-],
-"available_bag_sizes": [
-  250
-],
-"bag_volume_rule": {
-  "type": "fixed",
-  "volume": 250,
-  "unit": "mL",
-  "description": "Add the required volume of reconstituted trastuzumab to a 250 mL 0.9% Sodium Chloride infusion bag."
-},
-"administration": "Intravenous infusion",
-      "iv_push_or_bolus": "Do not administer as IV push or bolus",
-      "mixing": "Gently invert the infusion bag to mix; do not shake",
-      "product_stability": {
-  "reconstituted_vial": "28 days refrigerated at 2–8°C when reconstituted with bacteriostatic water for injection; if reconstituted with preservative-free sterile water, use immediately and discard unused portion.",
-  "normal_saline": "Up to 24 hours refrigerated at 2–8°C prior to use."
-},
-      "source": "Egyptian National Targeted Anticancer Formulary — EDA; verify current manufacturer information before clinical use"
-    }
-  }
-],
-
-    "indications": [
-      "HER2-positive breast cancer",
-      "HER2-positive metastatic gastric cancer"
-    ],
-
-    "routes": [
-      "Intravenous infusion",
-      "Subcutaneous administration for specific products"
-    ],
-
-    "preparation": {
-      "status": "Product-specific preparation requirements apply",
-      "dilution": "Refer to the current official product information",
-      "infusion_time": "Product- and regimen-dependent"
-    },
-
-    "warnings": [
-      "Cardiac function monitoring may be required.",
-      "Infusion-related reactions may occur."
-    ],
-
-    "adverse_effects": [
-      "Infusion-related reactions",
-      "Diarrhea",
-      "Fatigue",
-      "Cardiac dysfunction"
-    ],
-
-    "references": [
-      {
-        "name": "FDA Prescribing Information",
-        "type": "Regulatory"
-      },
-      {
-        "name": "Cancer Care Ontario",
-        "type": "Cancer Drug Monograph"
+  "drug_class": "Monoclonal antibody",
+  "category": "Oncology",
+  "products": [
+    {
+      "brand_name": "Herceptin",
+      "active_ingredient": "trastuzumab",
+      "concentration": "21 mg/mL after reconstitution",
+      "presentations": [
+        "150 mg single-dose vial"
+      ],
+      "route": "Intravenous",
+      "iv_preparation": {
+        "reconstitution": {
+          "diluent": "Sterile Water for Injection (SWFI)",
+          "volume": "7.4 mL",
+          "resulting_concentration": "21 mg/mL",
+          "resulting_volume": "Approximately 7.15 mL deliverable",
+          "method": "Slowly inject 7.4 mL SWFI into the vial, directing the stream into the cake. Gently swirl to aid reconstitution; do not shake. Allow the vial to stand undisturbed for approximately 5 minutes if slight foaming is present."
+        },
+        "diluent_options": [
+          "0.9% Sodium Chloride"
+        ],
+        "do_not_use": [
+          "5% Dextrose in Water"
+        ],
+        "available_bag_sizes": [
+          250
+        ],
+        "bag_volume_rule": {
+          "type": "fixed",
+          "volume": 250,
+          "unit": "mL",
+          "description": "Add the required volume of reconstituted Herceptin to a 250 mL 0.9% Sodium Chloride infusion bag."
+        },
+        "administration": "Intravenous infusion",
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+        "mixing": "Gently invert the infusion bag to mix; do not shake",
+        "product_stability": {
+          "reconstituted_vial": "If not used immediately, store at 2–8°C for up to 24 hours. Do not freeze. Discard unused solution after 24 hours.",
+          "normal_saline": "Store diluted infusion at 2–8°C for no more than 24 hours prior to use. Do not freeze."
+        },
+        "source": "Herceptin FDA Prescribing Information — verify current product-specific information before clinical use"
       }
-    ]
+    },
+    {
+      "brand_name": "Herceptin Hylecta",
+      "active_ingredient": "trastuzumab + hyaluronidase-oysk",
+      "concentration": "120 mg trastuzumab + 2,000 units hyaluronidase per mL",
+      "presentations": [
+        "600 mg trastuzumab + 10,000 units hyaluronidase / 5 mL single-dose vial"
+      ],
+      "route": "Subcutaneous",
+      "sc_preparation": {
+        "dose": "600 mg trastuzumab + 10,000 units hyaluronidase",
+        "volume": "5 mL",
+        "frequency": "Every 3 weeks",
+        "administration": "Subcutaneous injection over approximately 2–5 minutes",
+        "iv_use": "Do not administer intravenously",
+        "preparation": "Ready-to-use solution; no reconstitution or dilution required",
+        "storage": "Store refrigerated at 2–8°C in the original carton and protect from light. Do not freeze or shake.",
+        "source": "Herceptin Hylecta FDA Prescribing Information — verify current product-specific information before clinical use"
+      }
+    },
+    {
+      "brand_name": "Trastuza",
+      "active_ingredient": "trastuzumab",
+      "concentration": "21 mg/mL after reconstitution",
+      "presentations": [
+        "440 mg multidose vial + 20 mL WFI"
+      ],
+      "route": "Intravenous",
+      "iv_preparation": {
+        "reconstitution": {
+          "diluent": "Water for Injection (WFI) supplied with the product",
+          "volume": "20 mL",
+          "resulting_concentration": "21 mg/mL",
+          "resulting_volume": "Approximately 21 mL",
+          "method": "Slowly inject 20 mL of the supplied diluent into the vial, directing the stream into the lyophilized cake. Gently swirl to aid reconstitution; do not shake. Allow the vial to stand undisturbed for approximately 5 minutes if slight foaming is present."
+        },
+        "diluent_options": [
+          "0.9% Sodium Chloride"
+        ],
+        "do_not_use": [
+          "5% Dextrose in Water"
+        ],
+        "available_bag_sizes": [
+          250
+        ],
+        "bag_volume_rule": {
+          "type": "fixed",
+          "volume": 250,
+          "unit": "mL",
+          "description": "Add the required volume of reconstituted trastuzumab to a 250 mL 0.9% Sodium Chloride infusion bag."
+        },
+        "administration": "Intravenous infusion",
+        "iv_push_or_bolus": "Do not administer as IV push or bolus",
+        "mixing": "Gently invert the infusion bag to mix; do not shake",
+        "product_stability": {
+          "reconstituted_vial": "Follow the current Trastuza product information for storage and in-use stability after reconstitution.",
+          "normal_saline": "Follow the current Trastuza product information for storage and in-use stability after dilution."
+        },
+        "source": "Egyptian Drug Authority — Trastuza 440 mg registration information; verify current EIPICO product information before clinical use"
+      }
+    }
+  ],
+  "indications": [
+    "HER2-positive breast cancer",
+    "HER2-positive metastatic gastric cancer"
+  ],
+  "routes": [
+    "Intravenous infusion",
+    "Subcutaneous administration for specific products"
+  ],
+  "preparation": {
+    "status": "Product-specific preparation requirements apply",
+    "dilution": "Refer to the current official product information for the selected product",
+    "infusion_time": "Product- and regimen-dependent"
   },
-  "pertuzumab": {
+  "warnings": [
+    "Cardiac function monitoring may be required.",
+    "Infusion-related reactions may occur.",
+    "Herceptin Hylecta is for subcutaneous use only and must not be administered intravenously."
+  ],
+  "adverse_effects": [
+    "Infusion-related reactions",
+    "Diarrhea",
+    "Fatigue",
+    "Cardiac dysfunction"
+  ],
+  "references": [
+    {
+      "name": "FDA — Herceptin Prescribing Information",
+      "type": "Regulatory"
+    },
+    {
+      "name": "FDA — Herceptin Hylecta Prescribing Information",
+      "type": "Regulatory"
+    },
+    {
+      "name": "Egyptian Drug Authority — Trastuza 440 mg",
+      "type": "Regulatory"
+    },
+    {
+      "name": "Cancer Care Ontario — Trastuzumab",
+      "type": "Cancer Drug Monograph"
+    }
+  ]
+},  "pertuzumab": {
   "generic_name": "Pertuzumab",
   "brand_names": [
     "Perjeta"
