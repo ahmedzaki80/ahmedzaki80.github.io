@@ -710,10 +710,11 @@
           250
         ],
 
-        "bag_volume_rule": {
-          "type": "user_selected",
-          "description": "For diluted administration, use an infusion container of adequate size containing 0.9% Sodium Chloride. Remove an adequate volume of diluent before adding the calculated volume of Erbitux. The product may also be administered undiluted in a suitable sterile container or bag."
-        },
+       "bag_volume_rule": {
+  "type": "user_selected",
+  "basis": "final_total",
+  "description": "For diluted administration, select an adequate final infusion volume using sterile 0.9% Sodium Chloride. Remove a volume of Sodium Chloride equal to the required volume of Erbitux before adding Erbitux, so that the selected volume represents the final total infusion volume."
+},
 
         "administration": "Intravenous infusion",
 
