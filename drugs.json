@@ -677,7 +677,7 @@
     }
   ]
 },
-  "cetuximab": {
+ "cetuximab": {
   "generic_name": "Cetuximab",
   "brand_names": [
     "Erbitux"
@@ -692,7 +692,7 @@
       "concentration": "5 mg/mL",
       "presentations": [
         "100 mg/20 mL single-dose vial",
-        "500 mg/100 mL solution for infusion"
+        "500 mg/100 mL single-dose vial"
       ],
       "route": "Intravenous",
 
@@ -702,7 +702,7 @@
         ],
 
         "do_not_use": [
-          "Do not dilute"
+          "Do not mix with other medicinal products."
         ],
 
         "available_bag_sizes": [
@@ -710,28 +710,42 @@
           250
         ],
 
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "description": "For diluted administration, use an infusion container of adequate size containing 0.9% Sodium Chloride. Remove an adequate volume of diluent before adding the calculated volume of Erbitux. The product may also be administered undiluted in a suitable sterile container or bag."
+        },
+
         "administration": "Intravenous infusion",
 
         "iv_push_or_bolus": "Do not administer as IV push or bolus",
 
-        "mixing": "Do not shake. Do not dilute the product. Handle gently.",
+        "mixing": "Do not shake. For diluted administration, use sterile 0.9% Sodium Chloride and remove an adequate volume of diluent before adding the calculated volume of Erbitux. Erbitux may also be administered undiluted.",
 
-        "line": "Administer through a low protein-binding 0.22 micrometer in-line filter",
+        "line": "Administer through a low protein-binding 0.22 micrometer in-line filter.",
 
-        "product_stability": {
-          "infusion_container_room_temperature": "Discard after 8 hours at controlled room temperature.",
-          "infusion_container_refrigerated": "Discard after 12 hours at 2–8°C.",
-          "vial": "Discard unused portion."
+        "infusion_rate": "Do not exceed 10 mg/min.",
+
+        "infusion_time": {
+          "initial_dose": "120 minutes",
+          "subsequent_weekly_dose": "60 minutes if the initial infusion is well tolerated",
+          "subsequent_biweekly_dose": "120 minutes"
         },
 
-        "source": "Egyptian Drug Authority Targeted Anticancer Formulary and Erbitux FDA Prescribing Information — verify current local product information before clinical use"
+        "flush": "Flush the infusion line with sterile 0.9% Sodium Chloride after the infusion.",
+
+        "product_stability": {
+          "prepared_solution": "Chemical and physical in-use stability has been demonstrated for up to 48 hours at 25°C when prepared as directed.",
+          "opened_vial": "Use immediately from a microbiological perspective. If not used immediately, storage conditions and duration are the responsibility of the user and would normally not exceed 24 hours at 2–8°C unless prepared under controlled and validated aseptic conditions."
+        },
+
+        "source": "Erbitux 5 mg/mL Summary of Product Characteristics (SmPC), revised August 2025 — verify current local product information before clinical use"
       }
     }
   ],
 
   "indications": [
-    "Squamous cell carcinoma of the head and neck",
-    "K-RAS wild-type, EGFR-expressing metastatic colorectal cancer"
+    "RAS wild-type, EGFR-expressing metastatic colorectal cancer",
+    "Squamous cell carcinoma of the head and neck"
   ],
 
   "routes": [
@@ -740,27 +754,30 @@
 
   "preparation": {
     "status": "Product-specific preparation requirements apply",
-    "dilution": "Do not dilute unless required by the current product-specific instructions",
-    "infusion_time": "Dose- and regimen-dependent; infusion rate should not exceed 10 mg/min"
+    "dilution": "May be administered diluted with sterile 0.9% Sodium Chloride or undiluted according to the product instructions.",
+    "infusion_time": "Initial dose: 120 minutes. Subsequent weekly dose: 60 minutes if tolerated. Subsequent biweekly dose: 120 minutes.",
+    "infusion_rate": "Do not exceed 10 mg/min."
   },
 
   "warnings": [
-    "Infusion reactions may occur.",
-    "Electrolyte abnormalities may occur.",
+    "Serious infusion-related reactions may occur, particularly during the first infusion.",
+    "Patients should be monitored for infusion-related reactions.",
+    "Electrolyte disturbances, including hypomagnesemia, may occur.",
     "Severe dermatologic reactions may occur."
   ],
 
   "adverse_effects": [
-    "Acneiform rash",
+    "Acneiform dermatitis",
     "Infusion-related reactions",
     "Hypomagnesemia",
     "Diarrhea",
-    "Fatigue"
+    "Fatigue",
+    "Skin reactions"
   ],
 
   "references": [
     {
-      "name": "Egyptian Drug Authority — Targeted Anticancer Formulary",
+      "name": "Erbitux 5 mg/mL — Summary of Product Characteristics (SmPC)",
       "type": "Regulatory"
     },
     {
@@ -768,8 +785,7 @@
       "type": "Regulatory"
     }
   ]
-},
-  "panitumumab": {
+},  "panitumumab": {
   "generic_name": "Panitumumab",
   "brand_names": [
     "Vectibix"
