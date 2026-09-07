@@ -619,7 +619,7 @@
 <footer id="references">
 
     <p>
-        © 2026 MedInfoSakr — Evidence-Based Drug Information
+        © 2026 MedInfo — Evidence-Based Drug Information
     </p>
 
     <p style="margin-top:8px;">
@@ -1483,7 +1483,7 @@ function calculateDrugVolume() {
         product.iv_preparation || {};
 
 
-   // =================================================
+ // =================================================
 // BAG VOLUME
 // =================================================
 
@@ -1534,7 +1534,8 @@ if (
                 ? highDoseVolume
                 : standardVolume;
 
-       volumeBasis = bagRule.basis || "bag";
+        volumeBasis =
+            bagRule.basis || "bag";
     }
 }
 
@@ -1565,10 +1566,143 @@ else if (
             fixedVolume;
 
         volumeBasis =
-            bagRule.basis === "final_total"
-                ? "final_total"
-                : "bag";
+            bagRule.basis || "bag";
     }
+}
+
+
+// -------------------------------------------------
+// CONCENTRATION-DEPENDENT BAG
+// -------------------------------------------------
+
+else if (
+    bagRule?.type ===
+    "concentration-dependent"
+) {
+
+    const minimumConcentration =
+        parseFloat(
+            bagRule.minimum_concentration
+        );
+
+    const maximumConcentration =
+        parseFloat(
+            bagRule.maximum_concentration
+        );
+
+
+    const bagOptions =
+        Array.isArray(
+            ivPreparation.available_bag_sizes
+        )
+            ? ivPreparation.available_bag_sizes
+            : [];
+
+
+    const validBags =
+        bagOptions
+            .map(
+                bagSize => {
+
+                    const numericBagSize =
+                        parseFloat(
+                            bagSize
+                        );
+
+
+                    if (
+                        isNaN(
+                            numericBagSize
+                        )
+                    ) {
+
+                        return null;
+                    }
+
+
+                    // For concentration-dependent
+                    // products, the selected bag
+                    // volume represents the FINAL
+                    // TOTAL volume.
+
+                    const concentration =
+                        dose /
+                        numericBagSize;
+
+
+                    let valid =
+                        true;
+
+
+                    if (
+                        !isNaN(
+                            minimumConcentration
+                        )
+                    ) {
+
+                        valid =
+                            valid &&
+                            concentration >=
+                            minimumConcentration;
+                    }
+
+
+                    if (
+                        !isNaN(
+                            maximumConcentration
+                        )
+                    ) {
+
+                        valid =
+                            valid &&
+                            concentration <=
+                            maximumConcentration;
+                    }
+
+
+                    return {
+
+                        bagSize:
+                            numericBagSize,
+
+                        concentration,
+
+                        valid
+                    };
+                }
+            )
+            .filter(Boolean)
+            .filter(
+                bag =>
+                    bag.valid
+            )
+            .sort(
+                (a, b) =>
+                    a.bagSize -
+                    b.bagSize
+            );
+
+
+    if (
+        validBags.length > 0
+    ) {
+
+        // Select the smallest bag
+        // that satisfies the required
+        // final concentration.
+
+        finalBagVolume =
+            validBags[0].bagSize;
+
+    }
+
+
+    // The bag volume represents
+    // the FINAL TOTAL volume.
+
+    volumeBasis =
+        bagRule.basis ||
+        "final_total";
 }
 
 
@@ -1600,13 +1734,11 @@ if (
         return;
     }
 
-    volumeBasis =
-        bagRule?.basis === "final_total"
-            ? "final_total"
-            : "bag";
-}
 
-   // =================================================
+    volumeBasis =
+        bagRule?.basis ||
+        "bag";
+}   // =================================================
 // TOTAL VOLUME
 // =================================================
 
