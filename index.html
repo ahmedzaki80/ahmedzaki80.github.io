@@ -1569,8 +1569,7 @@ else if (
             bagRule.basis || "bag";
     }
 }
-
-
+    
 // -------------------------------------------------
 // CONCENTRATION-DEPENDENT BAG
 // -------------------------------------------------
@@ -1613,7 +1612,8 @@ else if (
                     if (
                         isNaN(
                             numericBagSize
-                        )
+                        ) ||
+                        numericBagSize <= 0
                     ) {
 
                         return null;
@@ -1621,9 +1621,8 @@ else if (
 
 
                     // For concentration-dependent
-                    // products, the selected bag
-                    // volume represents the FINAL
-                    // TOTAL volume.
+                    // products, the selected volume
+                    // represents the FINAL TOTAL volume.
 
                     const concentration =
                         dose /
@@ -1634,6 +1633,7 @@ else if (
                         true;
 
 
+                    // Minimum concentration
                     if (
                         !isNaN(
                             minimumConcentration
@@ -1647,6 +1647,7 @@ else if (
                     }
 
 
+                    // Maximum concentration
                     if (
                         !isNaN(
                             maximumConcentration
@@ -1675,11 +1676,6 @@ else if (
             .filter(
                 bag =>
                     bag.valid
-            )
-            .sort(
-                (a, b) =>
-                    a.bagSize -
-                    b.bagSize
             );
 
 
@@ -1687,9 +1683,81 @@ else if (
         validBags.length > 0
     ) {
 
-        // Select the smallest bag
-        // that satisfies the required
-        // final concentration.
+        // If BOTH minimum and maximum
+        // concentration limits exist,
+        // select the smallest valid bag.
+        //
+        // Example:
+        // Paclitaxel 175 mg
+        // 100 mL = 1.75 mg/mL ❌
+        // 250 mL = 0.70 mg/mL ✅
+        // 500 mL = 0.35 mg/mL ✅
+        //
+        // Select 250 mL.
+
+        if (
+            !isNaN(
+                minimumConcentration
+            ) &&
+            !isNaN(
+                maximumConcentration
+            )
+        ) {
+
+            validBags.sort(
+                (a, b) =>
+                    a.bagSize -
+                    b.bagSize
+            );
+
+        }
+
+
+        // If ONLY a minimum concentration
+        // is specified, select the largest
+        // available final volume that still
+        // maintains the minimum concentration.
+        //
+        // Example:
+        // Cyclophosphamide 1000 mg
+        // 250 mL = 4 mg/mL ✅
+        // 500 mL = 2 mg/mL ✅
+        //
+        // Select 500 mL.
+
+        else if (
+            !isNaN(
+                minimumConcentration
+            )
+        ) {
+
+            validBags.sort(
+                (a, b) =>
+                    b.bagSize -
+                    a.bagSize
+            );
+
+        }
+
+
+        // If ONLY a maximum concentration
+        // is specified, select the smallest
+        // valid final volume.
+
+        else if (
+            !isNaN(
+                maximumConcentration
+            )
+        ) {
+
+            validBags.sort(
+                (a, b) =>
+                    a.bagSize -
+                    b.bagSize
+            );
+
+        }
+
 
         finalBagVolume =
             validBags[0].bagSize;
@@ -1697,14 +1765,13 @@ else if (
     }
 
 
-    // The bag volume represents
+    // The selected bag volume represents
     // the FINAL TOTAL volume.
 
     volumeBasis =
         bagRule.basis ||
         "final_total";
 }
-
 
 // -------------------------------------------------
 // USER SELECTED BAG
