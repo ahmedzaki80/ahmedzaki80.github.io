@@ -1157,6 +1157,7 @@
     }
   ]
 },
+  
   "cyclophosphamide": {
 "generic_name": "Cyclophosphamide",
 "brand_names": [
@@ -1217,11 +1218,13 @@
       500
     ],
 
-    "bag_volume_rule": {
-      "type": "user_selected",
-      "unit": "mL",
-      "description": "Bag size is selected according to the prescribed regimen, dose, final concentration requirement, and institutional protocol."
-    },
+   "bag_volume_rule": {
+  "type": "concentration-dependent",
+  "minimum_concentration": 2,
+  "unit": "mg/mL",
+  "basis": "final_total",
+  "description": "Select a final total volume that maintains a cyclophosphamide concentration of at least 2 mg/mL. The required diluent volume is calculated by subtracting the reconstituted drug volume from the selected final total volume."
+},
 
     "concentration_requirement": {
       "minimum": 2,
