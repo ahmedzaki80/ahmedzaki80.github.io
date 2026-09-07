@@ -1212,18 +1212,18 @@
     ],
 
     "available_bag_sizes": [
-      50,
       100,
       250,
       500
     ],
 
    "bag_volume_rule": {
-  "type": "concentration-dependent",
-  "minimum_concentration": 2,
-  "unit": "mg/mL",
+  "type": "user_selected_range",
+  "minimum_volume": 100,
+  "maximum_volume": 500,
+  "unit": "mL",
   "basis": "final_total",
-  "description": "Select a final total volume that maintains a cyclophosphamide concentration of at least 2 mg/mL. The required diluent volume is calculated by subtracting the reconstituted drug volume from the selected final total volume."
+  "description": "Select a final total volume between 100 mL and 500 mL according to the prescribed regimen and institutional protocol. The final concentration must be at least 2 mg/mL."
 },
 
     "concentration_requirement": {
