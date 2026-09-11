@@ -1322,5 +1322,82 @@
 "type": "Regulatory"
   }
  ]
+},
+  "carboplatin": {
+  "generic_name": "Carboplatin",
+  "brand_names": [
+    "Carboplatin"
+  ],
+  "drug_class": "Platinum-based antineoplastic agent",
+  "category": "Oncology",
+
+  "products": [
+    {
+      "brand_name": "Carboplatin",
+      "active_ingredient": "carboplatin",
+      "concentration": "10 mg/mL",
+      "presentations": [
+        "150 mg/15 mL solution",
+        "450 mg/45 mL solution"
+      ],
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "do_not_use": [
+          "Do not administer undiluted",
+          "Do not administer as an intravenous push or bolus"
+        ],
+
+        "concentration_requirement": {
+          "minimum": 0.5,
+          "unit": "mg/mL",
+          "description": "The final diluted carboplatin concentration should be at least 0.5 mg/mL."
+        },
+
+        "available_bag_sizes": [
+          100,
+          250,
+          500
+        ],
+
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "unit": "mL",
+          "basis": "final_total",
+          "description": "Select the final total infusion volume according to the prescribed regimen and institutional protocol. The final carboplatin concentration must be at least 0.5 mg/mL."
+        },
+
+        "administration": "Intravenous infusion over 15 minutes or longer according to the prescribed regimen and institutional protocol",
+
+        "iv_push_or_bolus": "Do not administer as an intravenous push or bolus.",
+
+        "mixing": "Gently mix after dilution according to institutional aseptic preparation procedures.",
+
+        "line": "Administer through a secure, patent intravenous line and monitor the patient during administration.",
+
+        "compatibility": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "special_notes": [
+          "Ready-to-use solution; no reconstitution required.",
+          "Carboplatin is a hazardous cytotoxic drug; follow institutional hazardous-drug handling procedures.",
+          "Protect the product from light according to product labeling.",
+          "Inspect the solution visually for particulate matter and discoloration before administration.",
+          "The diluted solution should be discarded according to the applicable product-specific stability information.",
+          "Monitor for hypersensitivity or anaphylactic-like reactions during administration.",
+          "Carboplatin dosing is commonly calculated using the Calvert formula based on target AUC and renal function."
+        ],
+
+        "source": "Current Carboplatin Injection prescribing information / DailyMed; verify the specific local carboplatin product information before clinical use."
+      }
+    }
+  ]
 }
 }
