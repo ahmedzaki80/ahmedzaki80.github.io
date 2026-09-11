@@ -1137,19 +1137,21 @@ async function searchDrug() {
             drug.category;
 
 
-        // =========================
-        // INDICATIONS
-        // =========================
+      // =========================
+// INDICATIONS
+// =========================
 
-        document.getElementById(
-            "resultIndications"
-        ).innerHTML =
-            drug.indications
-                .map(
-                    item =>
-                        "• " + item
-                )
-                .join("<br>");
+document.getElementById(
+    "resultIndications"
+).innerHTML =
+    Array.isArray(drug.indications)
+        ? drug.indications
+            .map(
+                item =>
+                    "• " + item
+            )
+            .join("<br>")
+        : "Not specified";
 
 
         // =========================
