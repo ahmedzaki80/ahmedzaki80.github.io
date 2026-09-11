@@ -1451,5 +1451,136 @@
       }
     }
   ]
+},
+  "cisplatin": {
+  "generic_name": "Cisplatin",
+
+  "brand_names": [
+    "Cisplatin",
+    "Unistin"
+  ],
+
+  "drug_class": "Platinum-based antineoplastic agent",
+
+  "category": "Oncology",
+
+  "indications": [
+    "Treatment of various solid tumors according to the prescribed chemotherapy regimen",
+    "May be used as part of combination chemotherapy protocols according to the prescribed indication"
+  ],
+
+  "routes": [
+    "Intravenous"
+  ],
+
+  "preparation": {
+    "status": "Ready-to-use solution; no reconstitution required.",
+
+    "dilution": "Cisplatin must be diluted before intravenous administration according to the prescribed chemotherapy regimen and current product-specific instructions.",
+
+    "infusion_time": "Administer by intravenous infusion according to the prescribed regimen and institutional protocol."
+  },
+
+  "warnings": [
+    "Do not administer cisplatin undiluted.",
+    "Do not administer as an intravenous push or bolus.",
+    "Cisplatin is a hazardous cytotoxic drug; follow institutional hazardous-drug handling procedures.",
+    "Cisplatin is nephrotoxic; appropriate hydration and renal monitoring are required according to the treatment protocol.",
+    "Monitor renal function, electrolytes, hearing, and blood counts according to the prescribed regimen.",
+    "Avoid aluminum-containing needles, syringes, catheters, or administration sets because cisplatin can react with aluminum.",
+    "Monitor for hypersensitivity reactions during administration."
+  ],
+
+  "adverse_effects": [
+    "Nephrotoxicity",
+    "Nausea and vomiting",
+    "Myelosuppression",
+    "Ototoxicity",
+    "Peripheral neuropathy",
+    "Electrolyte abnormalities",
+    "Hypersensitivity reactions"
+  ],
+
+  "references": [
+    {
+      "name": "Cisplatin Injection Prescribing Information / DailyMed",
+      "type": "Official prescribing information"
+    }
+  ],
+
+  "products": [
+    {
+      "brand_name": "Cisplatin",
+
+      "active_ingredient": "cisplatin",
+
+      "concentration": "1 mg/mL",
+
+      "presentations": [
+        "10 mg/10 mL solution",
+        "50 mg/50 mL solution"
+      ],
+
+      "route": "Intravenous",
+
+      "iv_preparation": {
+
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "do_not_use": [
+          "Do not administer undiluted",
+          "Do not administer as an intravenous push or bolus",
+          "Do not use aluminum-containing administration equipment"
+        ],
+
+        "concentration_requirement": {
+          "description": "Final concentration and infusion volume should be selected according to the prescribed chemotherapy regimen and current product-specific instructions."
+        },
+
+        "available_bag_sizes": [
+          100,
+          250,
+          500,
+          1000
+        ],
+
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "unit": "mL",
+          "basis": "final_total",
+          "description": "Select the final total infusion volume according to the prescribed chemotherapy regimen and institutional protocol. The calculator will determine the required diluent volume and final cisplatin concentration."
+        },
+
+        "administration": "Intravenous infusion according to the prescribed chemotherapy regimen and institutional protocol",
+
+        "iv_push_or_bolus": "Do not administer as an intravenous push or bolus.",
+
+        "mixing": "Gently mix after dilution according to institutional aseptic preparation procedures.",
+
+        "line": "Administer through a secure, patent intravenous line. Avoid aluminum-containing administration equipment.",
+
+        "compatibility": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "special_notes": [
+          "Ready-to-use solution; no reconstitution required.",
+          "Cisplatin is a hazardous cytotoxic drug; follow institutional hazardous-drug handling procedures.",
+          "Appropriate hydration is an important component of cisplatin administration according to the chemotherapy protocol.",
+          "Monitor renal function and serum electrolytes according to the treatment protocol.",
+          "Monitor for ototoxicity and neurotoxicity.",
+          "Inspect the solution visually for particulate matter and discoloration before administration.",
+          "Protect the product from light according to product-specific labeling.",
+          "Discard unused solution according to institutional cytotoxic-drug procedures."
+        ],
+
+        "source": "Cisplatin Injection prescribing information / DailyMed; verify the specific local Cisplatin/Unistin product information before clinical use."
+      }
+    }
+  ]
 }
 }
