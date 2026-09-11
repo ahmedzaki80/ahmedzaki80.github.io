@@ -1323,26 +1323,78 @@
   }
  ]
 },
-  "carboplatin": {
+ "carboplatin": {
   "generic_name": "Carboplatin",
+
   "brand_names": [
     "Carboplatin"
   ],
+
   "drug_class": "Platinum-based antineoplastic agent",
+
   "category": "Oncology",
+
+  "indications": [
+    "Treatment of ovarian cancer according to the prescribed chemotherapy regimen",
+    "May be used in combination chemotherapy regimens for other malignancies according to the prescribed protocol"
+  ],
+
+  "routes": [
+    "Intravenous"
+  ],
+
+  "preparation": {
+    "status": "Ready-to-use solution; no reconstitution required.",
+
+    "dilution": "Dilute according to the prescribed regimen and institutional protocol using 0.9% Sodium Chloride or 5% Dextrose in Water. The final diluted concentration should be at least 0.5 mg/mL.",
+
+    "infusion_time": "Administer by intravenous infusion over 15 minutes or longer according to the prescribed regimen and institutional protocol."
+  },
+
+  "warnings": [
+    "Do not administer undiluted.",
+    "Do not administer as an intravenous push or bolus.",
+    "Carboplatin is a hazardous cytotoxic drug; follow institutional hazardous-drug handling procedures.",
+    "Monitor for hypersensitivity or anaphylactic-like reactions during administration.",
+    "Verify a secure and patent intravenous line before and during administration.",
+    "Protect the product from light according to product-specific labeling."
+  ],
+
+  "adverse_effects": [
+    "Myelosuppression",
+    "Nausea and vomiting",
+    "Hypersensitivity reactions",
+    "Thrombocytopenia",
+    "Neutropenia",
+    "Anemia",
+    "Peripheral neuropathy",
+    "Ototoxicity"
+  ],
+
+  "references": [
+    {
+      "name": "DailyMed – Carboplatin Injection Prescribing Information",
+      "type": "Official prescribing information"
+    }
+  ],
 
   "products": [
     {
       "brand_name": "Carboplatin",
+
       "active_ingredient": "carboplatin",
+
       "concentration": "10 mg/mL",
+
       "presentations": [
         "150 mg/15 mL solution",
         "450 mg/45 mL solution"
       ],
+
       "route": "Intravenous",
 
       "iv_preparation": {
+
         "diluent_options": [
           "0.9% Sodium Chloride",
           "5% Dextrose in Water"
@@ -1399,5 +1451,5 @@
       }
     }
   ]
- }
+}
 }
