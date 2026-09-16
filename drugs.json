@@ -2106,5 +2106,141 @@
       }
     }
   ]
+},
+  "irinotecan": {
+  "generic_name": "Irinotecan",
+  "brand_names": [
+    "Campto",
+    "Irinotecan"
+  ],
+  "drug_class": "Topoisomerase I inhibitor",
+  "category": "Oncology",
+
+  "indications": [
+    "Advanced colorectal cancer in combination with 5-fluorouracil and folinic acid",
+    "Advanced colorectal cancer as a single agent after failure of a fluorouracil-containing regimen",
+    "Metastatic colorectal cancer in combination with cetuximab in appropriate patients according to the prescribed regimen"
+  ],
+
+  "routes": [
+    "Intravenous"
+  ],
+
+  "preparation": {
+    "status": "Concentrate for solution for infusion; dilution is required before administration.",
+    "dilution": "Dilute the required dose in 5% Dextrose in Water or 0.9% Sodium Chloride according to the prescribed chemotherapy regimen and product-specific instructions.",
+    "infusion_time": "Administer by intravenous infusion according to the prescribed chemotherapy regimen; commonly over 30–90 minutes."
+  },
+
+  "warnings": [
+    "Must be diluted before intravenous infusion.",
+    "Do not administer as an undiluted intravenous injection.",
+    "Do not administer as an intravenous push or bolus.",
+    "Irinotecan is a hazardous cytotoxic drug; follow institutional hazardous-drug handling procedures.",
+    "Monitor for early cholinergic symptoms; atropine may be considered when clinically appropriate.",
+    "Monitor for severe or late-onset diarrhea and manage according to the treatment protocol.",
+    "Monitor complete blood counts for neutropenia and other myelosuppression.",
+    "Monitor for hypersensitivity reactions.",
+    "Verify a secure and patent intravenous line before and during administration."
+  ],
+
+  "adverse_effects": [
+    "Diarrhea",
+    "Neutropenia",
+    "Anemia",
+    "Thrombocytopenia",
+    "Nausea and vomiting",
+    "Abdominal pain",
+    "Mucositis",
+    "Alopecia",
+    "Fatigue",
+    "Fever",
+    "Cholinergic syndrome",
+    "Hypersensitivity reactions"
+  ],
+
+  "references": [
+    {
+      "name": "CAMPT0 20 mg/mL Concentrate for Solution for Infusion – Summary of Product Characteristics",
+      "type": "Official product information"
+    },
+    {
+      "name": "DailyMed – Irinotecan Hydrochloride Injection Prescribing Information",
+      "type": "Official prescribing information"
+    }
+  ],
+
+  "products": [
+    {
+      "brand_name": "Campto",
+      "active_ingredient": "irinotecan hydrochloride",
+      "concentration": "20 mg/mL",
+
+      "presentations": [
+        "100 mg/5 mL concentrate for solution for infusion",
+        "300 mg/15 mL concentrate for solution for infusion"
+      ],
+
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "5% Dextrose in Water",
+          "0.9% Sodium Chloride"
+        ],
+
+        "do_not_use": [
+          "Do not administer undiluted",
+          "Do not administer as an intravenous push or bolus",
+          "Do not add other medicinal products to the infusion solution unless compatibility has been specifically established"
+        ],
+
+        "concentration_requirement": {
+          "minimum": 0.12,
+          "maximum": 2.8,
+          "unit": "mg/mL",
+          "description": "Final irinotecan concentration should be maintained within 0.12–2.8 mg/mL."
+        },
+
+        "available_bag_sizes": [
+          100,
+          250,
+          500
+        ],
+
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "unit": "mL",
+          "basis": "final_total",
+          "description": "Select the final total infusion volume according to the prescribed chemotherapy regimen and institutional protocol. The calculator will determine the required diluent volume and final irinotecan concentration."
+        },
+
+        "administration": "Intravenous infusion according to the prescribed chemotherapy regimen, commonly over 30–90 minutes.",
+
+        "iv_push_or_bolus": "Do not administer as an intravenous push or bolus.",
+
+        "mixing": "Withdraw the required dose aseptically and dilute with 5% Dextrose in Water or 0.9% Sodium Chloride to the selected final total volume. Mix gently.",
+
+        "line": "Administer through a secure, patent intravenous line and monitor the patient during infusion.",
+
+        "compatibility": [
+          "5% Dextrose in Water",
+          "0.9% Sodium Chloride"
+        ],
+
+        "special_notes": [
+          "Concentrate for solution for infusion; no reconstitution is required.",
+          "Dilute before intravenous infusion.",
+          "Monitor for early cholinergic symptoms; atropine may be considered when clinically appropriate.",
+          "Monitor for severe diarrhea and neutropenia.",
+          "Inspect the solution visually for particulate matter and discoloration before administration.",
+          "Prepare and handle using appropriate hazardous-drug precautions.",
+          "Discard unused product according to cytotoxic-drug disposal procedures."
+        ],
+
+        "source": "CAMPT0 20 mg/mL SmPC; DailyMed Irinotecan Hydrochloride Injection prescribing information. Verify the specific local Campto product information before clinical use."
+      }
+    }
+  ]
 }
 }
