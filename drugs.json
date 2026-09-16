@@ -1582,5 +1582,203 @@
       }
     }
   ]
+},
+  "gemcitabine": {
+  "generic_name": "Gemcitabine",
+
+  "brand_names": [
+    "Gemcitabine",
+    "Gemecitabine Ebewe",
+    "Eupizar"
+  ],
+
+  "drug_class": "Antimetabolite",
+
+  "category": "Oncology",
+
+  "indications": [
+    "Locally advanced or metastatic non-small cell lung cancer",
+    "Locally advanced or metastatic adenocarcinoma of the pancreas",
+    "Bladder cancer in combination with cisplatin",
+    "Unresectable, locally recurrent or metastatic breast cancer in combination with paclitaxel",
+    "Recurrent epithelial ovarian carcinoma in combination with carboplatin"
+  ],
+
+  "routes": [
+    "Intravenous"
+  ],
+
+  "preparation": {
+    "status": "Concentrate for solution for infusion; dilution is required before administration.",
+
+    "dilution": "Dilute the required dose according to the product-specific instructions using the approved diluent for the selected product.",
+
+    "infusion_time": "Administer by intravenous infusion, commonly over 30 minutes according to the prescribed regimen."
+  },
+
+  "warnings": [
+    "Must be diluted before intravenous administration.",
+    "Do not administer as an undiluted intravenous injection.",
+    "Gemcitabine is a hazardous cytotoxic drug; follow institutional hazardous-drug handling procedures.",
+    "Prolongation of infusion time and increased dosing frequency may increase toxicity.",
+    "Monitor complete blood counts before each dose.",
+    "Monitor renal and hepatic function according to the treatment protocol.",
+    "Inspect the solution for particulate matter and discoloration before administration."
+  ],
+
+  "adverse_effects": [
+    "Myelosuppression",
+    "Neutropenia",
+    "Thrombocytopenia",
+    "Anemia",
+    "Nausea and vomiting",
+    "Elevated liver enzymes",
+    "Rash",
+    "Dyspnea",
+    "Fever",
+    "Fatigue",
+    "Peripheral edema"
+  ],
+
+  "references": [
+    {
+      "name": "Gemcitabin Ebewe 40 mg/mL – Summary of Product Characteristics",
+      "type": "Product information"
+    },
+    {
+      "name": "Gemcitabine 38 mg/mL – Summary of Product Characteristics",
+      "type": "Product information"
+    }
+  ],
+
+  "products": [
+    {
+      "brand_name": "Gemcitabin Ebewe",
+
+      "active_ingredient": "gemcitabine",
+
+      "concentration": "40 mg/mL",
+
+      "presentations": [
+        "200 mg/5 mL concentrate",
+        "1000 mg/25 mL concentrate",
+        "2000 mg/50 mL concentrate"
+      ],
+
+      "route": "Intravenous",
+
+      "iv_preparation": {
+
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Glucose in Water"
+        ],
+
+        "do_not_use": [
+          "Do not administer undiluted",
+          "Do not administer as an intravenous push or bolus"
+        ],
+
+        "available_bag_sizes": [
+          100,
+          250,
+          500
+        ],
+
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "unit": "mL",
+          "basis": "final_total",
+          "description": "Select the final total infusion volume according to the prescribed regimen and institutional protocol."
+        },
+
+        "administration": "Intravenous infusion, commonly over 30 minutes according to the prescribed regimen.",
+
+        "iv_push_or_bolus": "Do not administer as an intravenous push or bolus.",
+
+        "mixing": "Transfer the required quantity aseptically into a suitable infusion bag or bottle and dilute with 0.9% Sodium Chloride or 5% Glucose. Mix thoroughly by gentle rotation.",
+
+        "line": "Use a suitable intravenous line and preferably a large vein to reduce the risk of vessel damage and extravasation.",
+
+        "compatibility": [
+          "0.9% Sodium Chloride",
+          "5% Glucose in Water"
+        ],
+
+        "special_notes": [
+          "Ready-to-use concentrate; no reconstitution required.",
+          "The product must be diluted before use.",
+          "For single use only.",
+          "Inspect visually before administration.",
+          "Follow institutional hazardous-drug handling procedures.",
+          "Discard unused product according to cytotoxic-drug disposal procedures."
+        ],
+
+        "source": "Gemcitabin Ebewe 40 mg/mL Summary of Product Characteristics."
+      }
+    },
+
+    {
+      "brand_name": "Eupizar",
+
+      "active_ingredient": "gemcitabine",
+
+      "concentration": "38 mg/mL",
+
+      "presentations": [
+        "1000 mg/26.3 mL concentrate"
+      ],
+
+      "route": "Intravenous",
+
+      "iv_preparation": {
+
+        "diluent_options": [
+          "0.9% Sodium Chloride"
+        ],
+
+        "do_not_use": [
+          "Do not administer undiluted",
+          "Do not administer as an intravenous push or bolus"
+        ],
+
+        "available_bag_sizes": [
+          100,
+          250,
+          500
+        ],
+
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "unit": "mL",
+          "basis": "final_total",
+          "description": "Select the final total infusion volume according to the prescribed regimen and institutional protocol."
+        },
+
+        "administration": "Intravenous infusion, commonly over 30 minutes according to the prescribed regimen.",
+
+        "iv_push_or_bolus": "Do not administer as an intravenous push or bolus.",
+
+        "mixing": "Dilute the required dose aseptically with 0.9% Sodium Chloride according to the product-specific instructions and prescribed regimen.",
+
+        "line": "Use a suitable intravenous line and monitor the patient during infusion.",
+
+        "compatibility": [
+          "0.9% Sodium Chloride"
+        ],
+
+        "special_notes": [
+          "Gemcitabine 38 mg/mL concentrate.",
+          "Must be diluted before intravenous administration.",
+          "For single use only.",
+          "Inspect visually before administration.",
+          "Follow institutional hazardous-drug handling procedures.",
+          "Discard unused product according to cytotoxic-drug disposal procedures."
+        ],
+
+        "source": "Gemcitabine 38 mg/mL product information; verify the current local Eupizar leaflet before clinical use."
+      }
+    }
+  ]
 }
 }
