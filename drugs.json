@@ -1979,7 +1979,7 @@
   "fluorouracil": {
   "generic_name": "Fluorouracil",
   "brand_names": [
-    "utoral",
+    "Utoral",
     "Fluorouracil"
   ],
   "drug_class": "Antimetabolite",
@@ -2044,7 +2044,7 @@
 
   "products": [
     {
-      "brand_name": "Eutoral",
+      "brand_name": "Utoral",
       "active_ingredient": "fluorouracil",
       "concentration": "50 mg/mL",
 
@@ -2102,7 +2102,7 @@
           "Discard unused product according to cytotoxic-drug disposal procedures."
         ],
 
-        "source": "Fluorouracil 50 mg/mL product information / SmPC; DailyMed Fluorouracil Injection prescribing information. Verify the specific local Eutoral product information before clinical use."
+        "source": "Fluorouracil 50 mg/mL product information / SmPC; DailyMed Fluorouracil Injection prescribing information. Verify the specific local Utoral product information before clinical use."
       }
     }
   ]
