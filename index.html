@@ -2044,118 +2044,138 @@ const diluentVolume =
         )
         : finalBagVolume;
 
+// =================================================
+// RECOMMENDED BAG OPTIONS
+// =================================================
 
-    // =================================================
-    // RECOMMENDED BAG OPTIONS
-    // =================================================
+let bagOptionsHTML = "";
 
-    let bagOptionsHTML =
-        "";
+const bagOptions =
+    Array.isArray(
+        ivPreparation.available_bag_sizes
+    )
+        ? ivPreparation.available_bag_sizes
+        : [];
 
 
-    const bagOptions =
-        Array.isArray(
-            ivPreparation.available_bag_sizes
-        )
-            ? ivPreparation.available_bag_sizes
-            : [];
+if (bagOptions.length > 0) {
+
+    const minimum =
+        concentrationRule
+            ? parseFloat(
+                concentrationRule.minimum
+            )
+            : NaN;
+
+    const maximum =
+        concentrationRule
+            ? parseFloat(
+                concentrationRule.maximum
+            )
+            : NaN;
+
+    const unit =
+        concentrationRule?.unit ||
+        "mg/mL";
+
+
+    const hasMinimum =
+        !isNaN(minimum);
+
+    const hasMaximum =
+        !isNaN(maximum);
+
+
+    const hasConcentrationRequirement =
+        hasMinimum ||
+        hasMaximum;
+
+
+    const evaluatedBags =
+        bagOptions
+            .map(
+                bagSize => {
+
+                    const numericBagSize =
+                        parseFloat(
+                            bagSize
+                        );
+
+
+                    if (
+                        isNaN(
+                            numericBagSize
+                        ) ||
+                        numericBagSize <= 0
+                    ) {
+                        return null;
+                    }
+
+
+                    const totalVolume =
+                        volumeBasis ===
+                        "final_total"
+                            ? numericBagSize
+                            : numericBagSize +
+                              drugVolume;
+
+
+                    const concentration =
+                        dose /
+                        totalVolume;
+
+
+                    let withinRange =
+                        true;
+
+
+                    if (hasMinimum) {
+
+                        withinRange =
+                            concentration >=
+                            minimum;
+                    }
+
+
+                    if (hasMaximum) {
+
+                        withinRange =
+                            withinRange &&
+                            concentration <=
+                            maximum;
+                    }
+
+
+                    return {
+
+                        bagSize:
+                            numericBagSize,
+
+                        totalVolume,
+
+                        concentration,
+
+                        withinRange
+                    };
+                }
+            )
+            .filter(Boolean);
+
+
+    // -------------------------------------------------
+    // Find recommendation ONLY when there is a
+    // documented concentration requirement.
+    // -------------------------------------------------
+
+    let recommendedBag =
+        null;
 
 
     if (
-        bagOptions.length > 0 &&
-        concentrationRule
+        hasConcentrationRequirement
     ) {
 
-        const minimum =
-            parseFloat(
-                concentrationRule.minimum
-            );
-
-        const maximum =
-            parseFloat(
-                concentrationRule.maximum
-            );
-
-
-        const evaluatedBags =
-            bagOptions
-                .map(
-                    bagSize => {
-
-                        const numericBagSize =
-                            parseFloat(
-                                bagSize
-                            );
-
-
-                        if (
-                            isNaN(
-                                numericBagSize
-                            )
-                        ) {
-
-                            return null;
-                        }
-
-
-                        const totalVolume =
-    volumeBasis === "final_total"
-        ? numericBagSize
-        : numericBagSize + drugVolume;
-
-
-                        const concentration =
-                            dose /
-                            totalVolume;
-
-
-                        let withinRange =
-                            true;
-
-
-                        if (
-                            !isNaN(minimum)
-                        ) {
-
-                            withinRange =
-                                concentration >=
-                                minimum;
-                        }
-
-
-                        if (
-                            !isNaN(maximum)
-                        ) {
-
-                            withinRange =
-                                withinRange &&
-                                concentration <=
-                                maximum;
-                        }
-
-
-                        return {
-
-                            bagSize:
-                                numericBagSize,
-
-                            totalVolume,
-
-                            concentration,
-
-                            withinRange
-                        };
-                    }
-                )
-                .filter(Boolean);
-
-
-        // ---------------------------------------------
-        // Find the smallest bag that satisfies
-        // the concentration requirement.
-        // ---------------------------------------------
-
-        const recommendedBag =
+        recommendedBag =
             evaluatedBags
                 .filter(
                     bag =>
@@ -2166,135 +2186,155 @@ const diluentVolume =
                         a.bagSize -
                         b.bagSize
                 )[0];
-
-
-        evaluatedBags.sort(
-            (a, b) =>
-                a.bagSize -
-                b.bagSize
-        );
-
-
-        bagOptionsHTML = `
-
-            <div style="
-                margin-top:20px;
-                padding:20px;
-                background:#f8fbff;
-                border:1px solid #dce8f5;
-                border-radius:12px;
-            ">
-
-                <h3 style="
-                    color:#0b5cab;
-                    margin-bottom:15px;
-                ">
-                    Recommended Bag Options
-                </h3>
-
-
-                ${evaluatedBags
-                    .map(
-                        bag => {
-
-                            const isRecommended =
-                                recommendedBag &&
-                                bag.bagSize ===
-                                recommendedBag.bagSize;
-
-
-                            let statusText =
-                                "";
-
-
-                            let statusColor =
-                                "#b06b00";
-
-
-                            if (
-                                bag.withinRange
-                            ) {
-
-                                statusText =
-                                    isRecommended
-                                        ? "✓ Recommended"
-                                        : "✓ Within concentration requirement";
-
-                                statusColor =
-                                    "#176b3a";
-
-                            }
-
-                            else {
-
-                                statusText =
-                                    "⚠ Outside concentration requirement";
-
-                                statusColor =
-                                    "#9b3030";
-                            }
-
-
-                            return `
-
-                                <div style="
-                                    padding:15px;
-                                    margin-bottom:10px;
-                                    background:white;
-                                    border:
-                                        ${
-                                            isRecommended
-                                                ? "2px solid #176b3a"
-                                                : "1px solid #e2eaf3"
-                                        };
-                                    border-radius:8px;
-                                ">
-
-                                    <strong>
-                                        ${bag.bagSize}
-                                        mL bag
-                                    </strong>
-
-
-                                    <div style="
-                                        margin-top:7px;
-                                    ">
-                                        Total volume after
-                                        drug addition:
-                                        ${bag.totalVolume.toFixed(2)}
-                                        mL
-                                    </div>
-
-
-                                    <div style="
-                                        margin-top:7px;
-                                    ">
-                                        Final concentration:
-                                        ${bag.concentration.toFixed(2)}
-                                        mg/mL
-                                    </div>
-
-
-                                    <div style="
-                                        margin-top:7px;
-                                        font-weight:bold;
-                                        color:${statusColor};
-                                    ">
-                                        ${statusText}
-                                    </div>
-
-                                </div>
-                            `;
-                        }
-                    )
-                    .join("")
-                }
-
-            </div>
-        `;
     }
 
 
+    evaluatedBags.sort(
+        (a, b) =>
+            a.bagSize -
+            b.bagSize
+    );
+
+
+    bagOptionsHTML = `
+
+        <div style="
+            margin-top:20px;
+            padding:20px;
+            background:#f8fbff;
+            border:1px solid #dce8f5;
+            border-radius:12px;
+        ">
+
+            <h3 style="
+                color:#0b5cab;
+                margin-bottom:15px;
+            ">
+                Recommended Bag Options
+            </h3>
+
+
+            ${evaluatedBags
+                .map(
+                    bag => {
+
+                        const isRecommended =
+                            recommendedBag &&
+                            bag.bagSize ===
+                            recommendedBag.bagSize;
+
+
+                        let statusText =
+                            "";
+
+                        let statusColor =
+                            "#b06b00";
+
+
+                        // ---------------------------------
+                        // No concentration requirement
+                        // ---------------------------------
+
+                        if (
+                            !hasConcentrationRequirement
+                        ) {
+
+                            statusText =
+                                "ℹ No product-specific concentration requirement specified.";
+
+                            statusColor =
+                                "#b06b00";
+                        }
+
+
+                        // ---------------------------------
+                        // Concentration requirement exists
+                        // ---------------------------------
+
+                        else if (
+                            bag.withinRange
+                        ) {
+
+                            statusText =
+                                isRecommended
+                                    ? "✓ Recommended"
+                                    : "✓ Within concentration requirement";
+
+                            statusColor =
+                                "#176b3a";
+                        }
+
+
+                        else {
+
+                            statusText =
+                                "⚠ Outside concentration requirement";
+
+                            statusColor =
+                                "#9b3030";
+                        }
+
+
+                        return `
+
+                            <div style="
+                                padding:15px;
+                                margin-bottom:10px;
+                                background:white;
+
+                                border:
+                                    ${
+                                        isRecommended
+                                            ? "2px solid #176b3a"
+                                            : "1px solid #e2eaf3"
+                                    };
+
+                                border-radius:8px;
+                            ">
+
+                                <strong>
+                                    ${bag.bagSize}
+                                    mL final volume
+                                </strong>
+
+
+                                <div style="
+                                    margin-top:7px;
+                                ">
+                                    Total volume after
+                                    drug addition:
+                                    ${bag.totalVolume.toFixed(2)}
+                                    mL
+                                </div>
+
+
+                                <div style="
+                                    margin-top:7px;
+                                ">
+                                    Final concentration:
+                                    ${bag.concentration.toFixed(2)}
+                                    ${unit}
+                                </div>
+
+
+                                <div style="
+                                    margin-top:7px;
+                                    font-weight:bold;
+                                    color:${statusColor};
+                                ">
+                                    ${statusText}
+                                </div>
+
+                            </div>
+                        `;
+                    }
+                )
+                .join("")
+            }
+
+        </div>
+    `;
+}
     // =================================================
     // VIAL SELECTION
     // =================================================
