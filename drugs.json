@@ -1975,5 +1975,136 @@
       }
     }
   ]
+},
+  "fluorouracil": {
+  "generic_name": "Fluorouracil",
+  "brand_names": [
+    "Eutoral",
+    "Fluorouracil"
+  ],
+  "drug_class": "Antimetabolite",
+  "category": "Oncology",
+
+  "indications": [
+    "Colorectal cancer",
+    "Breast cancer",
+    "Gastric cancer",
+    "Pancreatic cancer",
+    "Head and neck cancer",
+    "Esophageal cancer",
+    "Other malignancies according to the prescribed chemotherapy regimen"
+  ],
+
+  "routes": [
+    "Intravenous"
+  ],
+
+  "preparation": {
+    "status": "Ready-to-use solution; no reconstitution required.",
+    "dilution": "For intravenous infusion, dilute the prescribed dose according to the chemotherapy regimen and product-specific instructions using 5% Dextrose in Water or 0.9% Sodium Chloride.",
+    "infusion_time": "Administration may be by intravenous injection/bolus or intravenous infusion depending on the prescribed chemotherapy regimen."
+  },
+
+  "warnings": [
+    "Fluorouracil is a hazardous cytotoxic drug; follow institutional hazardous-drug handling procedures.",
+    "Do not mix directly in the same container with other chemotherapeutic agents or intravenous additives.",
+    "Do not administer through the same intravenous line concomitantly with other medicinal products unless compatibility has been specifically established.",
+    "Serious or fatal toxicity may occur in patients with complete DPD deficiency.",
+    "Consider DPYD/DPD status according to current institutional and regulatory recommendations before treatment.",
+    "Monitor complete blood counts and clinical toxicity according to the treatment protocol.",
+    "Monitor for severe diarrhea, mucositis, neurotoxicity and cardiotoxicity.",
+    "Verify a secure and patent intravenous line before administration.",
+    "Inspect the solution for particulate matter and discoloration before administration."
+  ],
+
+  "adverse_effects": [
+    "Myelosuppression",
+    "Neutropenia",
+    "Thrombocytopenia",
+    "Anemia",
+    "Mucositis",
+    "Diarrhea",
+    "Nausea and vomiting",
+    "Hand-foot syndrome",
+    "Cardiotoxicity",
+    "Neurotoxicity",
+    "Fatigue"
+  ],
+
+  "references": [
+    {
+      "name": "Fluorouracil 50 mg/mL Injection – Summary of Product Characteristics",
+      "type": "Official product information"
+    },
+    {
+      "name": "DailyMed – Fluorouracil Injection Prescribing Information",
+      "type": "Official prescribing information"
+    }
+  ],
+
+  "products": [
+    {
+      "brand_name": "Eutoral",
+      "active_ingredient": "fluorouracil",
+      "concentration": "50 mg/mL",
+
+      "presentations": [
+        "250 mg/5 mL solution",
+        "500 mg/10 mL solution"
+      ],
+
+      "route": "Intravenous",
+
+      "iv_preparation": {
+        "diluent_options": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "do_not_use": [
+          "Do not mix directly in the same container with other chemotherapeutic agents or intravenous additives",
+          "Do not administer through the same intravenous line concomitantly with other medicinal products unless compatibility has been established"
+        ],
+
+        "available_bag_sizes": [
+          100,
+          250,
+          500
+        ],
+
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "unit": "mL",
+          "basis": "final_total",
+          "description": "Select the final total infusion volume according to the prescribed chemotherapy regimen and institutional protocol. The calculator will determine the required diluent volume and final fluorouracil concentration."
+        },
+
+        "administration": "Intravenous injection/bolus or intravenous infusion according to the prescribed chemotherapy regimen.",
+
+        "iv_push_or_bolus": "May be administered by intravenous injection/bolus when specified by the prescribed chemotherapy regimen.",
+
+        "mixing": "Withdraw the calculated dose aseptically and, when infusion is prescribed, dilute with the selected compatible diluent to the required final volume. Mix gently.",
+
+        "line": "Administer through a secure, patent intravenous line. For infusion regimens, use an appropriate infusion system according to the treatment protocol.",
+
+        "compatibility": [
+          "0.9% Sodium Chloride",
+          "5% Dextrose in Water"
+        ],
+
+        "special_notes": [
+          "Ready-to-use solution; no reconstitution required.",
+          "The required dose and administration method are regimen-dependent.",
+          "5-Fluorouracil may be administered as an IV bolus or infusion depending on the chemotherapy protocol.",
+          "Do not mix directly in the same container with other chemotherapeutic agents or intravenous additives.",
+          "Inspect the solution visually before administration.",
+          "Follow institutional hazardous-drug handling procedures.",
+          "Discard unused product according to cytotoxic-drug disposal procedures."
+        ],
+
+        "source": "Fluorouracil 50 mg/mL product information / SmPC; DailyMed Fluorouracil Injection prescribing information. Verify the specific local Eutoral product information before clinical use."
+      }
+    }
+  ]
 }
 }
