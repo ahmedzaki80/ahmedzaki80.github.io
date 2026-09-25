@@ -2048,17 +2048,38 @@ if (
     }
 
 
-   // =================================================
+ // =================================================
 // DILUENT VOLUME
 // =================================================
 
+// If the selected volume represents the FINAL TOTAL
+// volume, the diluent volume is the final volume
+// minus the volume of drug added.
+//
+// If the selected volume represents the BAG VOLUME
+// before drug addition, that volume is the diluent
+// volume.
+
 const diluentVolume =
     volumeBasis === "final_total"
-        ? Math.max(
-            0,
-            finalBagVolume - drugVolume
-        )
+        ? finalBagVolume - drugVolume
         : finalBagVolume;
+
+
+// Safety check:
+// Diluent volume must be greater than zero.
+
+if (
+    !isFinite(diluentVolume) ||
+    diluentVolume <= 0
+) {
+
+    alert(
+        "Unable to calculate a valid diluent volume."
+    );
+
+    return;
+}
 
 // =================================================
 // RECOMMENDED BAG OPTIONS
