@@ -1788,18 +1788,57 @@ if (
 // TOTAL VOLUME
 // =================================================
 
+// If the documented bag volume is the final total
+// volume, do not add the drug volume again.
+//
+// If the documented bag volume is the volume
+// BEFORE drug addition, add the drug volume.
+
 const totalFinalVolume =
     volumeBasis === "final_total"
         ? finalBagVolume
         : finalBagVolume + drugVolume;
 
-    // =================================================
-    // FINAL CONCENTRATION
-    // =================================================
 
-    const finalConcentration =
-        dose /
-        totalFinalVolume;
+// Safety check:
+// Final volume must always be greater than zero.
+
+if (
+    !isFinite(totalFinalVolume) ||
+    totalFinalVolume <= 0
+) {
+
+    alert(
+        "Unable to calculate the final volume."
+    );
+
+    return;
+}
+
+
+// =================================================
+// FINAL CONCENTRATION
+// =================================================
+
+const finalConcentration =
+    dose /
+    totalFinalVolume;
+
+
+// Safety check:
+// Final concentration must be a valid number.
+
+if (
+    !isFinite(finalConcentration) ||
+    finalConcentration <= 0
+) {
+
+    alert(
+        "Unable to calculate the final concentration."
+    );
+
+    return;
+}
 
 
     // =================================================
