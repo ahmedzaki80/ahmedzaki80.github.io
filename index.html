@@ -3081,8 +3081,8 @@ bestCombination.forEach(
 
                 return;
             }
-            if (
-    withdrawnMg >= vial.mg
+           if (
+    vial.mg - withdrawnMg <= 0.000001
 ) {
     return;
 }
