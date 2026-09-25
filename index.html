@@ -1485,15 +1485,19 @@ function calculateDrugVolume() {
         product.iv_preparation || {};
 
 
- // =================================================
+// =================================================
 // BAG VOLUME
 // =================================================
 
 let finalBagVolume = null;
 
-// Defines whether the specified volume is:
-// 1. The bag/diluent volume BEFORE drug addition
-// 2. The FINAL TOTAL volume AFTER drug addition
+// -------------------------------------------------
+// Volume basis
+//
+// "bag"         = selected volume is BEFORE drug addition
+// "final_total" = selected volume is FINAL TOTAL volume
+// -------------------------------------------------
+
 let volumeBasis = "bag";
 
 const bagRule =
@@ -1501,12 +1505,41 @@ const bagRule =
 
 
 // -------------------------------------------------
-// DOSE-DEPENDENT BAG
+// FIXED VOLUME
 // -------------------------------------------------
 
 if (
-    bagRule?.type ===
-    "dose-dependent"
+    bagRule?.type === "fixed"
+) {
+
+    const fixedVolume =
+        parseFloat(
+            bagRule.volume ??
+            bagRule.fixed_volume ??
+            bagRule.bag_volume
+        );
+
+    if (
+        !isNaN(fixedVolume) &&
+        fixedVolume > 0
+    ) {
+
+        finalBagVolume =
+            fixedVolume;
+
+        volumeBasis =
+            bagRule.basis ||
+            "bag";
+    }
+}
+
+
+// -------------------------------------------------
+// DOSE-DEPENDENT VOLUME
+// -------------------------------------------------
+
+else if (
+    bagRule?.type === "dose-dependent"
 ) {
 
     const threshold =
@@ -1524,7 +1557,6 @@ if (
             bagRule.high_dose_volume
         );
 
-
     if (
         !isNaN(threshold) &&
         !isNaN(standardVolume) &&
@@ -1537,43 +1569,14 @@ if (
                 : standardVolume;
 
         volumeBasis =
-            bagRule.basis || "bag";
+            bagRule.basis ||
+            "bag";
     }
 }
 
 
 // -------------------------------------------------
-// FIXED BAG
-// -------------------------------------------------
-
-else if (
-    bagRule?.type ===
-    "fixed"
-) {
-
-    const fixedVolume =
-        parseFloat(
-            bagRule.volume ??
-            bagRule.fixed_volume ??
-            bagRule.bag_volume
-        );
-
-
-    if (
-        !isNaN(fixedVolume) &&
-        fixedVolume > 0
-    ) {
-
-        finalBagVolume =
-            fixedVolume;
-
-        volumeBasis =
-            bagRule.basis || "bag";
-    }
-}
-    
-// -------------------------------------------------
-// CONCENTRATION-DEPENDENT BAG
+// CONCENTRATION-DEPENDENT VOLUME
 // -------------------------------------------------
 
 else if (
@@ -1590,7 +1593,6 @@ else if (
         parseFloat(
             bagRule.maximum_concentration
         );
-
 
     const bagOptions =
         Array.isArray(
@@ -1610,32 +1612,36 @@ else if (
                             bagSize
                         );
 
-
                     if (
-                        isNaN(
-                            numericBagSize
-                        ) ||
+                        isNaN(numericBagSize) ||
                         numericBagSize <= 0
                     ) {
-
                         return null;
                     }
 
 
                     // For concentration-dependent
-                    // products, the selected volume
-                    // represents the FINAL TOTAL volume.
+                    // rules, the bag size is treated
+                    // according to the documented basis.
 
-                    const concentration =
+                    const calculatedFinalVolume =
+                        (
+                            bagRule.basis ===
+                            "final_total"
+                        )
+                            ? numericBagSize
+                            : numericBagSize +
+                              drugVolume;
+
+
+                    const calculatedConcentration =
                         dose /
-                        numericBagSize;
+                        calculatedFinalVolume;
 
 
-                    let valid =
-                        true;
+                    let valid = true;
 
 
-                    // Minimum concentration
                     if (
                         !isNaN(
                             minimumConcentration
@@ -1644,12 +1650,11 @@ else if (
 
                         valid =
                             valid &&
-                            concentration >=
+                            calculatedConcentration >=
                             minimumConcentration;
                     }
 
 
-                    // Maximum concentration
                     if (
                         !isNaN(
                             maximumConcentration
@@ -1658,7 +1663,7 @@ else if (
 
                         valid =
                             valid &&
-                            concentration <=
+                            calculatedConcentration <=
                             maximumConcentration;
                     }
 
@@ -1668,7 +1673,11 @@ else if (
                         bagSize:
                             numericBagSize,
 
-                        concentration,
+                        finalVolume:
+                            calculatedFinalVolume,
+
+                        concentration:
+                            calculatedConcentration,
 
                         valid
                     };
@@ -1685,25 +1694,13 @@ else if (
         validBags.length > 0
     ) {
 
-        // If BOTH minimum and maximum
-        // concentration limits exist,
-        // select the smallest valid bag.
-        //
-        // Example:
-        // Paclitaxel 175 mg
-        // 100 mL = 1.75 mg/mL ❌
-        // 250 mL = 0.70 mg/mL ✅
-        // 500 mL = 0.35 mg/mL ✅
-        //
-        // Select 250 mL.
+        // If both minimum and maximum
+        // concentrations are specified,
+        // choose the smallest valid option.
 
         if (
-            !isNaN(
-                minimumConcentration
-            ) &&
-            !isNaN(
-                maximumConcentration
-            )
+            !isNaN(minimumConcentration) &&
+            !isNaN(maximumConcentration)
         ) {
 
             validBags.sort(
@@ -1711,26 +1708,14 @@ else if (
                     a.bagSize -
                     b.bagSize
             );
-
         }
 
 
-        // If ONLY a minimum concentration
-        // is specified, select the largest
-        // available final volume that still
-        // maintains the minimum concentration.
-        //
-        // Example:
-        // Cyclophosphamide 1000 mg
-        // 250 mL = 4 mg/mL ✅
-        // 500 mL = 2 mg/mL ✅
-        //
-        // Select 500 mL.
+        // Minimum concentration only:
+        // choose the largest valid volume.
 
         else if (
-            !isNaN(
-                minimumConcentration
-            )
+            !isNaN(minimumConcentration)
         ) {
 
             validBags.sort(
@@ -1738,18 +1723,14 @@ else if (
                     b.bagSize -
                     a.bagSize
             );
-
         }
 
 
-        // If ONLY a maximum concentration
-        // is specified, select the smallest
-        // valid final volume.
+        // Maximum concentration only:
+        // choose the smallest valid volume.
 
         else if (
-            !isNaN(
-                maximumConcentration
-            )
+            !isNaN(maximumConcentration)
         ) {
 
             validBags.sort(
@@ -1757,26 +1738,21 @@ else if (
                     a.bagSize -
                     b.bagSize
             );
-
         }
 
 
         finalBagVolume =
             validBags[0].bagSize;
 
+        volumeBasis =
+            bagRule.basis ||
+            "final_total";
     }
-
-
-    // The selected bag volume represents
-    // the FINAL TOTAL volume.
-
-    volumeBasis =
-        bagRule.basis ||
-        "final_total";
 }
 
+
 // -------------------------------------------------
-// USER SELECTED BAG
+// USER SELECTED VOLUME
 // -------------------------------------------------
 
 if (
@@ -1807,7 +1783,8 @@ if (
     volumeBasis =
         bagRule?.basis ||
         "bag";
-}   // =================================================
+}  
+// =================================================
 // TOTAL VOLUME
 // =================================================
 
