@@ -2769,6 +2769,52 @@ function getVialReconstitution(
 
         return null;
     }
+    // -------------------------------------------------
+// Single-vial reconstitution format
+//
+// Some products have one reconstitution instruction
+// that applies directly to the selected vial.
+// Example: Herceptin 150 mg.
+// -------------------------------------------------
+
+if (
+    reconstitution.volume &&
+    reconstitution.resulting_concentration
+) {
+
+    const volumeToAdd =
+        parseFloat(
+            reconstitution.volume
+        );
+
+    const resultingConcentration =
+        parseFloat(
+            reconstitution.resulting_concentration
+        );
+
+    if (
+        !isNaN(volumeToAdd) &&
+        volumeToAdd > 0 &&
+        !isNaN(resultingConcentration) &&
+        resultingConcentration > 0
+    ) {
+
+        return {
+
+            required:
+                true,
+
+            concentration:
+                resultingConcentration,
+
+            volumeToAdd:
+                volumeToAdd,
+
+            diluent:
+                reconstitution.diluent || []
+        };
+    }
+}
 
 
     // -------------------------------------------------
