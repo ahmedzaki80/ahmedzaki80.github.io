@@ -2757,7 +2757,8 @@ function getVialReconstitution(
     // -------------------------------------------------
 
     const reconstitution =
-        product.reconstitution;
+    product.reconstitution ||
+    product.iv_preparation?.reconstitution;
 
 
     if (
