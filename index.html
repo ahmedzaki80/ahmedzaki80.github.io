@@ -2809,6 +2809,10 @@ if (
 
             volumeToAdd:
                 volumeToAdd,
+            volumeAvailable:
+    parseFloat(
+        reconstitution.resulting_volume
+    ),
 
             diluent:
                 reconstitution.diluent || []
@@ -3077,9 +3081,12 @@ bestCombination.forEach(
                     .concentration;
 
 
-            const totalAvailableVolume =
-                vial.mg /
-                vialConcentration;
+           const totalAvailableVolume =
+    vialReconstitution.volumeAvailable ??
+    (
+        vial.mg /
+        vialConcentration
+    );
 
 
             const withdrawnVolume =
