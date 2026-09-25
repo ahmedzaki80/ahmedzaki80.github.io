@@ -3081,12 +3081,21 @@ bestCombination.forEach(
                     .concentration;
 
 
-           const totalAvailableVolume =
-    vialReconstitution.volumeAvailable ??
-    (
-        vial.mg /
-        vialConcentration
+          const documentedVolume =
+    parseFloat(
+        vialReconstitution.volumeAvailable
     );
+
+const totalAvailableVolume =
+    !isNaN(documentedVolume) &&
+    documentedVolume > 0
+
+        ? documentedVolume
+
+        : (
+            vial.mg /
+            vialConcentration
+        );
 
 
             const withdrawnVolume =
