@@ -3036,41 +3036,6 @@ bestCombination.forEach(
     }
 );
 
-
-        // ---------------------------------------------
-        // Solution vial
-        // ---------------------------------------------
-
-        else {
-
-            const vialConcentration =
-                vial.mg /
-                vial.ml;
-
-
-            const requiredFromThisVial =
-                Math.min(
-                    dose,
-                    vial.mg
-                );
-
-
-            const withdrawnVolume =
-                requiredFromThisVial /
-                vialConcentration;
-
-
-            wastageVolume +=
-                Math.max(
-                    0,
-                    vial.ml -
-                    withdrawnVolume
-                );
-        }
-    }
-);
-
-
 vialSummary += `
 
     <br><br>
