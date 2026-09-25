@@ -272,7 +272,7 @@
           "diluent": "Sterile Water for Injection (SWFI)",
           "volume": "7.4 mL",
           "resulting_concentration": "21 mg/mL",
-          "resulting_volume": "Approximately 7.15 mL deliverable",
+          "resulting_volume": 7.15,
           "method": "Slowly inject 7.4 mL SWFI into the vial, directing the stream into the cake. Gently swirl to aid reconstitution; do not shake. Allow the vial to stand undisturbed for approximately 5 minutes if slight foaming is present."
         },
         "diluent_options": [
