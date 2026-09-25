@@ -2862,23 +2862,28 @@ if (bagOptions.length > 0) {
         </p>
 
 
-       <p style="margin-top:8px;">
-    <strong>
-        ${
-            volumeBasis === "final_total"
-                ? "Final total volume:"
-                : "IV bag volume before drug addition:"
-        }
-    </strong>
-    ${finalBagVolume.toFixed(2)}
-    mL
-</p>
+              <p style="margin-top:8px;">
+            <strong>
+                ${
+                    volumeBasis === "final_total"
+                        ? "Final total volume:"
+                        : "IV bag volume before drug addition:"
+                }
+            </strong>
+            ${
+                volumeBasis === "final_total"
+                    ? totalFinalVolume.toFixed(2)
+                    : finalBagVolume.toFixed(2)
+            }
+            mL
+        </p>
+
 
         <p style="margin-top:8px;">
             <strong>
-                Total volume after drug addition:
+                Drug volume:
             </strong>
-            ${totalFinalVolume.toFixed(2)}
+            ${drugVolume.toFixed(2)}
             mL
         </p>
 
