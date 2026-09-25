@@ -2751,8 +2751,10 @@ function getVialReconstitution(
     }
 
 
-    // Powder vial requires
-    // documented reconstitution data.
+    // -------------------------------------------------
+    // Powder vial requires documented reconstitution
+    // data from the selected product.
+    // -------------------------------------------------
 
     const reconstitution =
         product.reconstitution;
@@ -2768,11 +2770,13 @@ function getVialReconstitution(
     }
 
 
-    // Try exact vial strength first.
+    // -------------------------------------------------
+    // Find matching vial strength.
     //
-    // Example:
-    // 200 mg
-    // 1 g
+    // Examples:
+    // "200 mg" → 200 mg
+    // "1 g"    → 1000 mg
+    // -------------------------------------------------
 
     const exactKey =
         Object.keys(
@@ -2781,19 +2785,37 @@ function getVialReconstitution(
         .find(
             key => {
 
-                const keyMg =
+                const normalizedKey =
+                    String(key)
+                        .trim()
+                        .toLowerCase();
+
+
+                let keyMg =
                     parseFloat(
-                        key
-                    ) *
-                    (
-                        /g\b/i.test(key)
-                            ? 1000
-                            : 1
+                        normalizedKey
                     );
+
+
+                if (
+                    isNaN(keyMg)
+                ) {
+
+                    return false;
+                }
+
+
+                if (
+                    normalizedKey.includes("g")
+                ) {
+
+                    keyMg *= 1000;
+                }
+
 
                 return (
                     keyMg ===
-                    vial.mg
+                    Number(vial.mg)
                 );
             }
         );
@@ -2813,6 +2835,14 @@ function getVialReconstitution(
         ];
 
 
+    if (
+        !data
+    ) {
+
+        return null;
+    }
+
+
     const volumeToAdd =
         parseFloat(
             data.volume_to_add
@@ -2827,7 +2857,14 @@ function getVialReconstitution(
 
     if (
         isNaN(volumeToAdd) ||
-        volumeToAdd <= 0 ||
+        volumeToAdd <= 0
+    ) {
+
+        return null;
+    }
+
+
+    if (
         isNaN(
             resultingConcentration
         ) ||
