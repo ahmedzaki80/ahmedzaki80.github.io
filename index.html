@@ -2455,120 +2455,124 @@ if (bagOptions.length > 0) {
     // =================================================
 
     const vialSizes =
-        (product.presentations || [])
-            .map(
-                item => {
+    (product.presentations || [])
+        .map(
+            item => {
 
-                    const text =
-                        String(item);
-
-
-                    // ---------------------------------
-                    // Solution presentation
-                    //
-                    // Example:
-                    // 100 mg/10 mL
-                    // 500 mg/50 mL
-                    // ---------------------------------
-
-                    const solutionMatch =
-                        text.match(
-                            /(\d+(?:\.\d+)?)\s*mg\s*\/\s*(\d+(?:\.\d+)?)\s*mL/i
-                        );
+                const text =
+                    String(item);
 
 
-                    if (
-                        solutionMatch
-                    ) {
+                // ---------------------------------
+                // Solution presentation
+                //
+                // Example:
+                // 100 mg/10 mL
+                // 500 mg/50 mL
+                // ---------------------------------
 
-                        return {
-
-                            mg:
-                                parseFloat(
-                                    solutionMatch[1]
-                                ),
-
-                            ml:
-                                parseFloat(
-                                    solutionMatch[2]
-                                )
-                        };
-                    }
+                const solutionMatch =
+                    text.match(
+                        /(\d+(?:\.\d+)?)\s*mg\s*\/\s*(\d+(?:\.\d+)?)\s*mL/i
+                    );
 
 
-                    // ---------------------------------
-                    // Powder in grams
-                    //
-                    // Example:
-                    // 1 g powder for solution
-                    // ---------------------------------
+                if (
+                    solutionMatch
+                ) {
 
-                    const gramMatch =
-                        text.match(
-                            /(\d+(?:\.\d+)?)\s*g\b/i
-                        );
+                    return {
 
-
-                    if (
-                        gramMatch
-                    ) {
-
-                        return {
-
-                            mg:
-                                parseFloat(
-                                    gramMatch[1]
-                                ) * 1000,
-
-                            ml:
-                                parseFloat(
-                                    gramMatch[1]
-                                ) * 1000 /
-                                concentration
-                        };
-                    }
-
-
-                    // ---------------------------------
-                    // Powder in mg
-                    //
-                    // Example:
-                    // 200 mg powder for solution
-                    // ---------------------------------
-
-                    const mgMatch =
-                        text.match(
-                            /(\d+(?:\.\d+)?)\s*mg\b/i
-                        );
-
-
-                    if (
-                        mgMatch
-                    ) {
-
-                        const vialMg =
+                        mg:
                             parseFloat(
-                                mgMatch[1]
-                            );
+                                solutionMatch[1]
+                            ),
 
+                        ml:
+                            parseFloat(
+                                solutionMatch[2]
+                            ),
 
-                        return {
-
-                            mg:
-                                vialMg,
-
-                            ml:
-                                vialMg /
-                                concentration
-                        };
-                    }
-
-
-                    return null;
+                        isPowder:
+                            false
+                    };
                 }
-            )
-            .filter(Boolean);
 
+
+                // ---------------------------------
+                // Powder in grams
+                //
+                // Example:
+                // 1 g powder for solution
+                // ---------------------------------
+
+                const gramMatch =
+                    text.match(
+                        /(\d+(?:\.\d+)?)\s*g\b/i
+                    );
+
+
+                if (
+                    gramMatch
+                ) {
+
+                    return {
+
+                        mg:
+                            parseFloat(
+                                gramMatch[1]
+                            ) * 1000,
+
+                        ml:
+                            null,
+
+                        isPowder:
+                            true
+                    };
+                }
+
+
+                // ---------------------------------
+                // Powder in mg
+                //
+                // Example:
+                // 200 mg powder for solution
+                // ---------------------------------
+
+                const mgMatch =
+                    text.match(
+                        /(\d+(?:\.\d+)?)\s*mg\b/i
+                    );
+
+
+                if (
+                    mgMatch
+                ) {
+
+                    const vialMg =
+                        parseFloat(
+                            mgMatch[1]
+                        );
+
+
+                    return {
+
+                        mg:
+                            vialMg,
+
+                        ml:
+                            null,
+
+                        isPowder:
+                            true
+                    };
+                }
+
+
+                return null;
+            }
+        )
+        .filter(Boolean);
 
     // Remove duplicate vial strengths
     const uniqueVialSizes =
