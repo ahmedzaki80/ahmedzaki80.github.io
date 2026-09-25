@@ -2719,7 +2719,140 @@ if (bagOptions.length > 0) {
             }
         }
     }
+// =================================================
+// RECONSTITUTION HELPER
+// =================================================
 
+function getVialReconstitution(
+    vial
+) {
+
+    // Solution vial:
+    // No reconstitution required.
+
+    if (
+        !vial.isPowder
+    ) {
+
+        return {
+
+            required:
+                false,
+
+            concentration:
+                null,
+
+            volumeToAdd:
+                null,
+
+            diluent:
+                null
+        };
+    }
+
+
+    // Powder vial requires
+    // documented reconstitution data.
+
+    const reconstitution =
+        product.reconstitution;
+
+
+    if (
+        !reconstitution ||
+        typeof reconstitution !==
+        "object"
+    ) {
+
+        return null;
+    }
+
+
+    // Try exact vial strength first.
+    //
+    // Example:
+    // 200 mg
+    // 1 g
+
+    const exactKey =
+        Object.keys(
+            reconstitution
+        )
+        .find(
+            key => {
+
+                const keyMg =
+                    parseFloat(
+                        key
+                    ) *
+                    (
+                        /g\b/i.test(key)
+                            ? 1000
+                            : 1
+                    );
+
+                return (
+                    keyMg ===
+                    vial.mg
+                );
+            }
+        );
+
+
+    if (
+        !exactKey
+    ) {
+
+        return null;
+    }
+
+
+    const data =
+        reconstitution[
+            exactKey
+        ];
+
+
+    const volumeToAdd =
+        parseFloat(
+            data.volume_to_add
+        );
+
+
+    const resultingConcentration =
+        parseFloat(
+            data.resulting_concentration
+        );
+
+
+    if (
+        isNaN(volumeToAdd) ||
+        volumeToAdd <= 0 ||
+        isNaN(
+            resultingConcentration
+        ) ||
+        resultingConcentration <= 0
+    ) {
+
+        return null;
+    }
+
+
+    return {
+
+        required:
+            true,
+
+        concentration:
+            resultingConcentration,
+
+        volumeToAdd:
+            volumeToAdd,
+
+        diluent:
+            data.diluent || []
+    };
+}
 
     if (
         uniqueVialSizes.length > 0
