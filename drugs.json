@@ -288,6 +288,7 @@
           "type": "fixed",
           "volume": 250,
           "unit": "mL",
+          "basis": "bag",
           "description": "Add the required volume of reconstituted Herceptin to a 250 mL 0.9% Sodium Chloride infusion bag."
         },
         "administration": "Intravenous infusion",
