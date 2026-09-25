@@ -3097,7 +3097,7 @@ vialSummary += `
         </p>
 
 
-        <p style="margin-top:8px;">
+               <p style="margin-top:8px;">
             <strong>
                 Required drug volume:
             </strong>
@@ -3106,7 +3106,132 @@ vialSummary += `
         </p>
 
 
-              <p style="margin-top:8px;">
+        ${
+            bestCombination &&
+            bestCombination.some(
+                vial => vial.isPowder
+            )
+                ? `
+                    <div style="
+                        margin-top:15px;
+                        padding:15px;
+                        background:#fff8e8;
+                        border:1px solid #f0d58a;
+                        border-radius:10px;
+                    ">
+
+                        <strong>
+                            Reconstitution Details
+                        </strong>
+
+                        <br><br>
+
+                        ${[
+                            ...new Set(
+                                bestCombination
+                                    .filter(
+                                        vial =>
+                                            vial.isPowder
+                                    )
+                                    .map(
+                                        vial =>
+                                            vial.mg
+                                    )
+                            )
+                        ]
+                        .map(
+                            vialMg => {
+
+                                const vial =
+                                    bestCombination.find(
+                                        item =>
+                                            item.isPowder &&
+                                            item.mg ===
+                                            vialMg
+                                    );
+
+                                const reconstitution =
+                                    getVialReconstitution(
+                                        vial
+                                    );
+
+                                if (
+                                    !reconstitution
+                                ) {
+
+                                    return `
+                                        <div style="
+                                            margin-bottom:10px;
+                                            color:#9b3030;
+                                        ">
+                                            ⚠ Reconstitution data unavailable for
+                                            ${vialMg} mg vial.
+                                        </div>
+                                    `;
+                                }
+
+                                const vialCount =
+                                    bestCombination.filter(
+                                        item =>
+                                            item.isPowder &&
+                                            item.mg ===
+                                            vialMg
+                                    ).length;
+
+                                return `
+                                    <div style="
+                                        margin-bottom:15px;
+                                    ">
+
+                                        <strong>
+                                            ${vialCount} ×
+                                            ${vialMg} mg vial
+                                        </strong>
+
+                                        <div style="
+                                            margin-top:7px;
+                                        ">
+                                            Reconstitution volume:
+                                            ${reconstitution.volumeToAdd.toFixed(2)}
+                                            mL per vial
+                                        </div>
+
+                                        <div style="
+                                            margin-top:7px;
+                                        ">
+                                            Reconstitution diluent:
+                                            ${
+                                                Array.isArray(
+                                                    reconstitution.diluent
+                                                )
+                                                    ? reconstitution.diluent.join(
+                                                        " / "
+                                                    )
+                                                    : reconstitution.diluent
+                                            }
+                                        </div>
+
+                                        <div style="
+                                            margin-top:7px;
+                                        ">
+                                            Resulting concentration:
+                                            ${reconstitution.concentration.toFixed(2)}
+                                            mg/mL
+                                        </div>
+
+                                    </div>
+                                `;
+                            }
+                        )
+                        .join("")}
+
+                    </div>
+                `
+                : ""
+        }
+
+
+        <p style="margin-top:8px;">
             <strong>
                 ${
                     volumeBasis === "final_total"
@@ -3121,7 +3246,6 @@ vialSummary += `
             }
             mL
         </p>
-
 
         <p style="margin-top:8px;">
             <strong>
