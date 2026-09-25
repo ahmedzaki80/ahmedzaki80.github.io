@@ -2922,30 +2922,124 @@ function getVialReconstitution(
             );
 
 
-        const wastageVolume =
-            wastageMg /
-            concentration;
+        // -------------------------------------------------
+// WASTAGE VOLUME
+// -------------------------------------------------
+
+let wastageVolume = 0;
 
 
-        vialSummary += `
+// -------------------------------------------------
+// Calculate wastage based on vial type
+// -------------------------------------------------
 
-            <br><br>
+bestCombination.forEach(
+    vial => {
 
-            <strong>
-                Total vial amount:
-            </strong>
-            ${totalVialMg} mg
+        const vialReconstitution =
+            getVialReconstitution(
+                vial
+            );
 
-            <br>
 
-            <strong>
-                Wastage:
-            </strong>
-            ${wastageMg.toFixed(2)} mg
-            (${wastageVolume.toFixed(2)} mL)
-        `;
+        // ---------------------------------------------
+        // Powder vial
+        // ---------------------------------------------
+
+        if (
+            vial.isPowder
+        ) {
+
+            if (
+                !vialReconstitution
+            ) {
+
+                return;
+            }
+
+
+            const vialConcentration =
+                vialReconstitution
+                    .concentration;
+
+
+            const requiredFromThisVial =
+                Math.min(
+                    dose,
+                    vial.mg
+                );
+
+
+            const withdrawnVolume =
+                requiredFromThisVial /
+                vialConcentration;
+
+
+            const totalAvailableVolume =
+                vial.mg /
+                vialConcentration;
+
+
+            wastageVolume +=
+                Math.max(
+                    0,
+                    totalAvailableVolume -
+                    withdrawnVolume
+                );
+        }
+
+
+        // ---------------------------------------------
+        // Solution vial
+        // ---------------------------------------------
+
+        else {
+
+            const vialConcentration =
+                vial.mg /
+                vial.ml;
+
+
+            const requiredFromThisVial =
+                Math.min(
+                    dose,
+                    vial.mg
+                );
+
+
+            const withdrawnVolume =
+                requiredFromThisVial /
+                vialConcentration;
+
+
+            wastageVolume +=
+                Math.max(
+                    0,
+                    vial.ml -
+                    withdrawnVolume
+                );
+        }
     }
+);
 
+
+vialSummary += `
+
+    <br><br>
+
+    <strong>
+        Total vial amount:
+    </strong>
+    ${totalVialMg} mg
+
+    <br>
+
+    <strong>
+        Wastage:
+    </strong>
+    ${wastageMg.toFixed(2)} mg
+    (${wastageVolume.toFixed(2)} mL)
+`;
 
     // =================================================
     // FINAL RESULT
