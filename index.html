@@ -2805,12 +2805,14 @@ function getVialReconstitution(
                 }
 
 
-                if (
-                    normalizedKey.includes("g")
+               if (
+                  /\bg\b/.test(
+                  normalizedKey
+                )
                 ) {
 
-                    keyMg *= 1000;
-                }
+               keyMg *= 1000;
+              }
 
 
                 return (
