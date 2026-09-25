@@ -2122,11 +2122,14 @@ if (bagOptions.length > 0) {
     const hasMaximum =
         !isNaN(maximum);
 
-
     const hasConcentrationRequirement =
         hasMinimum ||
         hasMaximum;
 
+
+    // -------------------------------------------------
+    // Evaluate every available bag option
+    // -------------------------------------------------
 
     const evaluatedBags =
         bagOptions
@@ -2145,22 +2148,37 @@ if (bagOptions.length > 0) {
                         ) ||
                         numericBagSize <= 0
                     ) {
+
                         return null;
                     }
 
 
+                    // -------------------------------------------------
+                    // Determine final total volume
+                    // -------------------------------------------------
+
                     const totalVolume =
                         volumeBasis ===
                         "final_total"
+
                             ? numericBagSize
+
                             : numericBagSize +
                               drugVolume;
 
+
+                    // -------------------------------------------------
+                    // Calculate final concentration
+                    // -------------------------------------------------
 
                     const concentration =
                         dose /
                         totalVolume;
 
+
+                    // -------------------------------------------------
+                    // Check concentration requirement
+                    // -------------------------------------------------
 
                     let withinRange =
                         true;
@@ -2183,16 +2201,39 @@ if (bagOptions.length > 0) {
                     }
 
 
+                    // -------------------------------------------------
+                    // Calculate actual diluent volume
+                    // -------------------------------------------------
+
+                    const optionDiluentVolume =
+                        volumeBasis ===
+                        "final_total"
+
+                            ? numericBagSize -
+                              drugVolume
+
+                            : numericBagSize;
+
+
                     return {
 
                         bagSize:
                             numericBagSize,
 
-                        totalVolume,
+                        drugVolume:
+                            drugVolume,
 
-                        concentration,
+                        diluentVolume:
+                            optionDiluentVolume,
 
-                        withinRange
+                        totalVolume:
+                            totalVolume,
+
+                        concentration:
+                            concentration,
+
+                        withinRange:
+                            withinRange
                     };
                 }
             )
@@ -2220,18 +2261,26 @@ if (bagOptions.length > 0) {
                 )
                 .sort(
                     (a, b) =>
-                        a.bagSize -
-                        b.bagSize
+                        a.totalVolume -
+                        b.totalVolume
                 )[0];
     }
 
 
+    // -------------------------------------------------
+    // Sort options by final total volume
+    // -------------------------------------------------
+
     evaluatedBags.sort(
         (a, b) =>
-            a.bagSize -
-            b.bagSize
+            a.totalVolume -
+            b.totalVolume
     );
 
+
+    // -------------------------------------------------
+    // Render
+    // -------------------------------------------------
 
     bagOptionsHTML = `
 
@@ -2302,6 +2351,10 @@ if (bagOptions.length > 0) {
                         }
 
 
+                        // ---------------------------------
+                        // Outside concentration requirement
+                        // ---------------------------------
+
                         else {
 
                             statusText =
@@ -2330,16 +2383,42 @@ if (bagOptions.length > 0) {
                             ">
 
                                 <strong>
-                                    ${bag.bagSize}
-                                    mL final volume
+                                    ${
+                                        volumeBasis ===
+                                        "final_total"
+
+                                            ? "Final total volume:"
+
+                                            : "Bag / diluent volume:"
+                                    }
+
+                                    ${bag.bagSize.toFixed(2)}
+                                    mL
                                 </strong>
 
 
                                 <div style="
                                     margin-top:7px;
                                 ">
-                                    Total volume after
-                                    drug addition:
+                                    Drug volume:
+                                    ${bag.drugVolume.toFixed(2)}
+                                    mL
+                                </div>
+
+
+                                <div style="
+                                    margin-top:7px;
+                                ">
+                                    Diluent volume:
+                                    ${bag.diluentVolume.toFixed(2)}
+                                    mL
+                                </div>
+
+
+                                <div style="
+                                    margin-top:7px;
+                                ">
+                                    Final total volume:
                                     ${bag.totalVolume.toFixed(2)}
                                     mL
                                 </div>
@@ -2371,8 +2450,7 @@ if (bagOptions.length > 0) {
 
         </div>
     `;
-}
-    // =================================================
+}    // =================================================
     // VIAL SELECTION
     // =================================================
 
