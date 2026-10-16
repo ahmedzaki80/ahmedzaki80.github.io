@@ -2476,6 +2476,13 @@
       "brand_name": "Docetaxel",
       "active_ingredient": "docetaxel",
       "concentration": "10 mg/mL",
+      "vial_use_policy": {
+  "container_type": "verify_from_local_leaflet",
+  "reuse_after_first_puncture": true,
+  "in_use_period_days": 28,
+  "storage_conditions": "Confirm exact temperature and light protection requirements from the local product leaflet.",
+  "reuse_conditions": "Reuse only if the local leaflet permits it and all required storage, aseptic handling, and beyond-use conditions are met."
+},
       "presentations": [
         "20 mg/2 mL ready-to-use solution",
         "80 mg/8 mL ready-to-use solution"
@@ -2512,6 +2519,13 @@
       "brand_name": "Eutaxer",
       "active_ingredient": "docetaxel",
       "concentration": "10 mg/mL",
+      "vial_use_policy": {
+  "container_type": "single_use",
+  "reuse_after_first_puncture": false,
+  "in_use_period_days": 0,
+  "storage_conditions": "Follow the current Eutaxer product leaflet.",
+  "reuse_conditions": "Discard any unused contents after use; do not retain the opened vial for a later preparation."
+},
       "presentations": [
         "20 mg/2 mL ready-to-use solution",
         "80 mg/8 mL ready-to-use solution"
