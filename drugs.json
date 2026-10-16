@@ -2426,5 +2426,118 @@
       }
     }
   ]
+},
+  
+"docetaxel": {
+  "generic_name": "Docetaxel",
+  "brand_names": [
+    "Docetaxel",
+    "Eutaxer"
+  ],
+  "drug_class": "Taxane antineoplastic agent",
+  "category": "Oncology",
+  "indications": [
+    "Treatment of selected malignancies according to the approved product information and prescribed oncology regimen."
+  ],
+  "routes": [
+    "Intravenous infusion"
+  ],
+  "preparation": {
+    "status": "Ready-to-use solution; no reconstitution required for the presentations listed here.",
+    "dilution": "Confirm the compatible diluent, required final concentration, and infusion volume using the current product-specific leaflet before preparation.",
+    "infusion_time": "Follow the prescribed regimen and current product-specific instructions."
+  },
+  "warnings": [
+    "Verify the exact product, strength, and presentation before preparation.",
+    "Docetaxel is a hazardous antineoplastic drug; follow institutional hazardous-drug handling and aseptic-compounding procedures.",
+    "Verify the prescribed dose, final concentration, diluent, infusion duration, stability, and storage requirements against the current product information.",
+    "Inspect the solution before use and follow the product-specific instructions for any unused contents."
+  ],
+  "adverse_effects": [
+    "Neutropenia and other myelosuppression",
+    "Hypersensitivity reactions",
+    "Fluid retention",
+    "Peripheral neuropathy",
+    "Mucositis",
+    "Nausea and vomiting"
+  ],
+  "references": [
+    {
+      "name": "Current local Docetaxel product leaflet",
+      "type": "Product-specific prescribing information; verify before clinical use"
+    },
+    {
+      "name": "Current local Eutaxer product leaflet",
+      "type": "Product-specific prescribing information; verify before clinical use"
+    }
+  ],
+  "products": [
+    {
+      "brand_name": "Docetaxel",
+      "active_ingredient": "docetaxel",
+      "concentration": "10 mg/mL",
+      "presentations": [
+        "20 mg/2 mL ready-to-use solution",
+        "80 mg/8 mL ready-to-use solution"
+      ],
+      "route": "Intravenous infusion",
+      "iv_preparation": {
+        "diluent_options": [],
+        "do_not_use": [
+          "Do not use a diluent or final concentration unless confirmed in the current product-specific leaflet."
+        ],
+        "available_bag_sizes": [],
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "unit": "mL",
+          "basis": "final_total",
+          "description": "Final infusion volume must be selected according to the current product-specific leaflet and prescribed regimen. Do not calculate a preparation recommendation until the permitted concentration range is verified."
+        },
+        "administration": "Intravenous infusion according to the prescribed regimen and current product-specific instructions.",
+        "iv_push_or_bolus": "Do not administer as an IV push or bolus.",
+        "mixing": "Confirm compatible diluent, final concentration, and preparation procedure from the current local product leaflet.",
+        "special_notes": [
+          "Ready-to-use solution; no reconstitution required.",
+          "Both presentations have a concentration of 10 mg/mL.",
+          "Confirm whether each presentation is single-dose or multidose from the package leaflet before defining vial-wastage behavior.",
+          "Stability after dilution has not been entered pending verification of the current product leaflet."
+        ],
+        "source": "Current local Docetaxel product leaflet — required for confirmation of preparation, stability, and vial-use instructions."
+      }
+    },
+    {
+      "brand_name": "Eutaxer",
+      "active_ingredient": "docetaxel",
+      "concentration": "10 mg/mL",
+      "presentations": [
+        "20 mg/2 mL ready-to-use solution",
+        "80 mg/8 mL ready-to-use solution"
+      ],
+      "route": "Intravenous infusion",
+      "iv_preparation": {
+        "diluent_options": [],
+        "do_not_use": [
+          "Do not use a diluent or final concentration unless confirmed in the current product-specific leaflet."
+        ],
+        "available_bag_sizes": [],
+        "bag_volume_rule": {
+          "type": "user_selected",
+          "unit": "mL",
+          "basis": "final_total",
+          "description": "Final infusion volume must be selected according to the current product-specific leaflet and prescribed regimen. Do not calculate a preparation recommendation until the permitted concentration range is verified."
+        },
+        "administration": "Intravenous infusion according to the prescribed regimen and current product-specific instructions.",
+        "iv_push_or_bolus": "Do not administer as an IV push or bolus.",
+        "mixing": "Confirm compatible diluent, final concentration, and preparation procedure from the current local product leaflet.",
+        "special_notes": [
+          "Ready-to-use solution; no reconstitution required.",
+          "Both presentations have a concentration of 10 mg/mL.",
+          "Confirm whether each presentation is single-dose or multidose from the package leaflet before defining vial-wastage behavior.",
+          "Stability after dilution has not been entered pending verification of the current product leaflet."
+        ],
+        "source": "Current local Eutaxer product leaflet — required for confirmation of preparation, stability, and vial-use instructions."
+      }
+    }
+  ]
 }
 }
