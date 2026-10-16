@@ -2486,7 +2486,10 @@
         "do_not_use": [
           "Do not use a diluent or final concentration unless confirmed in the current product-specific leaflet."
         ],
-        "available_bag_sizes": [],
+         "available_bag_sizes": [
+          250,
+          500
+        ],
         "bag_volume_rule": {
           "type": "user_selected",
           "unit": "mL",
