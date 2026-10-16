@@ -3147,19 +3147,33 @@ vialSummary += `
 
     <br><br>
 
-    <strong>
-        Total vial amount:
-    </strong>
-    ${totalVialMg} mg
+   <strong>
+    Total vial amount:
+</strong>
+${totalVialMg} mg
 
-    <br>
+<br>
 
-    <strong>
-        Wastage:
-    </strong>
-    ${wastageMg.toFixed(2)} mg
-    (${wastageVolume.toFixed(2)} mL)
-`;
+<strong>
+    Wastage:
+</strong>
+${wastageMg.toFixed(2)} mg
+(${wastageVolume.toFixed(2)} mL)
+
+<br><br>
+
+<strong>
+    Opened vial policy:
+</strong>
+${
+    selectedProduct?.vial_use_policy
+        ?.reuse_after_first_puncture === true
+        ? "The product leaflet indicates a possible in-use period. Verify storage conditions, opening date, and local requirements before any reuse."
+        : selectedProduct?.vial_use_policy
+            ?.reuse_after_first_puncture === false
+            ? "Discard unused contents after use according to the product leaflet."
+            : "Check the product-specific leaflet for opened-vial instructions."
+}
 
     // =================================================
     // FINAL RESULT
